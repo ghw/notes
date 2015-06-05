@@ -6,7 +6,7 @@ categories: 信息技术
 ## 启用 HTTPS 的原因
 
 原因嘛，
-1，https 保证网站传说过程中被修改，
+1，https 保证网站传说过程中不被修改，
 2，Google 提升了 https 网站的权重，
 3，。。。
 
