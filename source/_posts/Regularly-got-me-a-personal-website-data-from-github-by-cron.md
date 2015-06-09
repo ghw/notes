@@ -1,6 +1,7 @@
 title: 通过cron定期从github上拉去个人网站数据
 date: 2015-06-09 13:43:32
-tags: 
+tags: [信息技术,开源,NGINX,SSL,Github]
+categories: 信息技术
 ---
 
 先配置我的个人网站，

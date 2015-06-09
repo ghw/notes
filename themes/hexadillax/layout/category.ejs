@@ -33,8 +33,8 @@ if(page.category) {
 
                     <p class="say-title">
                         —— <img src="<%- theme.avatar %>" class="img-circle index-post-avatar" />
-                        <a href="<%- config.url %>" target="_blank" title="<%- config.author %>"><%- config.author %></a>
-                        于<%- item.date.format(config.date_format) %>自豪地<% if(item.tags && item.tags.length){ %>以 <%- list_tags(item.tags, { show_count: false, class: 'article-tag', style: ""}) %> <% } %>唠嗑
+                        <a href="<%- config.url %>"><%- config.author %></a>
+                        于 <%- item.date.format(config.date_format) %> 以 <% if(item.tags && item.tags.length){ %><%- list_tags(item.tags, { show_count: false, class: 'article-tag', style: ""}) %> <% } %> 标签发布
                     </p>
                 </div>
             </article>
