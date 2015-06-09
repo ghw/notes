@@ -68,7 +68,9 @@ server {
 
 
 新建一个网站根目录， 比如我这里使用 ***/home/ghw/*** ，接着执行 gitclone.sh 文件
-## gitclone.sh
+
+
+## 首次 clone 用的 gitclone.sh 脚本
 
 ```sh
 #!/bin/sh
@@ -83,17 +85,15 @@ git clone --depth 1 -b gh-pages https://github.com/gehaowu/blog /home/ghw/wwwroo
 
 因为我在 wwwroot 根目录放了 gitpull.sh 脚本，所以直接给 cron 添加计划任务：
 
-## crontab
+## 让 crontab 每 5 个小时执行一次 pull 脚本
 
 ```sh
+# 在需要运行 gitpull.sh 脚本的用户上执行 crontab -e  ，添加以下内容：
 * */5 * * * /bin/sh /home/ghw/wwwroot/gitpull.sh
 ```
 
-每 5 个小时执行一次脚本。
 
-
-一下 gitpull.sh 的内容
-## gitpull.sh
+## gitpull.sh 脚本的内容
 
 ```sh
 #!/bin/sh

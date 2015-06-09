@@ -26,7 +26,7 @@ date: 1990-03-27 00:00:00
 + [锦瑟华年](http://kuangqi.me/)
 + [YumeMichi's WiKi](https://ikke.moe/)
 + [ibrother](http://ibrother.me/)
-
++ [{Kingname}](http://kingname.info/)
 
 ## NGINX 相关个人网站
 
