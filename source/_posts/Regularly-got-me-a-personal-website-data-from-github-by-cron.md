@@ -4,9 +4,9 @@ tags: [信息技术,开源,NGINX,SSL,Github]
 categories: 信息技术
 ---
 
-先配置我的个人网站，
+## 创建个人网站主机配置文件，
 
-设置几个域名的虚拟主机，
+先设置几个域名的虚拟主机，
 
 ，让所有请求 gehaowu.com,www.gehaowu.com 两个域名的 http 请求，强制跳转到 https 协议的 www.gehaowu.com ，
 接着一个对发给 gehaowu.com 的 https 请求也强制转发给 www.gehaowu.com 。
