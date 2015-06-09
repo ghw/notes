@@ -14,10 +14,10 @@ background: [ 1.jpg, 2.jpg, 3.jpg ]
 avatar: /blog/images/avatar.gif
 
 #### Comment
-#duoshuo:
-#  short_name: gehaowu			         ## duoshuo short name.
-#                                         ## refer to http://dev.duoshuo.com/docs/501e6ce1cff715f71800000d
-disqus_comment: 
-  short_name: gehaowu			         ## disqus short name.
+duoshuo:
+  short_name: gehaowu			         ## duoshuo short name.
+                                         ## refer to http://dev.duoshuo.com/docs/501e6ce1cff715f71800000d
+#disqus: false
+#  short_name: gehaowu			         ## disqus short name.
 
 rss: /blog/atom.xml	                     ## if any...
