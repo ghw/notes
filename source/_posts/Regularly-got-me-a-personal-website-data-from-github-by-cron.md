@@ -121,6 +121,8 @@ git pull -f >/dev/null 2>&1
 十分容易也十分安全，哈哈哈。。。<(￣▽￣)>
 
 
+
+--------------------
 **版权声明**
 
 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh"><img src="//dn-nimages.qbox.me/other/CC-BY-SA-ND.png" alt="署名-非商业性使用-禁止演绎 创意共享4.0国际许可证" /></a>
