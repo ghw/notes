@@ -66,6 +66,9 @@ server {
 }
 ```
 
+![freebsdlogo.sh](//dn-nimages.qbox.me/2015/06/freebsd_gehaowu.com.png)
+
+
 
 新建一个网站根目录， 比如我这里使用 ***/home/ghw/*** ，接着执行 gitclone.sh 文件
 
@@ -82,6 +85,8 @@ git clone --depth 1 -b gh-pages https://github.com/gehaowu/blog /home/ghw/wwwroo
 git clone --depth 1 -b gh-pages https://github.com/gehaowu/blog /home/ghw/wwwroot/albums
 ```
 
+![gitclone.sh](//dn-nimages.qbox.me/2015/06/gitclone_gehaowu.com.png)
+
 
 因为我在 wwwroot 根目录放了 gitpull.sh 脚本，所以直接给 cron 添加计划任务：
 
@@ -92,6 +97,7 @@ git clone --depth 1 -b gh-pages https://github.com/gehaowu/blog /home/ghw/wwwroo
 * */5 * * * /bin/sh /home/ghw/wwwroot/gitpull.sh >/dev/null 2>&1
 ```
 
+![gitpull.sh](//dn-nimages.qbox.me/2015/06/gitpull_gehaowu.com.png)
 
 ## gitpull.sh 脚本的内容
 
