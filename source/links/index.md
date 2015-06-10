@@ -27,7 +27,7 @@ date: 1990-03-27 00:00:00
 + [YumeMichi's WiKi](https://ikke.moe/)
 + [ibrother](http://ibrother.me/)
 + [{Kingname}](http://kingname.info/)
-
++ [浮风 - QistChan](https://qistchan.com/)
 ## NGINX 相关个人网站
 
 + [Mofe's blog](http://blog.mofe.me/)
