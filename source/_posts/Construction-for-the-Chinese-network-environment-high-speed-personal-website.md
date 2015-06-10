@@ -36,7 +36,7 @@ categories: 信息技术
 ![加速乐](//dn-nimages.qbox.me/2015/06/jiasule_gehaowu.com.png)
 
 ![Github](//dn-nimages.qbox.me/2015/06/github_gehaowu.com.png)
-##　为主站添加 **robots.txt** 文件，
+## 为主站添加 **robots.txt** 文件，
 Github 会主动扩展账户下的分支为 gh-pages 的子仓库，避免被搜索引擎收录，屏蔽之。
 
 ```sh

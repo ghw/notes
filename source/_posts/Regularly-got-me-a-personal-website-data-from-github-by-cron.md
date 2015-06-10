@@ -95,24 +95,21 @@ git clone --depth 1 -b gh-pages https://github.com/gehaowu/blog /home/ghw/wwwroo
 
 ## gitpull.sh 脚本的内容
 
+因为 blog 模块实际上会出现向github提交的时候会使用-f参数，所以我们下拉的时候需要先清理掉分支
 ```sh
 #!/bin/sh
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 cd /home/ghw/wwwroot/
-git reset --hard >/dev/null 2>&1
-git pull --rebase -f >/dev/null 2>&1
+git pull
 cd /home/ghw/wwwroot/fonts/
-git reset --hard >/dev/null 2>&1
-git pull -f >/dev/null 2>&1
+git pull
 cd /home/ghw/wwwroot/aboutme/
-git reset --hard >/dev/null 2>&1
-git pull -f >/dev/null 2>&1
+git pull
 cd /home/ghw/wwwroot/blog/
-git reset --hard >/dev/null 2>&1
-git pull -f >/dev/null 2>&1
+git reset --hard origin/gh-pages
+git pull
 cd /home/ghw/wwwroot/albums/
-git reset --hard >/dev/null 2>&1
-git pull -f >/dev/null 2>&1
+git pull
 ```
 
 
