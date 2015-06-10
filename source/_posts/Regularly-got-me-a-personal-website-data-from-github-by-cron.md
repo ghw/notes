@@ -89,7 +89,7 @@ git clone --depth 1 -b gh-pages https://github.com/gehaowu/blog /home/ghw/wwwroo
 
 ```sh
 # 在需要运行 gitpull.sh 脚本的用户上执行 crontab -e  ，添加以下内容：
-* */5 * * * /bin/sh /home/ghw/wwwroot/gitpull.sh
+* */5 * * * /bin/sh /home/ghw/wwwroot/gitpull.sh >/dev/null 2>&1
 ```
 
 
