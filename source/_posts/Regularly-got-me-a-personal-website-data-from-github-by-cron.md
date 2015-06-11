@@ -112,8 +112,9 @@ git pull
 cd /home/ghw/wwwroot/aboutme/
 git pull
 cd /home/ghw/wwwroot/blog/
+git fetch
 git reset --hard origin/gh-pages
-git pull
+#git pull
 cd /home/ghw/wwwroot/albums/
 git pull
 ```
