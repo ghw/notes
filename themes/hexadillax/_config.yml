@@ -13,6 +13,8 @@ background: [ 1.jpg, 2.jpg, 3.jpg ]
 cdn-jquery: //dn-glibs.qbox.me/jquery-2.1.4/
 cdn-bootstrap: //dn-glibs.qbox.me/bootstrap-3.3.4/
 cdn-opt: //dn-glibs.qbox.me/blog/
+cdn-respond: //dn-glibs.qbox.me/Respond-1.4.2/
+cdn-html5shiv: //dn-glibs.qbox.me/html5shiv-3.7.2/
 
 avatar: /blog/images/avatar.gif
 
