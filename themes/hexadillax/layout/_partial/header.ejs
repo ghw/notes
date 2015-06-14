@@ -48,22 +48,14 @@ if(is_archive()) {
     <link rel="apple-touch-icon-precomposed" href="<%- config.root %><%- theme.apple_icon %>">
     <% } %>
 
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><% if(title) { %><%= title %> | <% } %><%= config.title %><% if(config.subtitle) { %> · <%= config.subtitle %><% } %></title>
 
     <!-- Bootstrap -->
-    <%- css('bootstrap/css/bootstrap.min') %>
-    <%- css('css/style') %>
-
-    <!-- Javascript -->
-    <script src="<%- config.root %>js/jquery-2.1.0.min.js"></script>
-    <script src="<%- config.root %>js/jquery.backstretch.min.js"></script>
-    <script src="<%- config.root %>bootstrap/js/bootstrap.min.js"></script>
-    <script src="<%- config.root %>js/headroom.min.js"></script>
-    <script src="<%- config.root %>js/jquery.headroom.min.js"></script>
-    <script src="<%- config.root %>js/common.js"></script>
+    <link rel="stylesheet" href="<%- theme['cdn-bootstrap'] %>css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="<%- theme['cdn-opt'] %>css/style.css" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -99,7 +91,15 @@ if(is_archive()) {
             </div>
         </div>
     </nav>
-    
+
+    <!-- Javascript -->
+    <script src="<%- theme['cdn-jquery'] %>jquery.min.js"></script>
+    <script src="<%- theme['cdn-opt'] %>js/jquery.backstretch.min.js"></script>
+    <script src="<%- theme['cdn-bootstrap'] %>bootstrap.min.js"></script>
+    <script src="<%- theme['cdn-opt'] %>js/headroom.min.js"></script>
+    <script src="<%- theme['cdn-opt'] %>js/jquery.headroom.min.js"></script>
+    <script src="<%- theme['cdn-opt'] %>js/common.js"></script>
+
     <script>
     var backRoot = "<%- theme['background-root'] %>";
     var backArray = [ <% for(var i = 0; i < theme.background.length; i++) { %>"<%- theme.background[i] %>", <% } %> ];

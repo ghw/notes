@@ -8,8 +8,11 @@ menu:
 
 #github: ghw
 
-background-root: /blog/images/background/
+background-root: https://dn-glibs.qbox.me/blog/images/background/
 background: [ 1.jpg, 2.jpg, 3.jpg ]
+cdn-jquery: //dn-glibs.qbox.me/jquery-2.1.4/
+cdn-bootstrap: //dn-glibs.qbox.me/bootstrap-3.3.4/
+cdn-opt: //dn-glibs.qbox.me/blog/
 
 avatar: /blog/images/avatar.gif
 
