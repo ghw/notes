@@ -1,9 +1,9 @@
 menu:
-  首页: { id: index, url: /blog/ }
-  归档: { id: archives, url: /blog/archives }
-  标签: { id: tags, url: /blog/tags }
-  分类: { id: categories, url: /blog/categories }
-  链接: { id: links, url: /blog/links }
+  首页: { id: index, url: /notes/ }
+  归档: { id: archives, url: /notes/archives }
+  标签: { id: tags, url: /notes/tags }
+  分类: { id: categories, url: /notes/categories }
+  链接: { id: links, url: /notes/links }
   关于: { id: curriculumvitae, url: /aboutme/ }
 
 #github: ghw
@@ -16,7 +16,7 @@ cdn-opt: //dn-glibs.qbox.me/blog/
 cdn-respond: //dn-glibs.qbox.me/Respond-1.4.2/
 cdn-html5shiv: //dn-glibs.qbox.me/html5shiv-3.7.2/
 
-avatar: /blog/images/avatar.gif
+avatar: /notes/images/avatar.gif
 
 #### Comment
 duoshuo:
@@ -25,4 +25,4 @@ duoshuo:
 disqus:
   short_name: gehaowu			         ## disqus short name.
 
-rss: /blog/atom.xml	                     ## if any...
+rss: /notes/atom.xml	                     ## if any...

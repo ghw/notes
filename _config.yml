@@ -13,7 +13,7 @@ timezone:
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://www.gehaowu.com
-root: /blog/
+root: /notes/
 permalink: :year/:month/:title/
 permalink_defaults:
 
@@ -86,4 +86,4 @@ baidu_analytics: 2f0f4b0d867163a00886350ad2c21f8c
 deploy:
   type: git
   branch: gh-pages
-  repo: git@github.com:gehaowu/blog.git
+  repo: git@github.com:gehaowu/notes.git
