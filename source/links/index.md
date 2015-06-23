@@ -29,6 +29,7 @@ date: 1990-03-27 00:00:00
 + [{Kingname}](http://kingname.info/)
 + [浮风 - QistChan](https://qistchan.com/)
 + [geekylin](http://geekylin.com/)
++ [屠夫9441的博客](https://haomwei.com/)
 
 ## NGINX 相关个人网站
 
