@@ -1,0 +1,22 @@
+extends base
+- var current_title = page.title || tag.name || category.name || site.title
+
+block title
+  title= config.title + " | " + config.subtitle
+block content
+     
+  for post in page.posts.toArray()
+    .post
+      h2.post-title
+        include _partial/helpers
+        a(href=url_for(post.path))
+          +title(post)
+      .post-meta= post.date.format('MMMM DD, YYYY')
+      if post.description
+        .post-content= post.description
+      else if post.excerpt
+        .post-content= post.excerpt
+      else
+        .post-content= post.content.replace(/<(?:.|\n)*?>/gm, '').substr(0, 300)
+
+  include _partial/paginator

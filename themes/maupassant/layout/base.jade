@@ -1,0 +1,106 @@
+include _partial/helpers
+include _partial/totop
+
+if page.title
+  - var current_title = page.title
+else
+  - var current_title = config.title
+
+html
+  head
+    meta(http-equiv="content-type", content="text/html; charset=utf-8")
+    meta(content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0", name="viewport")
+    meta(content="yes", name="apple-mobile-web-app-capable")
+    meta(content="black-translucent", name="apple-mobile-web-app-status-bar-style")
+    meta(content="telephone=no", name="format-detection")
+    meta(name="description", content=config.description)
+    block title
+    //+get_resource("blog_basic.css")
+    link(rel='stylesheet', type='text/css', href='/notes/css/normalize.css')
+    link(rel='stylesheet', type='text/css', href='/notes/css/pure-min.css')
+    link(rel='stylesheet', type='text/css', href='/notes/css/grids-responsive-min.css')
+    link(rel='stylesheet', type='text/css', href='/notes/css/highlight.css')
+    link(rel='stylesheet', type='text/css', href='/notes/css/style.css')
+    link(rel='Shortcut Icon', type='image/x-icon',href='/favicon.ico')
+    link(rel='apple-touch-icon', href='/notes/img/apple.png')
+    link(rel='apple-touch-icon-precomposed', href='/notes/img/apple.png')
+    link(rel='alternate', type='application/atom+xml', href='/notes/atom.xml')
+
+
+  body: .body_container 
+    #header
+      .site-name
+        h1.hidden= current_title
+        a#logo(href='/')= config.title
+        p.description= config.subtitle
+      #nav-menu
+        +a_with_current(config.root, __('home'))
+        +a_with_current(config.archive_dir, __('archive')) 
+        +a_with_current(config.about_dir, __('about'))
+        +a_with_current(config.history_dir, __('history')) 
+        +a_with_current(config.guestbook_dir, __('guestbook')) 
+        +a_with_current(config.feed.path, __('rss'))
+
+    #layout.pure-g
+      .pure-u-1.pure-u-md-3-4: .content_container
+        block content
+
+      .pure-u-1-4: #sidebar
+        .widget
+          .widget-title= __('categories')
+          != list_categories({show_count: false})
+        .widget
+          .widget-title= __('recent')
+          != list_posts({amount: 10})
+        if theme.duoshuo
+          .widget
+            .comments-title= __('recent_comments')
+            .ds-recent-comments(data-num-items='5' data-show-avatars='0' data-show-time='1' data-show-admin='0' data-excerpt-length='32' data-show-title='1')
+        if theme.disqus
+          .widget
+            .widget-title= __('recent_comments')
+            | <script type="text/javascript" src="//!{theme.disqus}.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=1&avatar_size=32&excerpt_length=20&hide_mods=1"></script>
+        .widget
+          .widget-title= __('blogroll')
+          ul: != link_to('http://example1/', 'site-name 1', {external: true})
+          ul: != link_to('http://example2.com/', 'site-name 2', {external: true})
+          ul: != link_to('http://example3.com/', 'site-name 3', {external: true})
+    
+    != js(['/notes/js/highlight.pack.js'])
+     script.
+       hljs.initHighlightingOnLoad();
+
+    #footer= '© '
+      a(href='/', real="nofollow")= config.title + '. '
+      | Powered by 
+      a(rel="nofollow", target="_blank", href="https://hexo.io") Hexo. 
+      | Theme by 
+      a(rel="nofollow", target="_blank", href="https://chopstack.com") Cho
+    
+  != js(['/notes/js/jquery.min.js', '/js/totop.js'])
+
+
+    if theme.fancybox
+      != js(['/notes/js/fancybox.pack.js'])
+      != css('/notes/css/jquery.fancybox.css')
+      script.
+        $(document).ready(function() {
+          $("img").wrap(function() {
+            return '<a href="' + $(this).attr("src") + '" rel="group" />'});
+        });
+      script.
+        $(document).ready(function() {
+          $("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").attr('rel', 'gallery').fancybox();
+        });
+
+    if theme.duoshuo
+      script.
+        var duoshuoQuery = {short_name:"!{theme.duoshuo}"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//dn-comment.qbox.me/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
