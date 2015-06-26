@@ -1,8 +1,8 @@
 # Header
 menu:
-  Home: /
-  Archives: /archives
-rss: /atom.xml
+  Home: /notes/
+  Archives: /notes/archives
+rss: /notes/atom.xml
 
 # Content
 excerpt_link: Read More
@@ -19,7 +19,7 @@ widgets:
 
 # Miscellaneous
 google_analytics:
-favicon: /favicon.png
+favicon: ../favicon.png
 twitter:
 google_plus:
 fb_admins:

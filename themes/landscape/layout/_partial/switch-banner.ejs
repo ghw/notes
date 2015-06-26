@@ -1,0 +1,10 @@
+<script>
+    <% if (theme.switch_banner){ %>
+    var d = new Date();
+    var m = d.getMinutes();
+    var num = Math.ceil((m + 1) / (60 / <%- theme.banner_count %>));
+    document.getElementById("banner").style.backgroundImage = "url(/notes/images/banner" + num + ".jpg)";
+    <% } else { %>
+    document.getElementById("banner").style.backgroundImage = "url(/notes/images/banner.jpg)";
+    <% } %>
+</script>

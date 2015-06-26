@@ -60,6 +60,16 @@ time_format: HH:mm:ss
 per_page: 10
 pagination_dir: page
 
+# Disqus
+disqus_shortname: gehaowu
+#host_name: 
+#google_analytics: UA-49728497-1
+#baidu_analytics: true
+#baidu_share: true
+switch_banner: true
+banner_count: 6
+
+
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
