@@ -14,10 +14,10 @@ html
     meta(name="description", content=config.description)
     block title
     //+get_resource("blog_basic.css")
-    link(rel='stylesheet', type='text/css', href='/css/normalize.css')
-    link(rel='stylesheet', type='text/css', href='/css/pure-min.css')
-    link(rel='stylesheet', type='text/css', href='/css/grids-responsive-min.css')
-    link(rel='stylesheet', type='text/css', href='/css/style.css')
+    link(rel='stylesheet', type='text/css', href='/notes/css/normalize.css')
+    link(rel='stylesheet', type='text/css', href='/notes/css/pure-min.css')
+    link(rel='stylesheet', type='text/css', href='/notes/css/grids-responsive-min.css')
+    link(rel='stylesheet', type='text/css', href='/notes/css/style.css')
   body: .body_container 
     #header
       .site-name
@@ -46,8 +46,8 @@ html
       a(rel="nofollow", target="_blank", href="http://chopstack.com") cho
 
     if theme.fancybox
-      != js(['/js/jquery.min.js', '/js/fancybox.pack.js'])
-      != css('/css/jquery.fancybox.css')
+      != js(['/notes/js/jquery.min.js', '/notes/js/fancybox.pack.js'])
+      != css('/notes/css/jquery.fancybox.css')
       script.
         $(document).ready(function() {
           $("img").wrap(function() {
