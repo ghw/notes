@@ -2,6 +2,7 @@
 menu:
   Home: /notes/
   Archives: /notes/archives
+  AboutMe: /aboutme/
 rss: /notes/atom.xml
 
 # Content
