@@ -7,6 +7,7 @@ title: 等一个晴天
 subtitle: 记录 & 监督
 description:
 author: 葛豪武
+author_en: Haowu Ge
 language: zh-CN
 timezone:
 
@@ -86,9 +87,12 @@ feed:
 sitemap:
     path: sitemap.xml
 
-
-
 baidu_analytics: 2f0f4b0d867163a00886350ad2c21f8c
+
+startyear: 2015
+
+
+
 
 
 # Deployment
