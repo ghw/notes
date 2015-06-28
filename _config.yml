@@ -80,12 +80,18 @@ plugins:
 - hexo-generator-feed
 - hexo-generator-sitemap
 
+# hexo sitemap网站地图
+baidusitemap:
+path: baidusitemap.xml
+sitemap:
+path: sitemap.xml
+
 feed:
   type: atom
   path: atom.xml
   limit: 20
-sitemap:
-    path: sitemap.xml
+#sitemap:
+#    path: sitemap.xml
 
 baidu_analytics: 2f0f4b0d867163a00886350ad2c21f8c
 
