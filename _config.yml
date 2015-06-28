@@ -78,6 +78,7 @@ theme: landscape
 
 plugins:
 - hexo-generator-feed
+- hexo-generator-baidu-sitemap
 - hexo-generator-sitemap
 
 # hexo sitemap网站地图
