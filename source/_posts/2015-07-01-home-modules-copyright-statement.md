@@ -34,6 +34,11 @@ in your terminal/console.
 
 
 <!-- more -->
+
+![道法自然](//dn-nimages.qbox.me/2015/07/dfzr1.png)
+![道法自然](//dn-nimages.qbox.me/2015/07/dfzr2.png)
+![道法自然](//dn-nimages.qbox.me/2015/07/dfzr3.png)
+
 ```sh
 Creative Commons Attribution 3.0 Unported
 http://creativecommons.org/licenses/by/3.0/
