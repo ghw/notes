@@ -2,6 +2,7 @@ title: "NGINX 配置多证书环境及强制 https 跳转"
 date: 2015-05-23 22:52:00
 tags: [信息技术,开源,FreeBSD,NGINX,SSL]
 categories: 信息技术
+toc: true
 ---
 ## 启用 HTTPS 的原因
 
