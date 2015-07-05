@@ -2,6 +2,7 @@ title: "通过 SSH 远程跨版本更新 FreeBSD"
 date: 2015-05-06 08:54:08
 tags: [信息技术,开源,FreeBSD]
 categories: 信息技术
+toc: true
 ---
 
 因为远程，所以你，只有一次机会！！！
