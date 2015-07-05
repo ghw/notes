@@ -30,6 +30,9 @@ letter-spacing: 1em;
 ![道法自然](//dn-nimages.qbox.me/2015/06/imitation_of_nature2.png)
 
 
+
+![兼爱非攻](//dn-nimages.qbox.me/2015/07/jafg.jpg)
+
 原方案：
 ```html
 				<!-- 头部代码 -->
