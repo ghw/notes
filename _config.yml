@@ -94,7 +94,8 @@ feed:
 #sitemap:
 #    path: sitemap.xml
 
-baidu_analytics: 2f0f4b0d867163a00886350ad2c21f8c
+#baidu_analytics: 2f0f4b0d867163a00886350ad2c21f8c
+tencent_analytics: 47218858
 
 startyear: 2011
 
