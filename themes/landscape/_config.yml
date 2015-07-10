@@ -1,12 +1,12 @@
 # Header
 menu:
-  Home: /notes/
-  Archives: /notes/archives
-  AboutMe: /aboutme/
+  主页: /notes/
+  归档: /notes/archives
+  关于我: /aboutme/
 rss: /notes/atom.xml
 
 # Content
-excerpt_link: Read More
+excerpt_link: 阅读全文 »
 fancybox: true
 
 # Sidebar

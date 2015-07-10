@@ -30,9 +30,9 @@
       <% } %>
     </div>
     <footer class="article-footer">
-      <a data-url="<%- config.url + config.root + post.path %>" data-id="<%= post._id %>" class="article-share-link">Share</a>
+      <a data-url="<%- config.url + config.root + post.path %>" data-id="<%= post._id %>" class="article-share-link">分享</a>
       <% if (post.comments && config.disqus_shortname){ %>
-        <a href="<%- config.url + config.root + post.path %>#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="<%- config.url + config.root + post.path %>#disqus_thread" class="article-comment-link">评论</a>
       <% } %>
       <%- partial('post/tag') %>
     </footer>
