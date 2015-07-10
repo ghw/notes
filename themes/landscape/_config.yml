@@ -20,7 +20,7 @@ widgets:
 - links
 
 # Miscellaneous
-google_analytics:
+google_analytics: UA-65013365-1
 favicon: ../favicon.png
 twitter:
 google_plus:

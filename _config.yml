@@ -64,7 +64,7 @@ pagination_dir: page
 # Disqus
 disqus_shortname: gehaowu
 #host_name: 
-#google_analytics: UA-49728497-1
+google_analytics: UA-65013365-1
 #baidu_analytics: true
 #baidu_share: true
 switch_banner: true
@@ -95,7 +95,7 @@ feed:
 #    path: sitemap.xml
 
 #baidu_analytics: 2f0f4b0d867163a00886350ad2c21f8c
-tencent_analytics: 47218858
+#tencent_analytics: 47218858
 
 startyear: 2011
 
