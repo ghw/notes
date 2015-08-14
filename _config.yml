@@ -62,7 +62,8 @@ per_page: 5
 pagination_dir: page
 
 # Disqus
-disqus_shortname: gehaowu
+#disqus_shortname: gehaowu
+duoshuo_shortname: gehaowu
 #host_name: 
 google_analytics: UA-65013365-1
 #baidu_analytics: true

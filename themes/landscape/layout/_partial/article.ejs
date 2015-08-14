@@ -49,3 +49,7 @@
   </div>
 </section>
 <% } %>
+
+<% if(!index && post.comments && config.duoshuo_shortname){ %>
+<%- partial('duoshuo-comment') %>
+<% } %>
