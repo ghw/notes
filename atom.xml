@@ -1,0 +1,1240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  
+  <title><![CDATA[等一个晴天]]></title>
+  <subtitle><![CDATA[记录 & 监督]]></subtitle>
+  <link href="/notes/atom.xml" rel="self"/>
+  <link href="https://www.gehaowu.com/notes//"/>
+  <updated>2015-08-02T10:37:43.685Z</updated>
+  <id>https://www.gehaowu.com/notes//</id>
+  
+  <author>
+    <name><![CDATA[葛豪武]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[通过 VeryCloud 为个人网站实现 HTTPS 功能]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/08/Implement-HTTPS-feature-through-VeryCloud-personal-website/"/>
+    <id>https://www.gehaowu.com/notes/2015/08/Implement-HTTPS-feature-through-VeryCloud-personal-website/</id>
+    <published>2015-08-02T08:36:34.000Z</published>
+    <updated>2015-08-02T10:37:43.685Z</updated>
+    <content type="html"><![CDATA[<h2 id="需求">需求</h2><p>提高国内用户的访问体验，并实现 HTTPS 功能。</p>
+<h2 id="必备条件">必备条件</h2><p>1，你要有个域名<br>2，你要有备案号<br>3，你要有备案号<br>4，你要有备案号</p>
+<p>重要的事情说三遍 →_→<br><a id="more"></a></p>
+<h2 id="闲扯一下">闲扯一下</h2><p>主机在国外的情况下，由于距离远与长城防火墙的存在，导致挂在国外的网站打开速度十分缓慢，</p>
+<p>所以想到套一层国内 CDN 来提高网站速度，同时出于装逼需要，<br>最终选择了 <a href="https://www.verycloud.cn/" target="_blank" rel="external">VeryCloud</a> 作为 CDN 加速商 （我需要 HTTPS 功能）</p>
+<p><strong>网站源站可以使用任何一个你顺手的网络空间，如： <a href="https://www.github.io/" target="_blank" rel="external">Github.io</a>， <a href="https://www.gitcafe.io/" target="_blank" rel="external">GitCafe.io</a></strong></p>
+<h2 id="开始捣腾">开始捣腾</h2><h3 id="选取主机服务提供商">选取主机服务提供商</h3><p>直接把个人网站托管到 github 跟 gitcafe 就可以了，一个主站，另外一个做备份站。<br>像仓库添加 CNAME 文件后托管商会自动给你做绑定，<br>更多信息请自行 Google</p>
+<h3 id="申请_HTTPS_网站证书">申请 HTTPS 网站证书</h3><p>去沃通申请一个证书 <a href="https://buy.wosign.com/free/" target="_blank" rel="external">沃通数字证书在线申请</a></p>
+<h3 id="配置_VeryCloud_加速">配置 VeryCloud 加速</h3><p>到 VeryCloud 注册你的帐号<br>将申请到的 SSL 证书添加到 VeryCloud 中去<br>进入 VeryCloud 控制台，<br><img src="//dn-nimages.qbox.me/2015/08/VeryCloudSSL0.png" alt="VeryCloud 控制台"><br>选择 <em>云分发</em> -&gt; <em>证书管理</em> -&gt; <em>新建</em><br><img src="//dn-nimages.qbox.me/2015/08/VeryCloudSSL1.png" alt="新建证书"><br>证书名称随便填，自己知道是哪一份就可以了<br>授权证书就是 CA 签发给你的证书<br>证书密钥。。。<br>CA 机构证书就是证书链，证书商会提供，可选选项<br>证书添加完成后就可以添加域名了<br>这里<strong>推荐使用二级域名</strong>，因为 VeryCloud 使用 CNAME CDN 方案，如果裸域名使用 CNAME 会破坏当前域上的其它 DNS 记录。<br>选择 <em>云分发</em> -&gt; <em>频道管理</em> -&gt; <em>新建</em><br><img src="//dn-nimages.qbox.me/2015/08/VeryCloudAdd1.png" alt="基础设置"><br>频道选择你需要加速的二级域名，我使用 <em>www.gehaowu.com</em><br>ICP 备案号会自动获取<br>加速类型选择云分发<br>源站填 <em>gehaowu.github.io</em> ，端口80<br>接着选择下一步<br><img src="//dn-nimages.qbox.me/2015/08/VeryCloudAdd2.png" alt="策略设置"><br>策略选择 <em>遵循源站</em> 就可以了，你也可以选择自定义，<br>接着再下一步<br><img src="//dn-nimages.qbox.me/2015/08/VeryCloudAdd3.png" alt="高级设置"><br>备份源站填 <em>gitcafe.io</em> ，端口80<br>证书选择之前添加的证书<br>创建，等官方审核通过。</p>
+<h3 id="配置_DNS_记录">配置 DNS 记录</h3><p>审核通过后修改 DNS 记录<br>修改 DNS 记录后台，为 <em>www</em> 添加 <em>CNAME</em> 记录值 <em>www.gehaowu.com.verygslb.com</em><br><img src="//dn-nimages.qbox.me/2015/08/DNSPod.png" alt="DNSPod添加www记录"><br>并将裸域名解析到 github.io 所在 IP （这里由 Github 实现 <a href="http://gehaowu.com" target="_blank" rel="external">http://gehaowu.com</a> 跳转到 <a href="http://www.gehaowu.com）" target="_blank" rel="external">http://www.gehaowu.com）</a></p>
+<h2 id="收官，开始装逼吧~~">收官，开始装逼吧~~</h2><p>最终的效果（忽悠朋友也开了VeryCloud的）<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">% curl -I https://www.ioliu.cn</span><br><span class="line">HTTP/<span class="number">1.1</span> <span class="number">200</span> OK</span><br><span class="line">Server: GitHub.com</span><br><span class="line">Content-Type: text/html; charset=utf-<span class="number">8</span></span><br><span class="line">Last-Modified: Sat, <span class="number">01</span> Aug <span class="number">2015</span> <span class="number">15</span>:<span class="number">37</span>:<span class="number">36</span> GMT</span><br><span class="line">Access-Control-Allow-Origin: *</span><br><span class="line">Expires: Sun, <span class="number">02</span> Aug <span class="number">2015</span> <span class="number">10</span>:<span class="number">05</span>:<span class="number">56</span> GMT</span><br><span class="line">Cache-Control: max-age=<span class="number">600</span></span><br><span class="line">Content-Length: <span class="number">32799</span></span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Date: Sun, <span class="number">02</span> Aug <span class="number">2015</span> <span class="number">09</span>:<span class="number">55</span>:<span class="number">56</span> GMT</span><br><span class="line">Via: <span class="number">1.1</span> varnish</span><br><span class="line">Age: <span class="number">17</span></span><br><span class="line">X-Served-By: cache-nrt6131-NRT</span><br><span class="line">X-Cache: MISS</span><br><span class="line">X-Cache-Hits: <span class="number">0</span></span><br><span class="line">X-Timer: S1438509356.<span class="number">272132</span>,VS0,VE325</span><br><span class="line">Vary: Accept-Encoding</span><br><span class="line">Strict-Transport-Security: max-age=<span class="number">15552000</span></span><br><span class="line">Powered-By-VeryCDN: MISS from ctc-dy-<span class="number">2</span>-<span class="number">1</span>-c1761, STALE from utn-cz-<span class="number">1</span>-<span class="number">4</span>-c17a1</span><br><span class="line">Connection: keep-alive</span><br><span class="line"></span><br><span class="line">%</span><br></pre></td></tr></table></figure></p>
+<p><img src="//dn-nimages.qbox.me/2015/08/VeryCloud1.png" alt="我的后台选项"><br>我的源站并没有使用Github，直接挂在朋友的VPS上的<br><img src="//dn-nimages.qbox.me/2015/08/VeryCloud2.png" alt="CURL"><br>我是高级装逼工程师，我是巨硬爱好者，，，哈哈哈</p>
+<hr>
+<p><strong>版权声明</strong></p>
+<p><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="external"><img src="//dn-nimages.qbox.me/other/CC-BY-SA-ND.png" alt="署名-非商业性使用-禁止演绎 创意共享4.0国际许可证"></a></p>
+<p><a href="//www.gehaowu.com/">Ge Haowu’s Personal Website</a> by <a href="//www.gehaowu.com/aboutme/">Haowu Ge</a> is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="external">CC BY-NC-ND 4.0 International</a> License.<br>由 <a href="//www.gehaowu.com/aboutme/">葛豪武</a> 创作并维护在<a href="//www.gehaowu.com/">葛豪武的个人网站</a> 采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="external">署名-非商业性使用-禁止演绎 创意共享 4.0 国际</a> 许可证。</p>
+<p>本文首发于 <a href="//www.gehaowu.com/">葛豪武的个人网站！· Ge Haowu’s Personal Website!</a> ，版权所有，侵权必究。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="需求">需求</h2><p>提高国内用户的访问体验，并实现 HTTPS 功能。</p>
+<h2 id="必备条件">必备条件</h2><p>1，你要有个域名<br>2，你要有备案号<br>3，你要有备案号<br>4，你要有备案号</p>
+<p>重要的事情说三遍 →_→<br>]]>
+    
+    </summary>
+    
+      <category term="Github" scheme="https://www.gehaowu.com/notes/tags/Github/"/>
+    
+      <category term="HTTPS" scheme="https://www.gehaowu.com/notes/tags/HTTPS/"/>
+    
+      <category term="SSL" scheme="https://www.gehaowu.com/notes/tags/SSL/"/>
+    
+      <category term="VeryCloud" scheme="https://www.gehaowu.com/notes/tags/VeryCloud/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/tags/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="开源" scheme="https://www.gehaowu.com/notes/tags/%E5%BC%80%E6%BA%90/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/categories/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[GitHub.io 301 重定向]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/07/GITHUBCNAME301/"/>
+    <id>https://www.gehaowu.com/notes/2015/07/GITHUBCNAME301/</id>
+    <published>2015-07-29T14:11:07.000Z</published>
+    <updated>2015-07-29T14:20:26.025Z</updated>
+    <content type="html"><![CDATA[<p>本来准备使用 Github 作为主机的，结果发现 301 永久定向会导致多跳一次。。<br>（原因是Github自定义域名的情况下是不支持HTTPS的，所以Github会把跳转头搞成http的）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -I https://www.gehaowu.com/notes</span><br><span class="line">curl -I https://www.gehaowu.com/notes/</span><br><span class="line">curl -IL https://www.gehaowu.com/notes</span><br></pre></td></tr></table></figure>
+<p><img src="//dn-nimages.qbox.me/2015/07/githubcname1.png" alt="Github提供的301"><br><a id="more"></a><br><img src="//dn-nimages.qbox.me/2015/07/githubcname2.png" alt="Github源模式，带/直接能获取数据"><br><img src="//dn-nimages.qbox.me/2015/07/githubcname3.png" alt="自己的NGINX配置的情况下，让跳转直接走https://www."></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>本来准备使用 Github 作为主机的，结果发现 301 永久定向会导致多跳一次。。<br>（原因是Github自定义域名的情况下是不支持HTTPS的，所以Github会把跳转头搞成http的）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -I https://www.gehaowu.com/notes</span><br><span class="line">curl -I https://www.gehaowu.com/notes/</span><br><span class="line">curl -IL https://www.gehaowu.com/notes</span><br></pre></td></tr></table></figure>
+<p><img src="//dn-nimages.qbox.me/2015/07/githubcname1.png" alt="Github提供的301"><br>]]>
+    
+    </summary>
+    
+      <category term="301" scheme="https://www.gehaowu.com/notes/tags/301/"/>
+    
+      <category term="Github" scheme="https://www.gehaowu.com/notes/tags/Github/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/tags/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="开源" scheme="https://www.gehaowu.com/notes/tags/%E5%BC%80%E6%BA%90/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/categories/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[我读书少，你不要骗我]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/07/%E6%88%91%E8%AF%BB%E4%B9%A6%E5%B0%91%EF%BC%8C%E4%BD%A0%E4%B8%8D%E8%A6%81%E9%AA%97%E6%88%91/"/>
+    <id>https://www.gehaowu.com/notes/2015/07/我读书少，你不要骗我/</id>
+    <published>2015-07-21T12:30:59.000Z</published>
+    <updated>2015-07-21T12:39:12.498Z</updated>
+    <content type="html"><![CDATA[<p>找了好久，终于翻出来了，哈哈哈</p>
+<p><img src="//dn-nimages.qbox.me/2015/07/wodushushaonibuyaopianwo.gif" alt="我读书少，你不要骗我"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>找了好久，终于翻出来了，哈哈哈</p>
+<p><img src="//dn-nimages.qbox.me/2015/07/wodushushaonibuyaopianwo.gif" alt="我读书少，你不要骗我"></p>
+]]>
+    </summary>
+    
+      <category term="碎碎念" scheme="https://www.gehaowu.com/notes/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+      <category term="网络" scheme="https://www.gehaowu.com/notes/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="碎碎念" scheme="https://www.gehaowu.com/notes/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[修复IE下显示br换行符显示方块问题]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/07/repair-box-br/"/>
+    <id>https://www.gehaowu.com/notes/2015/07/repair-box-br/</id>
+    <published>2015-07-17T16:48:25.000Z</published>
+    <updated>2015-07-17T16:56:27.932Z</updated>
+    <content type="html"><![CDATA[<p>发现 IE 下竟然</p>
+<p><img src="//dn-nimages.qbox.me/2015/07/br1.png" alt="IE 下显示的尾部"></p>
+<p>会显示一个方块。。。</p>
+<p>然后。。。定位发现是 br 换行符导致的，直接取消掉 br 换行符，换成 p 就可以了，哈哈哈</p>
+<p><img src="//dn-nimages.qbox.me/2015/07/br2.png" alt="取消 BR 换行符"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>发现 IE 下竟然</p>
+<p><img src="//dn-nimages.qbox.me/2015/07/br1.png" alt="IE 下显示的尾部"></p>
+<p>会显示一个方块。。。</p>
+<p>然后。。。定位发现是 br 换行符导致的，直接取消掉 br ]]>
+    </summary>
+    
+      <category term="IE" scheme="https://www.gehaowu.com/notes/tags/IE/"/>
+    
+      <category term="碎碎念" scheme="https://www.gehaowu.com/notes/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+      <category term="网络" scheme="https://www.gehaowu.com/notes/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="碎碎念" scheme="https://www.gehaowu.com/notes/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[打酱油]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/07/soysauce/"/>
+    <id>https://www.gehaowu.com/notes/2015/07/soysauce/</id>
+    <published>2015-07-15T11:39:20.000Z</published>
+    <updated>2015-07-15T13:16:16.925Z</updated>
+    <content type="html"><![CDATA[<p>打酱油。。。</p>
+<p><img src="//dn-nimages.qbox.me/2015/07/IMG_20150711_120142.jpg" alt="打酱油"><br><a id="more"></a><br><img src="//dn-nimages.qbox.me/2015/07/IMG_20150711_120354.jpg" alt="打酱油"><br><img src="//dn-nimages.qbox.me/2015/07/IMG_20150711_120259.jpg" alt="打酱油"></p>
+<p>增值税发票的防伪措施。。。那两根线。。。<br><img src="//dn-nimages.qbox.me/2015/07/IMG_20150714_154329.jpg" alt="打酱油"></p>
+<p>税务局这样要交版权费麽。。。MSN。。。<br><img src="//dn-nimages.qbox.me/2015/07/IMG_20150714_161638.jpg" alt="打酱油"></p>
+<p>突然而至的大雨<br><img src="//dn-nimages.qbox.me/2015/07/IMG_20150713_180558.jpg" alt="打酱油"></p>
+<p>前几天的台风。。<br><img src="//dn-nimages.qbox.me/2015/07/IMG_20150710_173729.jpg" alt="打酱油"></p>
+<p>标志。。。<br><img src="//dn-nimages.qbox.me/2015/07/IMG_20150702_224118.jpg" alt="打酱油"></p>
+<p><img src="//dn-nimages.qbox.me/2015/07/2015/07/zwjs.png" alt="别人的个人简介"></p>
+<p><img src="//dn-nimages.qbox.me/2015/07/2015/07/wocao.jpg" alt="打酱油">看到别人的个人介绍，，，我当时就醉了</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>打酱油。。。</p>
+<p><img src="//dn-nimages.qbox.me/2015/07/IMG_20150711_120142.jpg" alt="打酱油"><br>]]>
+    
+    </summary>
+    
+      <category term="碎碎念" scheme="https://www.gehaowu.com/notes/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+      <category term="网络" scheme="https://www.gehaowu.com/notes/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="碎碎念" scheme="https://www.gehaowu.com/notes/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[十年了]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/07/ten-years/"/>
+    <id>https://www.gehaowu.com/notes/2015/07/ten-years/</id>
+    <published>2015-07-10T11:39:20.000Z</published>
+    <updated>2015-07-12T10:44:20.747Z</updated>
+    <content type="html"><![CDATA[<p>转眼我的网易邮箱。。。注册了十年了。。。</p>
+<p><img src="//dn-nimages.qbox.me/2015/07/126.png" alt="网易邮箱注册十年了"><br><a id="more"></a></p>
+<p>竟然。。。注册过世纪佳缘。。。还是好几年前的。。。</p>
+<p><img src="//dn-nimages.qbox.me/2015/07/sjjy.png" alt="世纪佳缘"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>转眼我的网易邮箱。。。注册了十年了。。。</p>
+<p><img src="//dn-nimages.qbox.me/2015/07/126.png" alt="网易邮箱注册十年了"><br>]]>
+    
+    </summary>
+    
+      <category term="碎碎念" scheme="https://www.gehaowu.com/notes/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+      <category term="网络" scheme="https://www.gehaowu.com/notes/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="碎碎念" scheme="https://www.gehaowu.com/notes/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[温州碧桂园近照]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/07/wzbgy/"/>
+    <id>https://www.gehaowu.com/notes/2015/07/wzbgy/</id>
+    <published>2015-07-09T12:59:39.000Z</published>
+    <updated>2015-07-09T13:06:22.864Z</updated>
+    <content type="html"><![CDATA[<h1 id="近照近照~~~">近照近照~~~</h1><p>(￣︶￣)↗ 涨 (￣︶￣)↗ 涨 (￣︶￣)↗ 涨</p>
+<p><img src="//dn-nimages.qbox.me/2015/07/wzbgy01.jpg" alt="温州碧桂园"><br><a id="more"></a><br><img src="//dn-nimages.qbox.me/2015/07/wzbgy02.jpg" alt="温州碧桂园"><br><img src="//dn-nimages.qbox.me/2015/07/wzbgy03.jpg" alt="温州碧桂园"><br><img src="//dn-nimages.qbox.me/2015/07/wzbgy04.jpg" alt="温州碧桂园"><br><img src="//dn-nimages.qbox.me/2015/07/wzbgy05.jpg" alt="温州碧桂园"><br><img src="//dn-nimages.qbox.me/2015/07/wzbgy06.jpg" alt="温州碧桂园"><br><img src="//dn-nimages.qbox.me/2015/07/wzbgy07.jpg" alt="温州碧桂园"><br><img src="//dn-nimages.qbox.me/2015/07/wzbgy08.jpg" alt="温州碧桂园"><br><img src="//dn-nimages.qbox.me/2015/07/wzbgy09.jpg" alt="温州碧桂园"><br><img src="//dn-nimages.qbox.me/2015/07/wzbgy10.jpg" alt="温州碧桂园"><br><img src="//dn-nimages.qbox.me/2015/07/wzbgy11.jpg" alt="温州碧桂园"><br><img src="//dn-nimages.qbox.me/2015/07/wzbgy12.jpg" alt="温州碧桂园"><br><img src="//dn-nimages.qbox.me/2015/07/wzbgy13.jpg" alt="温州碧桂园"><br><img src="//dn-nimages.qbox.me/2015/07/wzbgy14.jpg" alt="温州碧桂园"><br><img src="//dn-nimages.qbox.me/2015/07/wzbgy15.jpg" alt="温州碧桂园"><br><img src="//dn-nimages.qbox.me/2015/07/wzbgy16.jpg" alt="温州碧桂园"><br><img src="//dn-nimages.qbox.me/2015/07/wzbgy17.jpg" alt="温州碧桂园"><br><img src="//dn-nimages.qbox.me/2015/07/wzbgy18.jpg" alt="温州碧桂园"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="近照近照~~~">近照近照~~~</h1><p>(￣︶￣)↗ 涨 (￣︶￣)↗ 涨 (￣︶￣)↗ 涨</p>
+<p><img src="//dn-nimages.qbox.me/2015/07/wzbgy01.jpg" alt="温州碧桂园"><br>]]>
+    
+    </summary>
+    
+      <category term="温州碧桂园" scheme="https://www.gehaowu.com/notes/tags/%E6%B8%A9%E5%B7%9E%E7%A2%A7%E6%A1%82%E5%9B%AD/"/>
+    
+      <category term="照片" scheme="https://www.gehaowu.com/notes/tags/%E7%85%A7%E7%89%87/"/>
+    
+      <category term="碎碎念" scheme="https://www.gehaowu.com/notes/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+      <category term="碎碎念" scheme="https://www.gehaowu.com/notes/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[完美世界]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/07/perfectworld/"/>
+    <id>https://www.gehaowu.com/notes/2015/07/perfectworld/</id>
+    <published>2015-07-09T12:47:47.000Z</published>
+    <updated>2015-07-09T13:09:03.808Z</updated>
+    <content type="html"><![CDATA[<p>完美世界<br>演唱：水木年华<br>不知日升月落多少个夏秋<br>不知我已这样奔跑了多久<br>我从出生就注定一生的寻求<br>远方那完美世界的爱和自由<br>Fly with me<br>In the perfect world<br>Go with me<br>Just like a bird<br><a id="more"></a><br>没什么能阻拦自由的天地<br>这样沉默爱你不知有多久<br>我愿付出我的生命和所有<br>我要你不顾一切跟我走<br>去向完美世界的爱和自由<br>Fly with me<br>In the perfect world<br>Go with me<br>Just like a bird<br>没什么能阻拦我们在一起<br>Fly with me<br>In the perfect world<br>Go with me<br>Just like a bird<br>没什么能阻拦自由的天地<br>Fly with me<br>In the perfect world<br>Go with me<br>Just like a bird<br>没什么能阻拦我们在一起<br>Fly with me<br>In the perfect world<br>Go with me<br>Just like a bird</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=376221&auto=1&height=66"></iframe>]]></content>
+    <summary type="html">
+    <![CDATA[<p>完美世界<br>演唱：水木年华<br>不知日升月落多少个夏秋<br>不知我已这样奔跑了多久<br>我从出生就注定一生的寻求<br>远方那完美世界的爱和自由<br>Fly with me<br>In the perfect world<br>Go with me<br>Just like a bird<br>]]>
+    
+    </summary>
+    
+      <category term="完美世界" scheme="https://www.gehaowu.com/notes/tags/%E5%AE%8C%E7%BE%8E%E4%B8%96%E7%95%8C/"/>
+    
+      <category term="碎碎念" scheme="https://www.gehaowu.com/notes/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+      <category term="音乐" scheme="https://www.gehaowu.com/notes/tags/%E9%9F%B3%E4%B9%90/"/>
+    
+      <category term="碎碎念" scheme="https://www.gehaowu.com/notes/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[个人主页首页模块版权申明]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/07/homepage-copyright/"/>
+    <id>https://www.gehaowu.com/notes/2015/07/homepage-copyright/</id>
+    <published>2015-07-01T12:14:17.000Z</published>
+    <updated>2015-07-05T02:00:27.767Z</updated>
+    <content type="html"><![CDATA[<h2 id="模板">模板</h2><p>clone pawlobanano 的</p>
+<p><a href="https://github.com/pawlobanano/pawlobanano.github.io" target="_blank" rel="external">https://github.com/pawlobanano/pawlobanano.github.io</a></p>
+<h2 id="Credits">Credits</h2><p>Aerial 1.0 by HTML5 UP<br>html5up.net | @n33co<br>Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)</p>
+<h2 id="Background_image">Background image</h2><p><a href="http://hdwallpaperuniverse.com" target="_blank" rel="external">http://hdwallpaperuniverse.com</a><br>“colored-horizontal-wood-planks-hd-wallpaper”   (<a href="http://www.hdwallpaperuniverse.com/wp-content/uploads/2013/07/colored-horizontal-wood-planks-hd-wallpaper.jpg" target="_blank" rel="external">http://www.hdwallpaperuniverse.com/wp-content/uploads/2013/07/colored-horizontal-wood-planks-hd-wallpaper.jpg</a>)</p>
+<h2 id="A_tip_for_Compass">A tip for Compass</h2><p>Compass works out of the box with help from ‘config.rb’ file. You just need to start:<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">compass</span> watch</span><br></pre></td></tr></table></figure></p>
+<p>in your terminal/console.</p>
+<a id="more"></a>
+<p><img src="//dn-nimages.qbox.me/2015/07/dfzr1.png" alt="道法自然"><br><img src="//dn-nimages.qbox.me/2015/07/dfzr2.png" alt="道法自然"><br><img src="//dn-nimages.qbox.me/2015/07/dfzr3.png" alt="道法自然"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">Creative Commons Attribution <span class="number">3.0</span> Unported</span><br><span class="line">http://creativecommons.org/licenses/by/<span class="number">3.0</span>/</span><br><span class="line"></span><br><span class="line">License</span><br><span class="line"></span><br><span class="line">THE WORK (AS DEFINED BELOW) IS PROVIDED UNDER THE TERMS OF THIS CREATIVE COMMONS PUBLIC LICENSE (<span class="string">"CCPL"</span> OR <span class="string">"LICENSE"</span>). THE WORK IS PROTECTED BY COPYRIGHT AND/OR OTHER APPLICABLE LAW. ANY USE OF THE WORK OTHER THAN AS AUTHORIZED UNDER THIS LICENSE OR COPYRIGHT LAW IS PROHIBITED.</span><br><span class="line"></span><br><span class="line">BY EXERCISING ANY RIGHTS TO THE WORK PROVIDED HERE, YOU ACCEPT AND AGREE TO BE BOUND BY THE TERMS OF THIS LICENSE. TO THE EXTENT THIS LICENSE MAY BE CONSIDERED TO BE A CONTRACT, THE LICENSOR GRANTS YOU THE RIGHTS CONTAINED HERE IN CONSIDERATION OF YOUR ACCEPTANCE OF SUCH TERMS AND CONDITIONS.</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. Definitions</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>. <span class="string">"Adaptation"</span> means a work based upon the Work, or upon the Work and other pre-existing works, such as a translation, adaptation, derivative work, arrangement of music or other alterations of a literary or artistic work, or phonogram or performance and includes cinematographic adaptations or any other form <span class="keyword">in</span> <span class="built_in">which</span> the Work may be recast, transformed, or adapted including <span class="keyword">in</span> any form recognizably derived from the original, except that a work that constitutes a Collection will not be considered an Adaptation <span class="keyword">for</span> the purpose of this License. For the avoidance of doubt, <span class="built_in">where</span> the Work is a musical work, performance or phonogram, the synchronization of the Work <span class="keyword">in</span> timed-relation with a moving image (<span class="string">"synching"</span>) will be considered an Adaptation <span class="keyword">for</span> the purpose of this License.</span><br><span class="line">   <span class="number">2</span>. <span class="string">"Collection"</span> means a collection of literary or artistic works, such as encyclopedias and anthologies, or performances, phonograms or broadcasts, or other works or subject matter other than works listed <span class="keyword">in</span> Section <span class="number">1</span>(f) below, <span class="built_in">which</span>, by reason of the selection and arrangement of their contents, constitute intellectual creations, <span class="keyword">in</span> <span class="built_in">which</span> the Work is included <span class="keyword">in</span> its entirety <span class="keyword">in</span> unmodified form along with one or more other contributions, each constituting separate and independent works <span class="keyword">in</span> themselves, <span class="built_in">which</span> together are assembled into a collective whole. A work that constitutes a Collection will not be considered an Adaptation (as defined above) <span class="keyword">for</span> the purposes of this License.</span><br><span class="line">   <span class="number">3</span>. <span class="string">"Distribute"</span> means to make available to the public the original and copies of the Work or Adaptation, as appropriate, through sale or other transfer of ownership.</span><br><span class="line">   <span class="number">4</span>. <span class="string">"Licensor"</span> means the individual, individuals, entity or entities that offer(s) the Work under the terms of this License.</span><br><span class="line">   <span class="number">5</span>. <span class="string">"Original Author"</span> means, <span class="keyword">in</span> the <span class="keyword">case</span> of a literary or artistic work, the individual, individuals, entity or entities who created the Work or <span class="keyword">if</span> no individual or entity can be identified, the publisher; and <span class="keyword">in</span> addition (i) <span class="keyword">in</span> the <span class="keyword">case</span> of a performance the actors, singers, musicians, dancers, and other persons who act, sing, deliver, declaim, play <span class="keyword">in</span>, interpret or otherwise perform literary or artistic works or expressions of folklore; (ii) <span class="keyword">in</span> the <span class="keyword">case</span> of a phonogram the producer being the person or legal entity who first fixes the sounds of a performance or other sounds; and, (iii) <span class="keyword">in</span> the <span class="keyword">case</span> of broadcasts, the organization that transmits the broadcast.</span><br><span class="line">   <span class="number">6</span>. <span class="string">"Work"</span> means the literary and/or artistic work offered under the terms of this License including without limitation any production <span class="keyword">in</span> the literary, scientific and artistic domain, whatever may be the mode or form of its expression including digital form, such as a book, pamphlet and other writing; a lecture, address, sermon or other work of the same nature; a dramatic or dramatico-musical work; a choreographic work or entertainment <span class="keyword">in</span> dumb show; a musical composition with or without words; a cinematographic work to <span class="built_in">which</span> are assimilated works expressed by a process analogous to cinematography; a work of drawing, painting, architecture, sculpture, engraving or lithography; a photographic work to <span class="built_in">which</span> are assimilated works expressed by a process analogous to photography; a work of applied art; an illustration, map, plan, sketch or three-dimensional work relative to geography, topography, architecture or science; a performance; a broadcast; a phonogram; a compilation of data to the extent it is protected as a copyrightable work; or a work performed by a variety or circus performer to the extent it is not otherwise considered a literary or artistic work.</span><br><span class="line">   <span class="number">7</span>. <span class="string">"You"</span> means an individual or entity exercising rights under this License who has not previously violated the terms of this License with respect to the Work, or who has received express permission from the Licensor to exercise rights under this License despite a previous violation.</span><br><span class="line">   <span class="number">8</span>. <span class="string">"Publicly Perform"</span> means to perform public recitations of the Work and to communicate to the public those public recitations, by any means or process, including by wire or wireless means or public digital performances; to make available to the public Works <span class="keyword">in</span> such a way that members of the public may access these Works from a place and at a place individually chosen by them; to perform the Work to the public by any means or process and the communication to the public of the performances of the Work, including by public digital performance; to broadcast and rebroadcast the Work by any means including signs, sounds or images.</span><br><span class="line">   <span class="number">9</span>. <span class="string">"Reproduce"</span> means to make copies of the Work by any means including without limitation by sound or visual recordings and the right of fixation and reproducing fixations of the Work, including storage of a protected performance or phonogram <span class="keyword">in</span> digital form or other electronic medium.</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. Fair Dealing Rights. Nothing <span class="keyword">in</span> this License is intended to reduce, <span class="built_in">limit</span>, or restrict any uses free from copyright or rights arising from limitations or exceptions that are provided <span class="keyword">for</span> <span class="keyword">in</span> connection with the copyright protection under copyright law or other applicable laws.</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. License Grant. Subject to the terms and conditions of this License, Licensor hereby grants You a worldwide, royalty-free, non-exclusive, perpetual (<span class="keyword">for</span> the duration of the applicable copyright) license to exercise the rights <span class="keyword">in</span> the Work as stated below:</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>. to Reproduce the Work, to incorporate the Work into one or more Collections, and to Reproduce the Work as incorporated <span class="keyword">in</span> the Collections;</span><br><span class="line">   <span class="number">2</span>. to create and Reproduce Adaptations provided that any such Adaptation, including any translation <span class="keyword">in</span> any medium, takes reasonable steps to clearly label, demarcate or otherwise identify that changes were made to the original Work. For example, a translation could be marked <span class="string">"The original work was translated from English to Spanish,"</span> or a modification could indicate <span class="string">"The original work has been modified."</span>;</span><br><span class="line">   <span class="number">3</span>. to Distribute and Publicly Perform the Work including as incorporated <span class="keyword">in</span> Collections; and,</span><br><span class="line">   <span class="number">4</span>. to Distribute and Publicly Perform Adaptations.</span><br><span class="line">   <span class="number">5</span>.</span><br><span class="line"></span><br><span class="line">      For the avoidance of doubt:</span><br><span class="line">         <span class="number">1</span>. Non-waivable Compulsory License Schemes. In those jurisdictions <span class="keyword">in</span> <span class="built_in">which</span> the right to collect royalties through any statutory or compulsory licensing scheme cannot be waived, the Licensor reserves the exclusive right to collect such royalties <span class="keyword">for</span> any exercise by You of the rights granted under this License;</span><br><span class="line">         <span class="number">2</span>. Waivable Compulsory License Schemes. In those jurisdictions <span class="keyword">in</span> <span class="built_in">which</span> the right to collect royalties through any statutory or compulsory licensing scheme can be waived, the Licensor waives the exclusive right to collect such royalties <span class="keyword">for</span> any exercise by You of the rights granted under this License; and,</span><br><span class="line">         <span class="number">3</span>. Voluntary License Schemes. The Licensor waives the right to collect royalties, whether individually or, <span class="keyword">in</span> the event that the Licensor is a member of a collecting society that administers voluntary licensing schemes, via that society, from any exercise by You of the rights granted under this License.</span><br><span class="line"></span><br><span class="line">The above rights may be exercised <span class="keyword">in</span> all media and formats whether now known or hereafter devised. The above rights include the right to make such modifications as are technically necessary to exercise the rights <span class="keyword">in</span> other media and formats. Subject to Section <span class="number">8</span>(f), all rights not expressly granted by Licensor are hereby reserved.</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. Restrictions. The license granted <span class="keyword">in</span> Section <span class="number">3</span> above is expressly made subject to and limited by the following restrictions:</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>. You may Distribute or Publicly Perform the Work only under the terms of this License. You must include a copy of, or the Uniform Resource Identifier (URI) <span class="keyword">for</span>, this License with every copy of the Work You Distribute or Publicly Perform. You may not offer or impose any terms on the Work that restrict the terms of this License or the ability of the recipient of the Work to exercise the rights granted to that recipient under the terms of the License. You may not sublicense the Work. You must keep intact all notices that refer to this License and to the disclaimer of warranties with every copy of the Work You Distribute or Publicly Perform. When You Distribute or Publicly Perform the Work, You may not impose any effective technological measures on the Work that restrict the ability of a recipient of the Work from You to exercise the rights granted to that recipient under the terms of the License. This Section <span class="number">4</span>(a) applies to the Work as incorporated <span class="keyword">in</span> a Collection, but this does not require the Collection apart from the Work itself to be made subject to the terms of this License. If You create a Collection, upon notice from any Licensor You must, to the extent practicable, remove from the Collection any credit as required by Section <span class="number">4</span>(b), as requested. If You create an Adaptation, upon notice from any Licensor You must, to the extent practicable, remove from the Adaptation any credit as required by Section <span class="number">4</span>(b), as requested.</span><br><span class="line">   <span class="number">2</span>. If You Distribute, or Publicly Perform the Work or any Adaptations or Collections, You must, unless a request has been made pursuant to Section <span class="number">4</span>(a), keep intact all copyright notices <span class="keyword">for</span> the Work and provide, reasonable to the medium or means You are utilizing: (i) the name of the Original Author (or pseudonym, <span class="keyword">if</span> applicable) <span class="keyword">if</span> supplied, and/or <span class="keyword">if</span> the Original Author and/or Licensor designate another party or parties (e.g., a sponsor institute, publishing entity, journal) <span class="keyword">for</span> attribution (<span class="string">"Attribution Parties"</span>) <span class="keyword">in</span> Licensor<span class="string">'s copyright notice, terms of service or by other reasonable means, the name of such party or parties; (ii) the title of the Work if supplied; (iii) to the extent reasonably practicable, the URI, if any, that Licensor specifies to be associated with the Work, unless such URI does not refer to the copyright notice or licensing information for the Work; and (iv) , consistent with Section 3(b), in the case of an Adaptation, a credit identifying the use of the Work in the Adaptation (e.g., "French translation of the Work by Original Author," or "Screenplay based on original Work by Original Author"). The credit required by this Section 4 (b) may be implemented in any reasonable manner; provided, however, that in the case of a Adaptation or Collection, at a minimum such credit will appear, if a credit for all contributing authors of the Adaptation or Collection appears, then as part of these credits and in a manner at least as prominent as the credits for the other contributing authors. For the avoidance of doubt, You may only use the credit required by this Section for the purpose of attribution in the manner set out above and, by exercising Your rights under this License, You may not implicitly or explicitly assert or imply any connection with, sponsorship or endorsement by the Original Author, Licensor and/or Attribution Parties, as appropriate, of You or Your use of the Work, without the separate, express prior written permission of the Original Author, Licensor and/or Attribution Parties.</span><br><span class="line">   3. Except as otherwise agreed in writing by the Licensor or as may be otherwise permitted by applicable law, if You Reproduce, Distribute or Publicly Perform the Work either by itself or as part of any Adaptations or Collections, You must not distort, mutilate, modify or take other derogatory action in relation to the Work which would be prejudicial to the Original Author'</span>s honor or reputation. Licensor agrees that <span class="keyword">in</span> those jurisdictions (e.g. Japan), <span class="keyword">in</span> <span class="built_in">which</span> any exercise of the right granted <span class="keyword">in</span> Section <span class="number">3</span>(b) of this License (the right to make Adaptations) would be deemed to be a distortion, mutilation, modification or other derogatory action prejudicial to the Original Author<span class="string">'s honor and reputation, the Licensor will waive or not assert, as appropriate, this Section, to the fullest extent permitted by the applicable national law, to enable You to reasonably exercise Your right under Section 3(b) of this License (right to make Adaptations) but not otherwise.</span><br><span class="line"></span><br><span class="line">5. Representations, Warranties and Disclaimer</span><br><span class="line"></span><br><span class="line">UNLESS OTHERWISE MUTUALLY AGREED TO BY THE PARTIES IN WRITING, LICENSOR OFFERS THE WORK AS-IS AND MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND CONCERNING THE WORK, EXPRESS, IMPLIED, STATUTORY OR OTHERWISE, INCLUDING, WITHOUT LIMITATION, WARRANTIES OF TITLE, MERCHANTIBILITY, FITNESS FOR A PARTICULAR PURPOSE, NONINFRINGEMENT, OR THE ABSENCE OF LATENT OR OTHER DEFECTS, ACCURACY, OR THE PRESENCE OF ABSENCE OF ERRORS, WHETHER OR NOT DISCOVERABLE. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF IMPLIED WARRANTIES, SO SUCH EXCLUSION MAY NOT APPLY TO YOU.</span><br><span class="line"></span><br><span class="line">6. Limitation on Liability. EXCEPT TO THE EXTENT REQUIRED BY APPLICABLE LAW, IN NO EVENT WILL LICENSOR BE LIABLE TO YOU ON ANY LEGAL THEORY FOR ANY SPECIAL, INCIDENTAL, CONSEQUENTIAL, PUNITIVE OR EXEMPLARY DAMAGES ARISING OUT OF THIS LICENSE OR THE USE OF THE WORK, EVEN IF LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</span><br><span class="line"></span><br><span class="line">7. Termination</span><br><span class="line"></span><br><span class="line">   1. This License and the rights granted hereunder will terminate automatically upon any breach by You of the terms of this License. Individuals or entities who have received Adaptations or Collections from You under this License, however, will not have their licenses terminated provided such individuals or entities remain in full compliance with those licenses. Sections 1, 2, 5, 6, 7, and 8 will survive any termination of this License.</span><br><span class="line">   2. Subject to the above terms and conditions, the license granted here is perpetual (for the duration of the applicable copyright in the Work). Notwithstanding the above, Licensor reserves the right to release the Work under different license terms or to stop distributing the Work at any time; provided, however that any such election will not serve to withdraw this License (or any other license that has been, or is required to be, granted under the terms of this License), and this License will continue in full force and effect unless terminated as stated above.</span><br><span class="line"></span><br><span class="line">8. Miscellaneous</span><br><span class="line"></span><br><span class="line">   1. Each time You Distribute or Publicly Perform the Work or a Collection, the Licensor offers to the recipient a license to the Work on the same terms and conditions as the license granted to You under this License.</span><br><span class="line">   2. Each time You Distribute or Publicly Perform an Adaptation, Licensor offers to the recipient a license to the original Work on the same terms and conditions as the license granted to You under this License.</span><br><span class="line">   3. If any provision of this License is invalid or unenforceable under applicable law, it shall not affect the validity or enforceability of the remainder of the terms of this License, and without further action by the parties to this agreement, such provision shall be reformed to the minimum extent necessary to make such provision valid and enforceable.</span><br><span class="line">   4. No term or provision of this License shall be deemed waived and no breach consented to unless such waiver or consent shall be in writing and signed by the party to be charged with such waiver or consent.</span><br><span class="line">   5. This License constitutes the entire agreement between the parties with respect to the Work licensed here. There are no understandings, agreements or representations with respect to the Work not specified here. Licensor shall not be bound by any additional provisions that may appear in any communication from You. This License may not be modified without the mutual written agreement of the Licensor and You.</span><br><span class="line">   6. The rights granted under, and the subject matter referenced, in this License were drafted utilizing the terminology of the Berne Convention for the Protection of Literary and Artistic Works (as amended on September 28, 1979), the Rome Convention of 1961, the WIPO Copyright Treaty of 1996, the WIPO Performances and Phonograms Treaty of 1996 and the Universal Copyright Convention (as revised on July 24, 1971). These rights and subject matter take effect in the relevant jurisdiction in which the License terms are sought to be enforced according to the corresponding provisions of the implementation of those treaty provisions in the applicable national law. If the standard suite of rights granted under applicable copyright law includes additional rights not granted under this License, such additional rights are deemed to be included in the License; this License is not intended to restrict the license of any rights under applicable law.</span></span><br></pre></td></tr></table></figure>]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="模板">模板</h2><p>clone pawlobanano 的</p>
+<p><a href="https://github.com/pawlobanano/pawlobanano.github.io">https://github.com/pawlobanano/pawlobanano.github.io</a></p>
+<h2 id="Credits">Credits</h2><p>Aerial 1.0 by HTML5 UP<br>html5up.net | @n33co<br>Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)</p>
+<h2 id="Background_image">Background image</h2><p><a href="http://hdwallpaperuniverse.com">http://hdwallpaperuniverse.com</a><br>“colored-horizontal-wood-planks-hd-wallpaper”   (<a href="http://www.hdwallpaperuniverse.com/wp-content/uploads/2013/07/colored-horizontal-wood-planks-hd-wallpaper.jpg">http://www.hdwallpaperuniverse.com/wp-content/uploads/2013/07/colored-horizontal-wood-planks-hd-wallpaper.jpg</a>)</p>
+<h2 id="A_tip_for_Compass">A tip for Compass</h2><p>Compass works out of the box with help from ‘config.rb’ file. You just need to start:<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">compass</span> watch</span><br></pre></td></tr></table></figure></p>
+<p>in your terminal/console.</p>]]>
+    
+    </summary>
+    
+      <category term="个人主页" scheme="https://www.gehaowu.com/notes/tags/%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/tags/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="开源" scheme="https://www.gehaowu.com/notes/tags/%E5%BC%80%E6%BA%90/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/categories/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[通过 Reaver 测试 WPS 安全性]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/07/WPS-safety-test-by-Reaver/"/>
+    <id>https://www.gehaowu.com/notes/2015/07/WPS-safety-test-by-Reaver/</id>
+    <published>2015-07-01T12:14:17.000Z</published>
+    <updated>2015-07-05T02:00:23.073Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng start wlan0</span><br><span class="line">airodump-ng wlan0</span><br><span class="line">reaver -i moninterface -b bssid -vv</span><br></pre></td></tr></table></figure>
+<a id="more"></a>]]></content>
+    <summary type="html">
+    <![CDATA[<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng start wlan0</span><br><span class="line">airodump-ng wlan0</span><br><span class="line">reaver -i moninterface -b bssid -vv</span><br></pre></td></tr></table></figure>]]>
+    
+    </summary>
+    
+      <category term="Reaver" scheme="https://www.gehaowu.com/notes/tags/Reaver/"/>
+    
+      <category term="WPS" scheme="https://www.gehaowu.com/notes/tags/WPS/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/tags/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="安全" scheme="https://www.gehaowu.com/notes/tags/%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="开源" scheme="https://www.gehaowu.com/notes/tags/%E5%BC%80%E6%BA%90/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/categories/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[【走进装逼学：】通过CSS字距调整空格]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/06/Perfectionism/"/>
+    <id>https://www.gehaowu.com/notes/2015/06/Perfectionism/</id>
+    <published>2015-06-30T13:49:53.000Z</published>
+    <updated>2015-07-05T13:26:56.273Z</updated>
+    <content type="html"><![CDATA[<p>抄来的主页，发现对方用了好多空格，</p>
+<p>想着空格多不舒服。。。</p>
+<p>就想通过调整字距来去掉空格</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">letter-spacing: <span class="number">1</span>em;</span><br></pre></td></tr></table></figure>
+<p>然后悲剧的发现 <strong>不居中了</strong> 。。。</p>
+<p><img src="//dn-nimages.qbox.me/2015/06/imitation_of_nature1.png" alt="道法自然"></p>
+<a id="more"></a>
+<p>想想算了，，，改回去吧。。</p>
+<p><img src="//dn-nimages.qbox.me/2015/06/imitation_of_nature2.png" alt="道法自然"></p>
+<p><img src="//dn-nimages.qbox.me/2015/07/jafg.jpg" alt="兼爱非攻"></p>
+<p>原方案：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 头部代码 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">header</span> <span class="attribute">id</span>=<span class="value">"header"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">h1</span>&gt;</span>道&amp;nbsp;&amp;nbsp;法&amp;nbsp;&amp;nbsp;自&amp;nbsp;&amp;nbsp;然<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">p</span>&gt;</span>Welcome to Ge Haowu's Personal Homepage!<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">nav</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>抄来的主页，发现对方用了好多空格，</p>
+<p>想着空格多不舒服。。。</p>
+<p>就想通过调整字距来去掉空格</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">letter-spacing: <span class="number">1</span>em;</span><br></pre></td></tr></table></figure>
+<p>然后悲剧的发现 <strong>不居中了</strong> 。。。</p>
+<p><img src="//dn-nimages.qbox.me/2015/06/imitation_of_nature1.png" alt="道法自然"></p>]]>
+    
+    </summary>
+    
+      <category term="CSS" scheme="https://www.gehaowu.com/notes/tags/CSS/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/tags/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/categories/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[【走进装逼学：】通过 netcraft 查看部分服务器信息]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/06/netcraft/"/>
+    <id>https://www.gehaowu.com/notes/2015/06/netcraft/</id>
+    <published>2015-06-27T06:44:58.000Z</published>
+    <updated>2015-07-05T02:00:44.355Z</updated>
+    <content type="html"><![CDATA[<p>向url=后面添加需要查看的域名，打开就OK了，<a href="http://toolbar.netcraft.com/site_report?url=" target="_blank" rel="external">http://toolbar.netcraft.com/site_report?url=</a></p>
+<p>就像这样子，</p>
+<p><a href="http://toolbar.netcraft.com/site_report?url=https://www.gehaowu.com" target="_blank" rel="external">http://toolbar.netcraft.com/site_report?url=https://www.gehaowu.com</a></p>
+<p><img src="//dn-nimages.qbox.me/2015/06/netcraft_freebsd.png" alt="netcraft"><br><img src="//dn-nimages.qbox.me/2015/06/netcraft_freebsd2.png" alt="netcraft"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>向url=后面添加需要查看的域名，打开就OK了，<a href="http://toolbar.netcraft.com/site_report?url=" target="_blank" rel="external">http://toolbar.netcraft.com]]>
+    </summary>
+    
+      <category term="FreeBSD" scheme="https://www.gehaowu.com/notes/tags/FreeBSD/"/>
+    
+      <category term="netcraft" scheme="https://www.gehaowu.com/notes/tags/netcraft/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/tags/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="开源" scheme="https://www.gehaowu.com/notes/tags/%E5%BC%80%E6%BA%90/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/categories/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[构建面向国内网络环境的高速个人网站]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/06/Construction-for-the-Chinese-network-environment-high-speed-personal-website/"/>
+    <id>https://www.gehaowu.com/notes/2015/06/Construction-for-the-Chinese-network-environment-high-speed-personal-website/</id>
+    <published>2015-06-10T00:16:00.000Z</published>
+    <updated>2015-07-05T02:00:48.881Z</updated>
+    <content type="html"><![CDATA[<p>前些日子在万网订购了一个款免费的虚拟主机产品，速度很快。。。但是。。。<br>竟然对中文目录支持如此恶心。。想想，算了，放弃主机产品。。。<br>（说的那么好好像真的要用一样的，，，其实我申请那个主机主要是为了备案的啦，<br>既然面向国内用户，且不会写<strong>不良</strong>信息，那么备案也没什么大不了的。）</p>
+<h2 id="重新选择托管方案">重新选择托管方案</h2><p>免费托管方案明细选择 <a href="https://github.com" target="_blank" rel="external">github</a>  -_-!</p>
+<p>由于 Github 本身在国外，从过来拉取数据会有较大的网络延时，如果就这样直接托管在 Github 上，<br>别说高速网站了，连能不能有效访问都是个问题，因为大中华区还有一款名为长城防火墙网络版的存在啊。。哈哈哈</p>
+<a id="more"></a>
+<h2 id="变更新方案">变更新方案</h2><p>所以我们换转一个架构，</p>
+<p>将 访客访问请求 —&gt; 主机托管商 的模式</p>
+<p>切换为</p>
+<p>访客访问请求 —&gt; 国内 CDN 服务商  —&gt; 主机托管商</p>
+<p>这里我选择国内的 <a href="https://www.jiasule.com" target="_blank" rel="external">加速乐</a> 作为 CDN 服务商，主机依旧选择 Github 。</p>
+<p>也就是 访客浏览器 -&gt; 加速乐 -&gt; Github 。</p>
+<p><img src="//dn-nimages.qbox.me/2015/06/jiasule_gehaowu.com.png" alt="加速乐"></p>
+<p><img src="//dn-nimages.qbox.me/2015/06/github_gehaowu.com.png" alt="Github"></p>
+<h2 id="为主站添加_robots-txt_文件，">为主站添加 <strong>robots.txt</strong> 文件，</h2><p>Github 会主动扩展账户下的分支为 gh-pages 的子仓库，避免被搜索引擎收录，屏蔽之。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># robots.txt</span></span><br><span class="line">User-agent: *</span><br><span class="line">Disallow: /*.old/</span><br><span class="line">Disallow: /Source_*/</span><br><span class="line">Disallow: /wwwroot_*/</span><br></pre></td></tr></table></figure>
+<p><a href="//www.gehaowu.com/">我的个人网站</a></p>
+<p>欢迎光临，哈哈哈~~~</p>
+<hr>
+<p><strong>版权声明</strong></p>
+<p><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="external"><img src="//dn-nimages.qbox.me/other/CC-BY-SA-ND.png" alt="署名-非商业性使用-禁止演绎 创意共享4.0国际许可证"></a></p>
+<p><a href="//www.gehaowu.com/">Ge Haowu’s Personal Website</a> by <a href="//www.gehaowu.com/aboutme/">Haowu Ge</a> is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="external">CC BY-NC-ND 4.0 International</a> License.<br>由 <a href="//www.gehaowu.com/aboutme/">葛豪武</a> 创作并维护在<a href="//www.gehaowu.com/">葛豪武的个人网站</a> 采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="external">署名-非商业性使用-禁止演绎 创意共享 4.0 国际</a> 许可证。</p>
+<p>本文首发于 <a href="//www.gehaowu.com/">葛豪武的个人网站！· Ge Haowu’s Personal Website!</a> ，版权所有，侵权必究。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>前些日子在万网订购了一个款免费的虚拟主机产品，速度很快。。。但是。。。<br>竟然对中文目录支持如此恶心。。想想，算了，放弃主机产品。。。<br>（说的那么好好像真的要用一样的，，，其实我申请那个主机主要是为了备案的啦，<br>既然面向国内用户，且不会写<strong>不良</strong>信息，那么备案也没什么大不了的。）</p>
+<h2 id="重新选择托管方案">重新选择托管方案</h2><p>免费托管方案明细选择 <a href="https://github.com">github</a>  -_-!</p>
+<p>由于 Github 本身在国外，从过来拉取数据会有较大的网络延时，如果就这样直接托管在 Github 上，<br>别说高速网站了，连能不能有效访问都是个问题，因为大中华区还有一款名为长城防火墙网络版的存在啊。。哈哈哈</p>]]>
+    
+    </summary>
+    
+      <category term="CDN" scheme="https://www.gehaowu.com/notes/tags/CDN/"/>
+    
+      <category term="Github" scheme="https://www.gehaowu.com/notes/tags/Github/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/tags/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="加速乐" scheme="https://www.gehaowu.com/notes/tags/%E5%8A%A0%E9%80%9F%E4%B9%90/"/>
+    
+      <category term="开源" scheme="https://www.gehaowu.com/notes/tags/%E5%BC%80%E6%BA%90/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/categories/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[通过cron定期从github上拉去个人网站数据]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/06/Regularly-got-me-a-personal-website-data-from-github-by-cron/"/>
+    <id>https://www.gehaowu.com/notes/2015/06/Regularly-got-me-a-personal-website-data-from-github-by-cron/</id>
+    <published>2015-06-09T05:43:32.000Z</published>
+    <updated>2015-07-09T12:30:56.033Z</updated>
+    <content type="html"><![CDATA[<h2 id="创建个人网站主机配置文件，">创建个人网站主机配置文件，</h2><p>先设置几个域名的虚拟主机，</p>
+<p>，让所有请求 gehaowu.com,www.gehaowu.com 两个域名的 http 请求，强制跳转到 https 协议的 www.gehaowu.com ，<br>接着一个对发给 gehaowu.com 的 https 请求也强制转发给 www.gehaowu.com 。</p>
+<p>关闭日志记录。</p>
+<a id="more"></a>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## NGINX 虚拟主机配置</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 监听 gehaowu.com 与 www.gehaowu.com 的 80 端口的请求</span></span><br><span class="line"><span class="comment"># 除百度蜘蛛外全部 301 到 https://www.gehaowu.com</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen                              <span class="number">80</span>;</span><br><span class="line">    listen                              [::]:<span class="number">80</span>;</span><br><span class="line">    server_name                         gehaowu.com www.gehaowu.com;</span><br><span class="line">    add_header                          Strict-Transport-Security max-age=<span class="number">31536000</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$http_user_agent</span> !~* baidu.com) &#123;</span><br><span class="line">        rewrite                         ^/(.*) https://www.gehaowu.com/<span class="variable">$1</span> permanent;</span><br><span class="line">    &#125;</span><br><span class="line">    index                               index.html;</span><br><span class="line">    root                                /home/ghw/wwwroot;</span><br><span class="line">    error_page                          <span class="number">404</span> /<span class="number">404</span>.html;</span><br><span class="line">    error_page                          <span class="number">403</span> /<span class="number">403</span>.html;</span><br><span class="line">    error_page                          <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span> /<span class="number">50</span>x.html;</span><br><span class="line">    access_<span class="built_in">log</span>                          /home/ghw/wwwlog/baidu.access.log;</span><br><span class="line">    error_<span class="built_in">log</span>                           /home/ghw/wwwlog/baidu.error.log;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 监听 gehaowu.com 的 443 请求</span></span><br><span class="line"><span class="comment"># 强制跳转到 https://www.gehaowu.com</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen                              <span class="number">443</span> ssl spdy;</span><br><span class="line">    listen                              [::]:<span class="number">443</span> ssl spdy;</span><br><span class="line">    server_name                         gehaowu.com;</span><br><span class="line">    ssl_certificate                     keys/www.gehaowu.com.crt;</span><br><span class="line">    ssl_certificate_key                 keys/www.gehaowu.com.key;</span><br><span class="line">    ssl_protocols                       TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</span><br><span class="line">    ssl_ciphers                         EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA256:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EDH+aRSA+AESGCM:EDH+aRSA+SHA256:EDH+aRSA:EECDH:!DH:!aNULL:!eNULL:!MEDIUM:!LOW:!<span class="number">3</span>DES:!MD5:!EXP:!PSK:!SRP:!DSS:!RC4:!SEED;</span><br><span class="line">    ssl_prefer_server_ciphers           on;</span><br><span class="line">    add_header                          Strict-Transport-Security max-age=<span class="number">31536000</span>;</span><br><span class="line">    ssl_session_cache                   shared:SSL:<span class="number">5</span>m;</span><br><span class="line">    ssl_session_timeout                 <span class="number">5</span>m;</span><br><span class="line">    ssl_stapling                        on;</span><br><span class="line">    ssl_stapling_verify                 on;</span><br><span class="line">    ssl_trusted_certificate             keys/www.gehaowu.com.crt;</span><br><span class="line">    resolver                            <span class="number">8.8</span>.<span class="number">4.4</span> <span class="number">8.8</span>.<span class="number">8.8</span>;</span><br><span class="line">    rewrite                             ^/(.*) https://www.gehaowu.com/<span class="variable">$1</span> permanent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 虚拟主机 https://www.gehaowu.com 的配置部分</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen                              <span class="number">443</span> ssl spdy;</span><br><span class="line">    listen                              [::]:<span class="number">443</span> ssl spdy ipv6only=on;</span><br><span class="line">    server_name                         www.gehaowu.com;</span><br><span class="line">    ssl_certificate                     keys/www.gehaowu.com.crt;</span><br><span class="line">    ssl_certificate_key                 keys/www.gehaowu.com.key;</span><br><span class="line">    ssl_protocols                       TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</span><br><span class="line">    ssl_ciphers                         EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA256:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EDH+aRSA+AESGCM:EDH+aRSA+SHA256:EDH+aRSA:EECDH:!DH:!aNULL:!eNULL:!MEDIUM:!LOW:!<span class="number">3</span>DES:!MD5:!EXP:!PSK:!SRP:!DSS:!RC4:!SEED;</span><br><span class="line">    ssl_prefer_server_ciphers           on;</span><br><span class="line">    add_header                          Strict-Transport-Security max-age=<span class="number">31536000</span>;</span><br><span class="line">    ssl_session_cache                   shared:SSL:<span class="number">5</span>m;</span><br><span class="line">    ssl_session_timeout                 <span class="number">5</span>m;</span><br><span class="line">    ssl_stapling                        on;</span><br><span class="line">    ssl_stapling_verify                 on;</span><br><span class="line">    ssl_trusted_certificate             keys/www.gehaowu.com.crt;</span><br><span class="line">    resolver                            <span class="number">8.8</span>.<span class="number">4.4</span> <span class="number">8.8</span>.<span class="number">8.8</span>;</span><br><span class="line">    index                               index.html;</span><br><span class="line">    root                                /home/ghw/wwwroot;</span><br><span class="line">    error_page                          <span class="number">404</span> /<span class="number">404</span>.html;</span><br><span class="line">    error_page                          <span class="number">403</span> /<span class="number">403</span>.html;</span><br><span class="line">    error_page                          <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span> /<span class="number">50</span>x.html;</span><br><span class="line">    access_<span class="built_in">log</span>                          /home/ghw/wwwlog/www.gehaowu.com.access.log;</span><br><span class="line">    error_<span class="built_in">log</span>                           /home/ghw/wwwlog/www.gehaowu.com.error.log;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 反向代理 bookcase 子目录</span></span><br><span class="line">    location                            = /bookcase &#123;</span><br><span class="line">        <span class="built_in">return</span>                          <span class="number">301</span> /bookcase/;</span><br><span class="line">    &#125;</span><br><span class="line">    location                            ^~ /bookcase &#123;</span><br><span class="line">        proxy_pass                      https://gehaowu.github.io;</span><br><span class="line">        proxy_<span class="built_in">set</span>_header                Host gehaowu.github.io;</span><br><span class="line">        proxy_<span class="built_in">set</span>_header                X-Host gehaowu.github.io;</span><br><span class="line">        proxy_<span class="built_in">set</span>_header                X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line"><span class="comment">#       proxy_cache                     ghw;</span></span><br><span class="line"><span class="comment">#       proxy_cache_valid               200 302 1h;</span></span><br><span class="line"><span class="comment">#       proxy_cache_valid               404 1m;</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    location                            = /life &#123;</span><br><span class="line">        <span class="built_in">return</span>                          <span class="number">301</span> /life/;</span><br><span class="line">    &#125;</span><br><span class="line">    location                            ^~ /life &#123;</span><br><span class="line">        proxy_pass                      https://gehaowu.github.io;</span><br><span class="line">        proxy_<span class="built_in">set</span>_header                Host gehaowu.github.io;</span><br><span class="line">        proxy_<span class="built_in">set</span>_header                X-Host gehaowu.github.io;</span><br><span class="line">        proxy_<span class="built_in">set</span>_header                X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 静止访问 "." 开头的隐藏文件</span></span><br><span class="line">    location                            ~ /\. &#123;</span><br><span class="line">        deny                            all;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># robots.txt 、 favicon.ico ，status.gif 文件访问不记录日志</span></span><br><span class="line">    location                            ~* ^/(favicon.ico|robots.txt|status.gif)$ &#123;</span><br><span class="line">        allow                           all;</span><br><span class="line">        access_<span class="built_in">log</span>                      /dev/null;</span><br><span class="line">        error_<span class="built_in">log</span>                       /dev/null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 静态文件超期</span></span><br><span class="line">    location                            ~* \.(html|htm|xml|rss|atom|txt|xhtml)$ &#123;</span><br><span class="line">        expires                         <span class="number">1</span>d;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location                            ~* \.(css|gif|jpeg|jpg|js|png|ico|bmp|svg|doc|pdf|mp3|ogg|mp4|mpeg|webm|eot|ttf|woff)$ &#123;</span><br><span class="line">        expires                         <span class="number">7</span>d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="//dn-nimages.qbox.me/2015/06/freebsd_gehaowu.com.png" alt="freebsdlogo.sh"></p>
+<p>新建一个网站根目录， 比如我这里使用 <strong><em>/home/ghw/</em></strong> ，接着执行 gitclone.sh 文件</p>
+<h2 id="首次_clone_用的_gitclone-sh_脚本">首次 clone 用的 gitclone.sh 脚本</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/sh</span></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/<span class="built_in">local</span>/bin:/usr/<span class="built_in">local</span>/sbin</span><br><span class="line">git <span class="built_in">clone</span> --depth <span class="number">1</span> -b gh-pages https://github.com/gehaowu/www.gehaowu.com /home/ghw/wwwroot</span><br><span class="line">git <span class="built_in">clone</span> --depth <span class="number">1</span> -b gh-pages https://github.com/gehaowu/aboutme /home/ghw/wwwroot/aboutme</span><br><span class="line">git <span class="built_in">clone</span> --depth <span class="number">1</span> -b gh-pages https://github.com/gehaowu/notes /home/ghw/wwwroot/notes</span><br><span class="line">git <span class="built_in">clone</span> --depth <span class="number">1</span> -b gh-pages https://github.com/gehaowu/albums /home/ghw/wwwroot/albums</span><br></pre></td></tr></table></figure>
+<p><img src="//dn-nimages.qbox.me/2015/06/gitclone_gehaowu.com.png" alt="gitclone.sh"></p>
+<p>因为我在 wwwroot 根目录放了 gitpull.sh 脚本，所以直接给 cron 添加计划任务：</p>
+<h2 id="让_crontab_每_5_个小时执行一次_pull_脚本">让 crontab 每 5 个小时执行一次 pull 脚本</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在需要运行 gitpull.sh 脚本的用户上执行 crontab -e  ，添加以下内容：</span></span><br><span class="line">* */<span class="number">5</span> * * * /bin/sh /home/ghw/wwwroot/gitpull.sh &gt;/dev/null <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><img src="//dn-nimages.qbox.me/2015/06/gitpull_gehaowu.com.png" alt="gitpull.sh"></p>
+<h2 id="gitpull-sh_脚本的内容">gitpull.sh 脚本的内容</h2><p>因为 blog 模块实际上会出现向github提交的时候会使用-f参数，所以我们下拉的时候需要先清理掉分支<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/sh</span></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/<span class="built_in">local</span>/bin:/usr/<span class="built_in">local</span>/sbin</span><br><span class="line"><span class="built_in">export</span> LC_ALL=zh_CN.UTF-<span class="number">8</span></span><br><span class="line">date &gt;&gt; /home/ghw/gitpulldate.log</span><br><span class="line"><span class="built_in">cd</span> /home/ghw/wwwroot/</span><br><span class="line">git pull</span><br><span class="line"><span class="built_in">cd</span> /home/ghw/wwwroot/aboutme/</span><br><span class="line">git pull</span><br><span class="line"><span class="built_in">cd</span> /home/ghw/wwwroot/notes/</span><br><span class="line">git pull</span><br><span class="line">git reset --hard</span><br><span class="line"><span class="built_in">cd</span> /home/ghw/wwwroot/albums/</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure></p>
+<p>搞完，这样就可以了，<br>没五个小时从 github 上拉取网站数据，所以我们只需要将自己的网站数据同步到github上就可以了。。。<br>十分容易也十分安全，哈哈哈。。。&lt;(￣▽￣)&gt;</p>
+<hr>
+<p><strong>版权声明</strong></p>
+<p><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="external"><img src="//dn-nimages.qbox.me/other/CC-BY-SA-ND.png" alt="署名-非商业性使用-禁止演绎 创意共享4.0国际许可证"></a></p>
+<p><a href="//www.gehaowu.com/">Ge Haowu’s Personal Website</a> by <a href="//www.gehaowu.com/aboutme/">Haowu Ge</a> is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="external">CC BY-NC-ND 4.0 International</a> License.<br>由 <a href="//www.gehaowu.com/aboutme/">葛豪武</a> 创作并维护在<a href="//www.gehaowu.com/">葛豪武的个人网站</a> 采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="external">署名-非商业性使用-禁止演绎 创意共享 4.0 国际</a> 许可证。</p>
+<p>本文首发于 <a href="//www.gehaowu.com/">葛豪武的个人网站！· Ge Haowu’s Personal Website!</a> ，版权所有，侵权必究。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="创建个人网站主机配置文件，">创建个人网站主机配置文件，</h2><p>先设置几个域名的虚拟主机，</p>
+<p>，让所有请求 gehaowu.com,www.gehaowu.com 两个域名的 http 请求，强制跳转到 https 协议的 www.gehaowu.com ，<br>接着一个对发给 gehaowu.com 的 https 请求也强制转发给 www.gehaowu.com 。</p>
+<p>关闭日志记录。</p>]]>
+    
+    </summary>
+    
+      <category term="Github" scheme="https://www.gehaowu.com/notes/tags/Github/"/>
+    
+      <category term="NGINX" scheme="https://www.gehaowu.com/notes/tags/NGINX/"/>
+    
+      <category term="SSL" scheme="https://www.gehaowu.com/notes/tags/SSL/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/tags/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="开源" scheme="https://www.gehaowu.com/notes/tags/%E5%BC%80%E6%BA%90/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/categories/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[贷款利率与投资收益]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/06/lending-rates-and-investment-income/"/>
+    <id>https://www.gehaowu.com/notes/2015/06/lending-rates-and-investment-income/</id>
+    <published>2015-06-02T03:02:11.000Z</published>
+    <updated>2015-07-05T02:01:00.393Z</updated>
+    <content type="html"><![CDATA[<h4 id="烂尾了。。。没动力写了。。。。。。。。。。">烂尾了。。。没动力写了。。。。。。。。。。</h4><p>贷款利率与投资收益<br><a id="more"></a><br>===<strong>未完工</strong>===</p>
+<h3 id="相关计算公式">相关计算公式</h3><!-- 等额本金还款计算公式 -->
+<p>$等额本金每月还款额 = {贷款本金金额 \over 还款月数} + ({本金 - 累计已还本金额}) \times 月利率$</p>
+<!-- 等额本息还款计算公式 -->
+<p>$等额本息每月还款额 = 贷款本金金额 \times {月利率 \times (1 + 月利率)^{还款月数} \over (1 + 月利率)^{还款月数} - 1}$</p>
+<!-- 月利率计算公式 -->
+<p>$月利率 = {年利率 \over 12}$</p>
+<!-- 借款产品计算公式 -->
+<p>$预约借款产品年收益 = {本金 \times 约定年化收益率}$</p>
+<p>那么我们搞个栗子看看，，</p>
+<h3 id="来，举个栗子">来，举个栗子</h3><p><strong><em>假设条件</em></strong></p>
+<!-- 借款产品计算公式 -->
+<p>假设借现在将1万元给金融机构，利率按年利6.68%计算，一年到期后将能收到：${10000 \times 6.68\%} = 668$</p>
+<p>接下来看看房贷利息：<br><!-- 月利率计算公式 --><br>先计算月利率（假设年率5.60%）= ${5.60\% \over 12} = 0.466667\%$</p>
+<!-- 等额本金还款计算公式 -->
+<p>第一个月还款本息：${10000 \over 12} + ({10000 - 0}) \times 0.466667\% = 833.33 + 46.6667 = 879.9967$<br>第二个月还款本息：${10000 \over 12} + ({10000 - 833.33}) \times 0.466667\% = 833.33 + 42.7778 = 876.1078$<br>第三个月还款本息：${10000 \over 12} + ({10000 - 1666.66}) \times 0.466667\% = 833.33 + 38.8890 = 872.2190$<br>第四个月还款本息：${10000 \over 12} + ({10000 - 2499.99}) \times 0.466667\% = 833.33 + 35.0001 = 868.3301$<br>第五个月还款本息：${10000 \over 12} + ({10000 - 3333.32}) \times 0.466667\% = 833.33 + 31.1112 = 864.4412$<br>第六个月还款本息：${10000 \over 12} + ({10000 - 4166.65}) \times 0.466667\% = 833.33 + 27.2223 = 860.5523$<br>第七个月还款本息：${10000 \over 12} + ({10000 - 4999.98}) \times 0.466667\% = 833.33 + 23.3334 = 856.6634$<br>第八个月还款本息：${10000 \over 12} + ({10000 - 5833.31}) \times 0.466667\% = 833.33 + 19.4446 = 852.7746$<br>第九个月还款本息：${10000 \over 12} + ({10000 - 6666.64}) \times 0.466667\% = 833.33 + 15.5557 = 848.8857$<br>第十个月还款本息：${10000 \over 12} + ({10000 - 7499.97}) \times 0.466667\% = 833.33 + 11.6669 = 844.9969$<br>第十一个月还款本息：${10000 \over 12} + ({10000 - 8333.30}) \times 0.466667\% = 833.33 + 7.7779 = 841.1079$<br>第十二个月还款本息：${10000 \over 12} + ({10000 - 9166.63}) \times 0.466667\% = 833.33 + 3.8891 = 837.2191$</p>
+<p>等额本息模式下，全年需要支付利息：$46.6667 = 879.9967+ 42.7778+ 38.8890+ 35.0001 + 27.2223 + 23.3334 + 15.5557 + 11.6669 + 7.7779 + 3.8891 = 303.3347$</p>
+<!--
+1月,880(元)
+2月,876.11(元)
+3月,872.22(元)
+4月,868.33(元)
+5月,864.44(元)
+6月,860.56(元)
+7月,856.67(元)
+8月,852.78(元)
+9月,848.89(元)
+10月,845(元)
+11月,841.11(元)
+12月,837.22(元)
+-->
+<p>1万，12期，利率12.33%，利息667.88</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h4 id="烂尾了。。。没动力写了。。。。。。。。。。">烂尾了。。。没动力写了。。。。。。。。。。</h4><p>贷款利率与投资收益<br>]]>
+    
+    </summary>
+    
+      <category term="利率" scheme="https://www.gehaowu.com/notes/tags/%E5%88%A9%E7%8E%87/"/>
+    
+      <category term="投资" scheme="https://www.gehaowu.com/notes/tags/%E6%8A%95%E8%B5%84/"/>
+    
+      <category term="收益" scheme="https://www.gehaowu.com/notes/tags/%E6%94%B6%E7%9B%8A/"/>
+    
+      <category term="财务会计" scheme="https://www.gehaowu.com/notes/tags/%E8%B4%A2%E5%8A%A1%E4%BC%9A%E8%AE%A1/"/>
+    
+      <category term="贷款" scheme="https://www.gehaowu.com/notes/tags/%E8%B4%B7%E6%AC%BE/"/>
+    
+      <category term="财务会计" scheme="https://www.gehaowu.com/notes/categories/%E8%B4%A2%E5%8A%A1%E4%BC%9A%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[会计准则规定的几种固定资产折旧方法]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/05/depreciation-of-several-fixed-assets-under-accounting-standards/"/>
+    <id>https://www.gehaowu.com/notes/2015/05/depreciation-of-several-fixed-assets-under-accounting-standards/</id>
+    <published>2015-05-27T00:26:06.000Z</published>
+    <updated>2015-07-05T02:01:21.800Z</updated>
+    <content type="html"><![CDATA[<h2 id="会计准则规定的几种固定资产折旧方法">会计准则规定的几种固定资产折旧方法</h2><h2 id="年限平均法">年限平均法</h2><p><strong>年限平均法</strong>又称直线法，是将固定资产的折旧均衡地分摊到各期的一种方法。</p>
+<h2 id="工作量法">工作量法</h2><p><strong>工作量法</strong>是指按实际工作量计提固定资产折旧额的一种方法。</p>
+<h2 id="双倍余额递减法">双倍余额递减法</h2><p><strong>加速折旧法</strong>是一种使用前期提取折旧较多，固定资产成本在使用年限内尽早得到价值补偿的折旧方法。</p>
+<h2 id="年数总和法">年数总和法</h2><p><strong>年数总和法</strong>又称折旧年限积数法、年数比率法、级数递减法或年限合计法，是将固定资产的原值减去预计净残值后的净额乘以一个逐年递减的分数计算每年的折旧额，这个分数的分子代表固定资产尚可使用的年数，分母代表使用年限的逐年数字总和。 </p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="会计准则规定的几种固定资产折旧方法">会计准则规定的几种固定资产折旧方法</h2><h2 id="年限平均法">年限平均法</h2><p><strong>年限平均法</strong>又称直线法，是将固定资产的折旧均衡地分摊到各期的一种方法。</p>
+<h2 id=]]>
+    </summary>
+    
+      <category term="财务会计" scheme="https://www.gehaowu.com/notes/tags/%E8%B4%A2%E5%8A%A1%E4%BC%9A%E8%AE%A1/"/>
+    
+      <category term="财务会计" scheme="https://www.gehaowu.com/notes/categories/%E8%B4%A2%E5%8A%A1%E4%BC%9A%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[NGINX 配置多证书环境及强制 https 跳转]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/05/NGINX-configure-multiple-certificate-environment-and-forced-https-Jump/"/>
+    <id>https://www.gehaowu.com/notes/2015/05/NGINX-configure-multiple-certificate-environment-and-forced-https-Jump/</id>
+    <published>2015-05-23T14:52:00.000Z</published>
+    <updated>2015-07-09T12:22:26.836Z</updated>
+    <content type="html"><![CDATA[<h2 id="启用_HTTPS_的原因">启用 HTTPS 的原因</h2><p>原因嘛，<br>1，https 保证网站传说过程中不被修改，<br>2，Google 提升了 https 网站的权重，<br>3，。。。</p>
+<p>其实，很简单嘛，，，<br>根本还是在比较装逼呗。。。<br><img src="//dn-nimages.qbox.me/2015/05/https.png" alt="https"><br>小绿锁哟，哈哈哈哈哈哈</p>
+<p>下面开始，通过 FreeBSD 的包管理器安 NGINX ，<br>（个人强力不推荐绕过操作系统包管理工具自己编译的超级装逼行为！）</p>
+<p>FreeBSD 安装 NGINX 很简单，如果偷懒，可以直接：<br><a id="more"></a><br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkg <span class="keyword">install</span> -y nginx</span><br></pre></td></tr></table></figure></p>
+<p>不过你也可以使用 Ports 安装，因为可以自定义选项→_→<br>比如开启 NGINX 的 SPDY 模块，make config 出来的界面在 SPDY 前面选中就可以了<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#cd <span class="regexp">/usr/</span>ports<span class="regexp">/www/</span>nginx &amp;&amp;make config</span><br><span class="line">cd <span class="regexp">/usr/</span>ports<span class="regexp">/www/</span>nginx &amp;&amp;make install clean</span><br></pre></td></tr></table></figure></p>
+<p><img src="//dn-nimages.qbox.me/2015/05/ports.nginx.png" alt="从Ports安装NGINX"></p>
+<p>坐等一会，NGINX 就安好了，比较方便，</p>
+<p>安装后配置，因为我的网站是纯静态网站，所以也不需要安其它动态语言。</p>
+<p>NGINX 的主配置文件在 /usr/local/etc/nginx/nginx.conf</p>
+<h2 id="NGINX_主配置文件">NGINX 主配置文件</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">user</span>  www;</span><br><span class="line"><span class="title">worker_processes</span>  <span class="number">5</span>;</span><br><span class="line"><span class="title">events</span> &#123;</span><br><span class="line">    <span class="title">use</span> <span class="built_in">kqueue</span>;</span><br><span class="line">    <span class="title">multi_accept</span> <span class="built_in">on</span>;</span><br><span class="line">    <span class="title">worker_connections</span>  <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title">http</span> &#123;</span><br><span class="line">    <span class="title">include</span>       mime.types;</span><br><span class="line">    <span class="title">default_type</span>  application/octet-stream;</span><br><span class="line">    <span class="title">sendfile</span>      <span class="built_in">on</span>;</span><br><span class="line">    <span class="title">tcp_nopush</span>    <span class="built_in">on</span>;</span><br><span class="line">    <span class="comment">#keepalive_timeout  0;</span></span><br><span class="line">    <span class="title">keepalive_timeout</span>   <span class="number">65</span>;</span><br><span class="line">    <span class="title">access_log</span>          <span class="built_in">off</span>;</span><br><span class="line">    <span class="title">ssl_protocols</span>       TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</span><br><span class="line">    <span class="title">ssl_ciphers</span>         HIGH:!aNULL:!MD5;</span><br><span class="line">    <span class="title">ssl_prefer_server_ciphers</span> <span class="built_in">on</span>;</span><br><span class="line">    <span class="title">gzip</span> <span class="built_in">on</span>;</span><br><span class="line">    <span class="title">gzip_disable</span> <span class="string">"msie6"</span>;</span><br><span class="line">    <span class="title">gzip_vary</span> <span class="built_in">on</span>;</span><br><span class="line">    <span class="title">gzip_proxied</span> any;</span><br><span class="line">    <span class="title">gzip_comp_level</span> <span class="number">6</span>;</span><br><span class="line">    <span class="title">gzip_buffers</span> <span class="number">16</span> <span class="number">8k</span>;</span><br><span class="line">    <span class="title">gzip_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">    <span class="title">gzip_types</span> text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;</span><br><span class="line">    <span class="title">include</span> /usr/local/etc/nginx/sites/<span class="regexp">*.conf</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要特殊优化的可以搜些资料自己搞。。。这里就不累赘了。<br>在配置里面增加<br><strong>include /usr/local/etc/nginx/sites/*.conf;</strong><br>这一行内容，接着创建默认站点配置文件</p>
+<h2 id="创建默认站点配置文件">创建默认站点配置文件</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">mkdir</span> /usr/local/etc/nginx/sites</span><br><span class="line">$ cat /usr/local/etc/nginx/sites/defaultsite.conf</span><br><span class="line">server &#123;</span><br><span class="line">    <span class="title">listen</span>              <span class="number">80</span>  default_server;</span><br><span class="line">    <span class="title">listen</span>              <span class="number">443</span> ssl default_server;</span><br><span class="line">    <span class="title">ssl_certificate</span>     keys/defaultsite.crt;</span><br><span class="line">    <span class="title">ssl_certificate_key</span> keys/defaultsite.key;</span><br><span class="line">    <span class="title">server_name</span>         _;</span><br><span class="line">    <span class="comment">#charset            utf-8;</span></span><br><span class="line">    <span class="comment">#access_log         logs/host.access.log  main;</span></span><br><span class="line">    <span class="title">location</span>    / &#123;</span><br><span class="line">        <span class="title">root</span>        /home/wwwroot/default;</span><br><span class="line">        <span class="title">index</span>       index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">#error_page  404              /404.html;</span></span><br><span class="line">    <span class="comment"># redirect server error pages to the static page /50x.html</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="title">error_page</span>  <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span>  /50x.html;</span><br><span class="line">    <span class="title">location</span> =  /50x.html &#123;</span><br><span class="line">        <span class="title">root</span>    /usr/local/www/nginx-dist;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title">location</span> <span class="regexp">~ /\.ht</span> &#123;</span><br><span class="line">        <span class="title">deny</span>  all;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title">location</span> /NginxStatus &#123;</span><br><span class="line">    <span class="title">stub_status</span> <span class="built_in">on</span>;</span><br><span class="line">    <span class="title">auth_basic</span> <span class="string">"Nginx Status Authenticate"</span>;</span><br><span class="line">    <span class="title">auth_basic_user_file</span> keys/.htpasswd.db;</span><br><span class="line">    <span class="title">access_log</span>   <span class="built_in">off</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的配置文件注意 <strong>default_server</strong> 行，<br>在配置文件里增加 <strong>default_server</strong> 后所有无法匹配的访问的请求<br>都会被转发给这个默认服务。</p>
+<p>接着创建个人的虚拟主机配置</p>
+<h2 id="个人网站的配置文件">个人网站的配置文件</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">cat</span> /usr/local/etc/nginx/sites/www.gehaowu.com.conf</span><br><span class="line"><span class="comment">## NGINX 虚拟主机配置</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 监听 gehaowu.com 与 www.gehaowu.com 的 80 端口的请求</span></span><br><span class="line"><span class="comment"># 除百度蜘蛛外全部 301 到 https://www.gehaowu.com</span></span><br><span class="line">server &#123;</span><br><span class="line">    <span class="title">listen</span>                              <span class="number">80</span>;</span><br><span class="line">    <span class="title">listen</span>                              [::]:<span class="number">80</span>;</span><br><span class="line">    <span class="title">server_name</span>                         gehaowu.com www.gehaowu.com;</span><br><span class="line">    <span class="title">add_header</span>                          Strict-Transport-Security max-age=<span class="number">31536000</span>;</span><br><span class="line">    <span class="title">if</span> (<span class="variable">$http_user_agent</span> !<span class="regexp">~* baidu.com)</span> &#123;</span><br><span class="line">        <span class="title">rewrite</span>                        <span class="regexp"> ^/(.*)</span> <span class="url">https://www.gehaowu.com/<span class="variable">$1</span></span> <span class="built_in">permanent</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title">index</span>                               index.html;</span><br><span class="line">    <span class="title">root</span>                                /home/ghw/wwwroot;</span><br><span class="line">    <span class="title">error_page</span>                          <span class="number">404</span> /<span class="number">404</span>.html;</span><br><span class="line">    <span class="title">error_page</span>                          <span class="number">403</span> /<span class="number">403</span>.html;</span><br><span class="line">    <span class="title">error_page</span>                          <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span> /50x.html;</span><br><span class="line">    <span class="title">access_log</span>                          /home/ghw/wwwlog/baidu.access.log;</span><br><span class="line">    <span class="title">error_log</span>                           /home/ghw/wwwlog/baidu.<span class="built_in">error</span>.log;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 监听 gehaowu.com 的 443 请求</span></span><br><span class="line"><span class="comment"># 强制跳转到 https://www.gehaowu.com</span></span><br><span class="line"><span class="title">server</span> &#123;</span><br><span class="line">    <span class="title">listen</span>                              <span class="number">443</span> ssl spdy;</span><br><span class="line">    <span class="title">listen</span>                              [::]:<span class="number">443</span> ssl spdy;</span><br><span class="line">    <span class="title">server_name</span>                         gehaowu.com;</span><br><span class="line">    <span class="title">ssl_certificate</span>                     keys/www.gehaowu.com.crt;</span><br><span class="line">    <span class="title">ssl_certificate_key</span>                 keys/www.gehaowu.com.key;</span><br><span class="line">    <span class="title">ssl_protocols</span>                       TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</span><br><span class="line">    <span class="title">ssl_ciphers</span>                         EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA256:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EDH+aRSA+AESGCM:EDH+aRSA+SHA256:EDH+aRSA:EECDH:!DH:!aNULL:!eNULL:!MEDIUM:!LOW:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS:!RC4:!SEED;</span><br><span class="line">    <span class="title">ssl_prefer_server_ciphers</span>           <span class="built_in">on</span>;</span><br><span class="line">    <span class="title">add_header</span>                          Strict-Transport-Security max-age=<span class="number">31536000</span>;</span><br><span class="line">    <span class="title">ssl_session_cache</span>                   shared:SSL:<span class="number">5m</span>;</span><br><span class="line">    <span class="title">ssl_session_timeout</span>                 <span class="number">5m</span>;</span><br><span class="line">    <span class="title">ssl_stapling</span>                        <span class="built_in">on</span>;</span><br><span class="line">    <span class="title">ssl_stapling_verify</span>                 <span class="built_in">on</span>;</span><br><span class="line">    <span class="title">ssl_trusted_certificate</span>             keys/www.gehaowu.com.crt;</span><br><span class="line">    <span class="title">resolver</span>                            <span class="number">8.8.4.4</span> <span class="number">8.8.8.8</span>;</span><br><span class="line">    <span class="title">rewrite</span>                            <span class="regexp"> ^/(.*)</span> <span class="url">https://www.gehaowu.com/<span class="variable">$1</span></span> <span class="built_in">permanent</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 虚拟主机 https://www.gehaowu.com 的配置部分</span></span><br><span class="line"><span class="title">server</span> &#123;</span><br><span class="line">    <span class="title">listen</span>                              <span class="number">443</span> ssl spdy;</span><br><span class="line">    <span class="title">listen</span>                              [::]:<span class="number">443</span> ssl spdy ipv6only=<span class="built_in">on</span>;</span><br><span class="line">    <span class="title">server_name</span>                         www.gehaowu.com;</span><br><span class="line">    <span class="title">ssl_certificate</span>                     keys/www.gehaowu.com.crt;</span><br><span class="line">    <span class="title">ssl_certificate_key</span>                 keys/www.gehaowu.com.key;</span><br><span class="line">    <span class="title">ssl_protocols</span>                       TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</span><br><span class="line">    <span class="title">ssl_ciphers</span>                         EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA256:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EDH+aRSA+AESGCM:EDH+aRSA+SHA256:EDH+aRSA:EECDH:!DH:!aNULL:!eNULL:!MEDIUM:!LOW:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS:!RC4:!SEED;</span><br><span class="line">    <span class="title">ssl_prefer_server_ciphers</span>           <span class="built_in">on</span>;</span><br><span class="line">    <span class="title">add_header</span>                          Strict-Transport-Security max-age=<span class="number">31536000</span>;</span><br><span class="line">    <span class="title">ssl_session_cache</span>                   shared:SSL:<span class="number">5m</span>;</span><br><span class="line">    <span class="title">ssl_session_timeout</span>                 <span class="number">5m</span>;</span><br><span class="line">    <span class="title">ssl_stapling</span>                        <span class="built_in">on</span>;</span><br><span class="line">    <span class="title">ssl_stapling_verify</span>                 <span class="built_in">on</span>;</span><br><span class="line">    <span class="title">ssl_trusted_certificate</span>             keys/www.gehaowu.com.crt;</span><br><span class="line">    <span class="title">resolver</span>                            <span class="number">8.8.4.4</span> <span class="number">8.8.8.8</span>;</span><br><span class="line">    <span class="title">index</span>                               index.html;</span><br><span class="line">    <span class="title">root</span>                                /home/ghw/wwwroot;</span><br><span class="line">    <span class="title">error_page</span>                          <span class="number">404</span> /<span class="number">404</span>.html;</span><br><span class="line">    <span class="title">error_page</span>                          <span class="number">403</span> /<span class="number">403</span>.html;</span><br><span class="line">    <span class="title">error_page</span>                          <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span> /50x.html;</span><br><span class="line">    <span class="title">access_log</span>                          /home/ghw/wwwlog/www.gehaowu.com.access.log;</span><br><span class="line">    <span class="title">error_log</span>                           /home/ghw/wwwlog/www.gehaowu.com.<span class="built_in">error</span>.log;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 反向代理 bookcase 子目录</span></span><br><span class="line">    <span class="title">location</span>                            = /bookcase &#123;</span><br><span class="line">        <span class="title">return</span>                          <span class="number">301</span> /bookcase/;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title">location</span>                           <span class="regexp"> ^~</span> /bookcase &#123;</span><br><span class="line">        <span class="title">proxy_pass</span>                      <span class="url">https://gehaowu.github.io</span>;</span><br><span class="line">        <span class="title">proxy_set_header</span>                Host gehaowu.github.io;</span><br><span class="line">        <span class="title">proxy_set_header</span>                X-Host gehaowu.github.io;</span><br><span class="line">        <span class="title">proxy_set_header</span>                X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line"><span class="comment">#       proxy_cache                     ghw;</span></span><br><span class="line"><span class="comment">#       proxy_cache_valid               200 302 1h;</span></span><br><span class="line"><span class="comment">#       proxy_cache_valid               404 1m;</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title">location</span>                            = /life &#123;</span><br><span class="line">        <span class="title">return</span>                          <span class="number">301</span> /life/;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title">location</span>                           <span class="regexp"> ^~</span> /life &#123;</span><br><span class="line">        <span class="title">proxy_pass</span>                      <span class="url">https://gehaowu.github.io</span>;</span><br><span class="line">        <span class="title">proxy_set_header</span>                Host gehaowu.github.io;</span><br><span class="line">        <span class="title">proxy_set_header</span>                X-Host gehaowu.github.io;</span><br><span class="line">        <span class="title">proxy_set_header</span>                X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 静止访问 "." 开头的隐藏文件</span></span><br><span class="line">    <span class="title">location</span>                            <span class="regexp">~ /\.</span> &#123;</span><br><span class="line">        <span class="title">deny</span>                            all;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># robots.txt 、 favicon.ico ，status.gif 文件访问不记录日志</span></span><br><span class="line">    <span class="title">location</span>                            <span class="regexp">~* ^/(favicon.ico|robots.txt|status.gif)$</span> &#123;</span><br><span class="line">        <span class="title">allow</span>                           all;</span><br><span class="line">        <span class="title">access_log</span>                      /dev/null;</span><br><span class="line">        <span class="title">error_log</span>                       /dev/null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 静态文件超期</span></span><br><span class="line">    <span class="title">location</span>                            <span class="regexp">~* \.(html|htm|xml|rss|atom|txt|xhtml)$</span> &#123;</span><br><span class="line">        <span class="title">expires</span>                         <span class="number">1d</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title">location</span>                            <span class="regexp">~* \.(css|gif|jpeg|jpg|js|png|ico|bmp|svg|doc|pdf|mp3|ogg|mp4|mpeg|webm|eot|ttf|woff)$</span> &#123;</span><br><span class="line">        <span class="title">expires</span>                         <span class="number">7d</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>整个规则流程就是</p>
+<p>创建一个 gehaowu.com www.gehaowu.com 的虚拟主机<br>NGINX 会监听这两个域名的的80号端口，<br>所有跟这两个域名匹配的请求都会被重写为<br><strong><a href="https://www.gehaowu.com">https://www.gehaowu.com</a></strong><br>接着再建一个 gehaowu.com 的 HTTPS 虚拟主机，<br>当发往 gehaowu.com 主机主机的 443 端口的请求时将请求重写为<br><strong><a href="https://www.gehaowu.com">https://www.gehaowu.com</a></strong><br>最后创建一个 www.gehaowu.com 的 HTTPS 虚拟主机<br>以上的两个虚拟主机重写的链接最后都会发送到这个虚拟主机上，</p>
+<p><strong>ssl_certificate ssl_certificate_key</strong>行，可以直接自己使用openssl生成<br>也可以去其它证书商申请，</p>
+<p>这里推荐 <a href="https://buy.wosign.com/free/FreeSSL.html" target="_blank" rel="external">申请免费SSL证书 - 沃通</a></p>
+<hr>
+<p><strong>版权声明</strong></p>
+<p><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="external"><img src="//dn-nimages.qbox.me/other/CC-BY-SA-ND.png" alt="署名-非商业性使用-禁止演绎 创意共享4.0国际许可证"></a></p>
+<p><a href="//www.gehaowu.com/">Ge Haowu’s Personal Website</a> by <a href="//www.gehaowu.com/aboutme/">Haowu Ge</a> is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="external">CC BY-NC-ND 4.0 International</a> License.<br>由 <a href="//www.gehaowu.com/aboutme/">葛豪武</a> 创作并维护在<a href="//www.gehaowu.com/">葛豪武的个人网站</a> 采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="external">署名-非商业性使用-禁止演绎 创意共享 4.0 国际</a> 许可证。</p>
+<p>本文首发于 <a href="//www.gehaowu.com/">葛豪武的个人网站！· Ge Haowu’s Personal Website!</a> ，版权所有，侵权必究。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="启用_HTTPS_的原因">启用 HTTPS 的原因</h2><p>原因嘛，<br>1，https 保证网站传说过程中不被修改，<br>2，Google 提升了 https 网站的权重，<br>3，。。。</p>
+<p>其实，很简单嘛，，，<br>根本还是在比较装逼呗。。。<br><img src="//dn-nimages.qbox.me/2015/05/https.png" alt="https"><br>小绿锁哟，哈哈哈哈哈哈</p>
+<p>下面开始，通过 FreeBSD 的包管理器安 NGINX ，<br>（个人强力不推荐绕过操作系统包管理工具自己编译的超级装逼行为！）</p>
+<p>FreeBSD 安装 NGINX 很简单，如果偷懒，可以直接：<br>]]>
+    
+    </summary>
+    
+      <category term="FreeBSD" scheme="https://www.gehaowu.com/notes/tags/FreeBSD/"/>
+    
+      <category term="NGINX" scheme="https://www.gehaowu.com/notes/tags/NGINX/"/>
+    
+      <category term="SSL" scheme="https://www.gehaowu.com/notes/tags/SSL/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/tags/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="开源" scheme="https://www.gehaowu.com/notes/tags/%E5%BC%80%E6%BA%90/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/categories/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Markdown语法说明 ( 简体中文版 )]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/05/Markdown-syntax-description-Simplified-Chinese-Version/"/>
+    <id>https://www.gehaowu.com/notes/2015/05/Markdown-syntax-description-Simplified-Chinese-Version/</id>
+    <published>2015-05-16T13:35:08.000Z</published>
+    <updated>2015-07-05T02:01:29.676Z</updated>
+    <content type="html"><![CDATA[<p>================</p>
+<ul>
+<li><a href="#overview">概述</a><ul>
+<li><a href="#philosophy">宗旨</a></li>
+<li><a href="#html">兼容 HTML</a></li>
+<li><a href="#autoescape">特殊字符自动转换</a></li>
+</ul>
+</li>
+<li><a href="#block">区块元素</a><ul>
+<li><a href="#p">段落和换行</a></li>
+<li><a href="#header">标题</a></li>
+<li><a href="#blockquote">区块引用</a></li>
+<li><a href="#list">列表</a></li>
+<li><a href="#precode">代码区块</a></li>
+<li><a href="#hr">分隔线</a></li>
+</ul>
+</li>
+<li><a href="#span">区段元素</a><a id="more"></a>
+<ul>
+<li><a href="#link">链接</a></li>
+<li><a href="#em">强调</a></li>
+<li><a href="#code">代码</a></li>
+<li><a href="#img">图片</a></li>
+</ul>
+</li>
+<li><a href="#misc">其它</a><ul>
+<li><a href="#backslash">反斜杠</a></li>
+<li><a href="#autolink">自动链接</a></li>
+</ul>
+</li>
+<li><a href="#acknowledgement">感谢</a></li>
+<li><a href="#editor">Markdown 免费编辑器</a></li>
+</ul>
+<hr>
+<h2 id="overview">概述</h2>
+
+<h3 id="philosophy">宗旨</h3>
+
+<p>Markdown 的目标是实现「易读易写」。</p>
+<p>可读性，无论如何，都是最重要的。一份使用 Markdown 格式撰写的文件应该可以直接以纯文本发布，并且看起来不会像是由许多标签或是格式指令所构成。Markdown 语法受到一些既有 text-to-HTML 格式的影响，包括 <a href="http://docutils.sourceforge.net/mirror/setext.html" target="_blank" rel="external">Setext</a>、<a href="http://www.aaronsw.com/2002/atx/" target="_blank" rel="external">atx</a>、<a href="http://textism.com/tools/textile/" target="_blank" rel="external">Textile</a>、<a href="http://docutils.sourceforge.net/rst.html" target="_blank" rel="external">reStructuredText</a>、<a href="http://www.triptico.com/software/grutatxt.html" target="_blank" rel="external">Grutatext</a> 和 <a href="http://ettext.taint.org/doc/" target="_blank" rel="external">EtText</a>，而最大灵感来源其实是纯文本电子邮件的格式。</p>
+<p>总之， Markdown 的语法全由一些符号所组成，这些符号经过精挑细选，其作用一目了然。比如：在文字两旁加上星号，看起来就像*强调*。Markdown 的列表看起来，嗯，就是列表。Markdown 的区块引用看起来就真的像是引用一段文字，就像你曾在电子邮件中见过的那样。</p>
+<h3 id="html">兼容 HTML</h3>
+
+<p>Markdown 语法的目标是：成为一种适用于网络的<em>书写</em>语言。</p>
+<p>Markdown 并不是想取代 HTML的地位，甚至接近它。它的语法种类很少，只对应 HTML 标记的一小部分。Markdown 的构想<em>不是</em>要使得 HTML 文档更容易书写。在我看来， HTML 已经很容易写了。Markdown 的理念是，能让文档更容易读、写和随意改。HTML 是一种<em>发布</em>的格式，Markdown 是一种<em>书写</em>的格式。就这样，Markdown 的格式语法只涵盖纯文本可以涵盖的范围。</p>
+<p>不在 Markdown 涵盖范围之内的标签，都可以直接在文档里面用 HTML 撰写。不需要额外标注这是 HTML 或是 Markdown；只要直接加标签就可以了。</p>
+<p>要制约的只有一些 HTML 区块元素――比如 <code>&lt;div&gt;</code>、<code>&lt;table&gt;</code>、<code>&lt;pre&gt;</code>、<code>&lt;p&gt;</code> 等标签，必须在前后加上空行与其它内容区隔开，还要求它们的开始标签与结尾标签不能用制表符或空格来缩进。Markdown 的生成器有足够智能，不会在 HTML 区块标签外加上不必要的 <code>&lt;p&gt;</code> 标签。</p>
+<p>例子如下，在 Markdown 文件里加上一段 HTML 表格：</p>
+<pre><code>这是一个普通段落。
+
+<span class="tag">&lt;<span class="title">table</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">tr</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">td</span>&gt;</span>Foo<span class="tag">&lt;/<span class="title">td</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">tr</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">table</span>&gt;</span>
+
+这是另一个普通段落。
+</code></pre><p>请注意，在 HTML 区块标签间的 Markdown 格式语法将不会被处理。比如，你在 HTML 区块内使用 Markdown 样式的<code>*强调*</code>会没有效果。</p>
+<p>HTML 的区段（行内）标签如 <code>&lt;span&gt;</code>、<code>&lt;cite&gt;</code>、<code>&lt;del&gt;</code> 可以在 Markdown 的段落、列表或是标题里随意使用。依照个人习惯，甚至可以不用 Markdown 格式，而直接采用 HTML 标签来格式化。举例说明：如果比较喜欢 HTML 的 <code>&lt;a&gt;</code> 或 <code>&lt;img&gt;</code> 标签，可以直接使用这些标签，而不用 Markdown 提供的链接或是图像标签语法。</p>
+<p>和处在 HTML 区块标签间不同，Markdown 语法在 HTML 区段标签间是有效的。</p>
+<h3 id="autoescape">特殊字符自动转换</h3>
+
+<p>在 HTML 文件中，有两个字符需要特殊处理： <code>&lt;</code> 和 <code>&amp;</code> 。 <code>&lt;</code> 符号用于起始标签，<code>&amp;</code> 符号则用于标记 HTML 实体，如果你只是想要显示这些字符的原型，你必须要使用实体的形式，像是 <code>&amp;lt;</code> 和 <code>&amp;amp;</code>。</p>
+<p><code>&amp;</code> 字符尤其让网络文档编写者受折磨，如果你要打「<code>AT&amp;T</code>」 ，你必须要写成「<code>AT&amp;amp;T</code>」。而网址中的 <code>&amp;</code> 字符也要转换。比如你要链接到：</p>
+<pre><code><span class="string">http:</span><span class="comment">//images.google.com/images?num=30&amp;q=larry+bird</span>
+</code></pre><p>你必须要把网址转换写为：</p>
+<pre><code><span class="string">http:</span><span class="comment">//images.google.com/images?num=30&amp;amp;q=larry+bird</span>
+</code></pre><p>才能放到链接标签的 <code>href</code> 属性里。不用说也知道这很容易忽略，这也可能是 HTML 标准检验所检查到的错误中，数量最多的。</p>
+<p>Markdown 让你可以自然地书写字符，需要转换的由它来处理好了。如果你使用的 <code>&amp;</code> 字符是 HTML 字符实体的一部分，它会保留原状，否则它会被转换成 <code>&amp;amp</code>;。</p>
+<p>所以你如果要在文档中插入一个版权符号 <code>©</code>，你可以这样写：</p>
+<pre><code>&amp;<span class="keyword">copy</span>;
+</code></pre><p>Markdown 会保留它不动。而若你写：</p>
+<pre><code><span class="built_in">AT</span>&amp;T
+</code></pre><p>Markdown 就会将它转为：</p>
+<pre><code>AT&amp;amp<span class="comment">;T</span>
+</code></pre><p>类似的状况也会发生在 <code>&lt;</code> 符号上，因为 Markdown 允许 <a href="#html">兼容 HTML</a> ，如果你是把 <code>&lt;</code> 符号作为 HTML 标签的定界符使用，那 Markdown 也不会对它做任何转换，但是如果你写：</p>
+<pre><code>4 &lt; 5
+</code></pre><p>Markdown 将会把它转换为：</p>
+<pre><code>4 &amp;lt<span class="comment">; 5</span>
+</code></pre><p>不过需要注意的是，code 范围内，不论是行内还是区块， <code>&lt;</code> 和 <code>&amp;</code> 两个符号都<em>一定</em>会被转换成 HTML 实体，这项特性让你可以很容易地用 Markdown 写 HTML code （和 HTML 相对而言， HTML 语法中，你要把所有的 <code>&lt;</code> 和 <code>&amp;</code> 都转换为 HTML 实体，才能在 HTML 文件里面写出 HTML code。）</p>
+<hr>
+<h2 id="block">区块元素</h2>
+
+
+<h3 id="p">段落和换行</h3>
+
+<p>一个 Markdown 段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行（空行的定义是显示上看起来像是空的，便会被视为空行。比方说，若某一行只包含空格和制表符，则该行也会被视为空行）。普通段落不该用空格或制表符来缩进。</p>
+<p>「由一个或多个连续的文本行组成」这句话其实暗示了 Markdown 允许段落内的强迫换行（插入换行符），这个特性和其他大部分的 text-to-HTML 格式不一样（包括 Movable Type 的「Convert Line Breaks」选项），其它的格式会把每个换行符都转成 <code>&lt;br /&gt;</code> 标签。</p>
+<p>如果你<em>确实</em>想要依赖 Markdown 来插入 <code>&lt;br /&gt;</code> 标签的话，在插入处先按入两个以上的空格然后回车。</p>
+<p>的确，需要多费点事（多加空格）来产生 <code>&lt;br /&gt;</code> ，但是简单地「每个换行都转换为 <code>&lt;br /&gt;</code>」的方法在 Markdown 中并不适合， Markdown 中 email 式的 <a href="#blockquote">区块引用</a> 和多段落的 <a href="#list">列表</a> 在使用换行来排版的时候，不但更好用，还更方便阅读。</p>
+<h3 id="header">标题</h3>
+
+<p>Markdown 支持两种标题的语法，类 <a href="http://docutils.sourceforge.net/mirror/setext.html" target="_blank" rel="external">Setext</a> 和类 <a href="http://www.aaronsw.com/2002/atx/" target="_blank" rel="external">atx</a> 形式。</p>
+<p>类 Setext 形式是用底线的形式，利用 <code>=</code> （最高阶标题）和 <code>-</code> （第二阶标题），例如：</p>
+<pre><code><span class="header">This is an H1
+=============</span>
+
+<span class="header">This is an H2
+-------------</span>
+</code></pre><p>任何数量的 <code>=</code> 和 <code>-</code> 都可以有效果。</p>
+<p>类 Atx 形式则是在行首插入 1 到 6 个 <code>#</code> ，对应到标题 1 到 6 阶，例如：</p>
+<pre><code><span class="preprocessor"># 这是 H1</span>
+
+<span class="preprocessor">## 这是 H2</span>
+
+<span class="preprocessor">###### 这是 H6</span>
+</code></pre><p>你可以选择性地「闭合」类 atx 样式的标题，这纯粹只是美观用的，若是觉得这样看起来比较舒适，你就可以在行尾加上 <code>#</code>，而行尾的 <code>#</code> 数量也不用和开头一样（行首的井字符数量决定标题的阶数）：</p>
+<pre><code><span class="preprocessor"># 这是 H1 #</span>
+
+<span class="preprocessor">## 这是 H2 ##</span>
+
+<span class="preprocessor">### 这是 H3 ######</span>
+</code></pre><h3 id="blockquote">区块引用 Blockquotes</h3>
+
+<p>Markdown 标记区块引用是使用类似 email 中用 <code>&gt;</code> 的引用方式。如果你还熟悉在 email 信件中的引言部分，你就知道怎么在 Markdown 文件中建立一个区块引用，那会看起来像是你自己先断好行，然后在每行的最前面加上 <code>&gt;</code> ：</p>
+<pre><code>&gt; This is a blockquote with two paragraphs. Lo<span class="comment">rem ipsum dolor sit amet,</span>
+&gt; consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
+&gt; Vestibulum enim wisi, viverra nec, fringilla <span class="flow">in</span>, laoreet vitae, risus.
+&gt; 
+&gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
+&gt; id sem consectetuer libero luctus adipiscing.
+</code></pre><p>Markdown 也允许你偷懒只在整个段落的第一行最前面加上 <code>&gt;</code> ：</p>
+<pre><code>&gt; This is a blockquote with two paragraphs. Lo<span class="comment">rem ipsum dolor sit amet,</span>
+consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
+Vestibulum enim wisi, viverra nec, fringilla <span class="flow">in</span>, laoreet vitae, risus.
+
+&gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
+id sem consectetuer libero luctus adipiscing.
+</code></pre><p>区块引用可以嵌套（例如：引用内的引用），只要根据层次加上不同数量的 <code>&gt;</code> ：</p>
+<pre><code>&gt; This <span class="keyword">is</span> <span class="keyword">the</span> <span class="keyword">first</span> level <span class="keyword">of</span> quoting.
+&gt;
+&gt; &gt; This <span class="keyword">is</span> nested blockquote.
+&gt;
+&gt; Back <span class="keyword">to</span> <span class="keyword">the</span> <span class="keyword">first</span> level.
+</code></pre><p>引用的区块内也可以使用其他的 Markdown 语法，包括标题、列表、代码区块等：</p>
+<pre><code>&gt; <span class="comment">## 这是一个标题。</span>
+&gt; 
+&gt; <span class="number">1</span>.   这是第一行列表项。
+&gt; <span class="number">2</span>.   这是第二行列表项。
+&gt; 
+&gt; 给出一些例子代码：
+&gt; 
+&gt;     <span class="built_in">return</span> shell_<span class="built_in">exec</span>(<span class="string">"echo <span class="variable">$input</span> | <span class="variable">$markdown_script</span>"</span>);
+</code></pre><p>任何像样的文本编辑器都能轻松地建立 email 型的引用。例如在 BBEdit 中，你可以选取文字后然后从选单中选择<em>增加引用阶层</em>。</p>
+<h3 id="list">列表</h3>
+
+<p>Markdown 支持有序列表和无序列表。</p>
+<p>无序列表使用星号、加号或是减号作为列表标记：</p>
+<pre><code><span class="bullet">*   </span>Red
+<span class="bullet">*   </span>Green
+<span class="bullet">*   </span>Blue
+</code></pre><p>效果就是</p>
+<ul>
+<li>red</li>
+<li>green</li>
+<li>blue</li>
+</ul>
+<p>等同于：</p>
+<pre><code><span class="bullet">+   </span>Red
+<span class="bullet">+   </span>Green
+<span class="bullet">+   </span>Blue
+</code></pre><p>也等同于：</p>
+<pre><code>-<span class="ruby">   <span class="constant">Red</span>
+</span>-<span class="ruby">   <span class="constant">Green</span>
+</span>-<span class="ruby">   <span class="constant">Blue</span></span>
+</code></pre><p>有序列表则使用数字接着一个英文句点：</p>
+<pre><code><span class="bullet">1.  </span>Bird
+<span class="bullet">2.  </span>McHale
+<span class="bullet">3.  </span>Parish
+</code></pre><p>很重要的一点是，你在列表标记上使用的数字并不会影响输出的 HTML 结果，上面的列表所产生的 HTML 标记为：</p>
+<pre><code><span class="tag">&lt;<span class="title">ol</span>&gt;</span>
+<span class="tag">&lt;<span class="title">li</span>&gt;</span>Bird<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;<span class="title">li</span>&gt;</span>McHale<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;<span class="title">li</span>&gt;</span>Parish<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">ol</span>&gt;</span>
+</code></pre><p>如果你的列表标记写成：</p>
+<pre><code><span class="bullet">1.  </span>Bird
+<span class="bullet">1.  </span>McHale
+<span class="bullet">1.  </span>Parish
+</code></pre><p>或甚至是：</p>
+<pre><code><span class="bullet">3. </span>Bird
+<span class="bullet">1. </span>McHale
+<span class="bullet">8. </span>Parish
+</code></pre><p>你都会得到完全相同的 HTML 输出。重点在于，你可以让 Markdown 文件的列表数字和输出的结果相同，或是你懒一点，你可以完全不用在意数字的正确性。</p>
+<p>如果你使用懒惰的写法，建议第一个项目最好还是从 1. 开始，因为 Markdown 未来可能会支持有序列表的 start 属性。</p>
+<p>列表项目标记通常是放在最左边，但是其实也可以缩进，最多 3 个空格，项目标记后面则一定要接着至少一个空格或制表符。</p>
+<p>要让列表看起来更漂亮，你可以把内容用固定的缩进整理好：</p>
+<pre><code>*   Lo<span class="comment">rem ipsum dolor sit amet, consectetuer adipiscing elit.</span>
+    Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
+    viverra nec, fringilla <span class="flow">in</span>, laoreet vitae, risus.
+*   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
+    Suspendisse id sem consectetuer libero luctus adipiscing.
+</code></pre><p>但是如果你懒，那也行：</p>
+<pre><code>*   Lo<span class="comment">rem ipsum dolor sit amet, consectetuer adipiscing elit.</span>
+Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
+viverra nec, fringilla <span class="flow">in</span>, laoreet vitae, risus.
+*   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
+Suspendisse id sem consectetuer libero luctus adipiscing.
+</code></pre><p>如果列表项目间用空行分开，在输出 HTML 时 Markdown 就会将项目内容用 <code>&lt;p&gt;</code><br>标签包起来，举例来说：</p>
+<pre><code><span class="bullet">*   </span>Bird
+<span class="bullet">*   </span>Magic
+</code></pre><p>会被转换为：</p>
+<pre><code><span class="tag">&lt;<span class="title">ul</span>&gt;</span>
+<span class="tag">&lt;<span class="title">li</span>&gt;</span>Bird<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;<span class="title">li</span>&gt;</span>Magic<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+</code></pre><p>但是这个：</p>
+<pre><code><span class="bullet">*   </span>Bird
+
+<span class="bullet">*   </span>Magic
+</code></pre><p>会被转换为：</p>
+<pre><code><span class="tag">&lt;<span class="title">ul</span>&gt;</span>
+<span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Bird<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Magic<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+</code></pre><p>列表项目可以包含多个段落，每个项目下的段落都必须缩进 4 个空格或是 1 个制表符：</p>
+<pre><code><span class="number">1</span>.  This is a list item with two paragraphs. Lo<span class="comment">rem ipsum dolor</span>
+    sit amet, consectetuer adipiscing elit. Aliquam hendrerit
+    mi posuere lectus.
+
+    Vestibulum enim wisi, viverra nec, fringilla <span class="flow">in</span>, laoreet
+    vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
+    sit amet velit.
+
+<span class="number">2</span>.  Suspendisse id sem consectetuer libero luctus adipiscing.
+</code></pre><p>如果你每行都有缩进，看起来会看好很多，当然，再次地，如果你很懒惰，Markdown 也允许：</p>
+<pre><code>*   This <span class="keyword">is</span> a <span class="type">list</span> <span class="property">item</span> <span class="keyword">with</span> two <span class="property">paragraphs</span>.
+
+    This <span class="keyword">is</span> <span class="keyword">the</span> <span class="keyword">second</span> <span class="property">paragraph</span> <span class="keyword">in</span> <span class="keyword">the</span> <span class="type">list</span> <span class="property">item</span>. You're
+only required <span class="keyword">to</span> indent <span class="keyword">the</span> <span class="keyword">first</span> line. Lorem ipsum dolor
+sit amet, consectetuer adipiscing elit.
+
+*   Another <span class="property">item</span> <span class="keyword">in</span> <span class="keyword">the</span> same <span class="type">list</span>.
+</code></pre><p>如果要在列表项目内放进引用，那 <code>&gt;</code> 就需要缩进：</p>
+<pre><code>*   A list item with a blockquote:
+
+    &gt; This <span class="keyword">is</span> a blockquote
+    &gt; <span class="keyword">inside</span> a list item.
+</code></pre><p>如果要放代码区块的话，该区块就需要缩进<em>两次</em>，也就是 8 个空格或是 2 个制表符：</p>
+<pre><code><span class="keyword">*</span>   一列表项包含一个列表区块：
+
+        <span class="variable">&lt;代码写在这&gt;</span>
+</code></pre><p>当然，项目列表很可能会不小心产生，像是下面这样的写法：</p>
+<pre><code><span class="number">1986</span>. What <span class="tag">a</span> great season.
+</code></pre><p>换句话说，也就是在行首出现<em>数字-句点-空白</em>，要避免这样的状况，你可以在句点前面加上反斜杠。</p>
+<pre><code><span class="number">1986</span>\. What <span class="tag">a</span> great season.
+</code></pre><h3 id="precode">代码区块</h3>
+
+<p>和程序相关的写作或是标签语言原始码通常会有已经排版好的代码区块，通常这些区块我们并不希望它以一般段落文件的方式去排版，而是照原来的样子显示，Markdown 会用 <code>&lt;pre&gt;</code> 和 <code>&lt;code&gt;</code> 标签来把代码区块包起来。</p>
+<p>要在 Markdown 中建立代码区块很简单，只要简单地缩进 4 个空格或是 1 个制表符就可以，例如，下面的输入：</p>
+<pre><code>这是一个普通段落：
+
+    这是一个代码区块。
+</code></pre><p>Markdown 会转换成：</p>
+<pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span>这是一个普通段落：<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">pre</span>&gt;</span><span class="tag">&lt;<span class="title">code</span>&gt;</span>这是一个代码区块。
+<span class="tag">&lt;/<span class="title">code</span>&gt;</span><span class="tag">&lt;/<span class="title">pre</span>&gt;</span>
+</code></pre><p>这个每行一阶的缩进（4 个空格或是 1 个制表符），都会被移除，例如：</p>
+<pre><code>Here <span class="keyword">is</span> an example <span class="keyword">of</span> <span class="constant">AppleScript</span>:
+
+    <span class="keyword">tell</span> <span class="type">application</span> <span class="string">"Foo"</span>
+        <span class="command">beep</span>
+    <span class="keyword">end</span> <span class="keyword">tell</span>
+</code></pre><p>会被转换为：</p>
+<pre><code>&lt;p&gt;Here <span class="keyword">is</span> an example <span class="keyword">of</span> <span class="constant">AppleScript</span>:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;<span class="keyword">tell</span> <span class="type">application</span> <span class="string">"Foo"</span>
+    <span class="command">beep</span>
+<span class="keyword">end</span> <span class="keyword">tell</span>
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre><p>一个代码区块会一直持续到没有缩进的那一行（或是文件结尾）。</p>
+<p>在代码区块里面， <code>&amp;</code> 、 <code>&lt;</code> 和 <code>&gt;</code> 会自动转成 HTML 实体，这样的方式让你非常容易使用 Markdown 插入范例用的 HTML 原始码，只需要复制贴上，再加上缩进就可以了，剩下的 Markdown 都会帮你处理，例如：</p>
+<pre><code>&lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"footer"</span>&gt;
+    &amp;<span class="keyword">copy</span>; <span class="number">2004</span> Foo Corporation
+&lt;/<span class="keyword">div</span>&gt;
+</code></pre><p>会被转换为：</p>
+<pre><code>&lt;<span class="keyword">pre</span>&gt;&lt;code&gt;&amp;<span class="keyword">lt</span>;div class=<span class="string">"footer"</span>&amp;gt;
+    &amp;amp;<span class="built_in">copy</span>; <span class="number">2004</span> Foo Corporation
+&amp;<span class="keyword">lt</span>;/div&amp;gt;
+&lt;/code&gt;&lt;/<span class="keyword">pre</span>&gt;
+</code></pre><p>代码区块中，一般的 Markdown 语法不会被转换，像是星号便只是星号，这表示你可以很容易地以 Markdown 语法撰写 Markdown 语法相关的文件。</p>
+<h3 id="hr">分隔线</h3>
+
+<p>你可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。下面每种写法都可以建立分隔线：</p>
+<pre><code><span class="keyword">*</span> <span class="keyword">*</span> <span class="keyword">*</span>
+
+<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>
+
+<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>
+
+- - -
+
+---------------------------------------
+</code></pre><hr>
+<h2 id="span">区段元素</h2>
+
+<h3 id="link">链接</h3>
+
+<p>Markdown 支持两种形式的链接语法： <em>行内式</em>和<em>参考式</em>两种形式。</p>
+<p>不管是哪一种，链接文字都是用 [方括号] 来标记。</p>
+<p>要建立一个<em>行内式</em>的链接，只要在方块括号后面紧接着圆括号并插入网址链接即可，如果你还想要加上链接的 title 文字，只要在网址后面，用双引号把 title 文字包起来即可，例如：</p>
+<pre><code>This is [<span class="link_label">an example</span>](<span class="link_url">http://example.com/ "Title"</span>) inline link.
+
+[<span class="link_label">This link</span>](<span class="link_url">http://example.net/</span>) has no title attribute.
+</code></pre><p>会产生：</p>
+<pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span>This is <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://example.com/"</span> <span class="attribute">title</span>=<span class="value">"Title"</span>&gt;</span>
+an example<span class="tag">&lt;/<span class="title">a</span>&gt;</span> inline link.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://example.net/"</span>&gt;</span>This link<span class="tag">&lt;/<span class="title">a</span>&gt;</span> has no
+title attribute.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+</code></pre><p>如果你是要链接到同样主机的资源，你可以使用相对路径：</p>
+<pre><code>See my [<span class="link_label">About</span>](<span class="link_url">/about/</span>) page for details.   
+</code></pre><p><em>参考式</em>的链接是在链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入用以辨识链接的标记：</p>
+<pre><code>This is [<span class="link_label">an example</span>][<span class="link_reference">id</span>] reference-style link.
+</code></pre><p>你也可以选择性地在两个方括号中间加上一个空格：</p>
+<pre><code>This <span class="keyword">is</span> [an example] [<span class="property">id</span>] <span class="keyword">reference</span>-style link.
+</code></pre><p>接着，在文件的任意处，你可以把这个标记的链接内容定义出来：</p>
+<pre><code><span class="attr_selector">[id]</span>: <span class="rule"><span class="attribute">http</span>:<span class="value">//example.com/  <span class="string">"Optional Title Here"</span></span></span>
+</code></pre><p>链接内容定义的形式为：</p>
+<ul>
+<li>方括号（前面可以选择性地加上至多三个空格来缩进），里面输入链接文字</li>
+<li>接着一个冒号</li>
+<li>接着一个以上的空格或制表符</li>
+<li>接着链接的网址</li>
+<li>选择性地接着 title 内容，可以用单引号、双引号或是括弧包着</li>
+</ul>
+<p>下面这三种链接的定义都是相同：</p>
+<pre><code>[<span class="link_reference">foo</span>]:<span class="link_url"> http://example.com/  "Optional Title Here"</span>
+[<span class="link_reference">foo</span>]:<span class="link_url"> http://example.com/  'Optional Title Here'</span>
+[<span class="link_reference">foo</span>]:<span class="link_url"> http://example.com/  (Optional Title Here)</span>
+</code></pre><p><strong>请注意：</strong>有一个已知的问题是 Markdown.pl 1.0.1 会忽略单引号包起来的链接 title。</p>
+<p>链接网址也可以用尖括号包起来：</p>
+<pre><code><span class="attr_selector">[id]</span>: &lt;<span class="rule"><span class="attribute">http</span>:<span class="value">//example.com/&gt;  <span class="string">"Optional Title Here"</span></span></span>
+</code></pre><p>你也可以把 title 属性放到下一行，也可以加一些缩进，若网址太长的话，这样会比较好看：</p>
+<pre><code>[id]<span class="symbol">:</span> <span class="symbol">http:</span>/<span class="regexp">/example.com/longish</span><span class="regexp">/path/to</span><span class="regexp">/resource/here</span>
+    <span class="string">"Optional Title Here"</span>
+</code></pre><p>网址定义只有在产生链接的时候用到，并不会直接出现在文件之中。</p>
+<p>链接辨别标签可以有字母、数字、空白和标点符号，但是并<em>不</em>区分大小写，因此下面两个链接是一样的：</p>
+<pre><code>[<span class="link_label">link text</span>][<span class="link_reference">a</span>]
+[<span class="link_label">link text</span>][<span class="link_reference">A</span>]
+</code></pre><p><em>隐式链接标记</em>功能让你可以省略指定链接标记，这种情形下，链接标记会视为等同于链接文字，要用隐式链接标记只要在链接文字后面加上一个空的方括号，如果你要让 “Google” 链接到 google.com，你可以简化成：</p>
+<pre><code>[<span class="link_label">Google</span>][<span class="link_reference"></span>]
+</code></pre><p>然后定义链接内容：</p>
+<pre><code>[<span class="link_reference">Google</span>]:<span class="link_url"> http://google.com/</span>
+</code></pre><p>由于链接文字可能包含空白，所以这种简化型的标记内也许包含多个单词：</p>
+<pre><code>Visit [<span class="link_label">Daring Fireball</span>][<span class="link_reference"></span>] for more information.
+</code></pre><p>然后接着定义链接：</p>
+<pre><code>[<span class="link_reference">Daring Fireball</span>]:<span class="link_url"> http://daringfireball.net/</span>
+</code></pre><p>链接的定义可以放在文件中的任何一个地方，我比较偏好直接放在链接出现段落的后面，你也可以把它放在文件最后面，就像是注解一样。</p>
+<p>下面是一个参考式链接的范例：</p>
+<pre><code><span class="name">I</span> <span class="atom">get</span> <span class="number">10</span> <span class="atom">times</span> <span class="atom">more</span> <span class="atom">traffic</span> <span class="atom">from</span> [<span class="name">Google</span>] [<span class="number">1</span>] <span class="atom">than</span> <span class="atom">from</span>
+[<span class="name">Yahoo</span>] [<span class="number">2</span>] <span class="atom">or</span> [<span class="name">MSN</span>] [<span class="number">3</span>].
+
+  [<span class="number">1</span>]: <span class="atom">http</span>://<span class="atom">google</span>.<span class="atom">com</span>/        <span class="string">"Google"</span>
+  [<span class="number">2</span>]: <span class="atom">http</span>://<span class="atom">search</span>.<span class="atom">yahoo</span>.<span class="atom">com</span>/  <span class="string">"Yahoo Search"</span>
+  [<span class="number">3</span>]: <span class="atom">http</span>://<span class="atom">search</span>.<span class="atom">msn</span>.<span class="atom">com</span>/    <span class="string">"MSN Search"</span>
+</code></pre><p>如果改成用链接名称的方式写：</p>
+<pre><code>I get 10 times more traffic from [<span class="link_label">Google</span>][<span class="link_reference"></span>] than from
+[<span class="link_label">Yahoo</span>][<span class="link_reference"></span>] or [<span class="link_label">MSN</span>][<span class="link_reference"></span>].
+
+  [google]: http://google.com/        "Google"
+  [yahoo]:  http://search.yahoo.com/  "Yahoo Search"
+  [msn]:    http://search.msn.com/    "MSN Search"
+</code></pre><p>上面两种写法都会产生下面的 HTML。</p>
+<pre><code>&lt;p&gt;I <span class="built_in">get</span> <span class="number">10</span> times more traffic <span class="built_in">from</span> &lt;<span class="operator">a</span> href=<span class="string">"http://google.com/"</span>
+title=<span class="string">"Google"</span>&gt;Google&lt;/<span class="operator">a</span>&gt; than <span class="built_in">from</span>
+&lt;<span class="operator">a</span> href=<span class="string">"http://search.yahoo.com/"</span> title=<span class="string">"Yahoo Search"</span>&gt;Yahoo&lt;/<span class="operator">a</span>&gt;
+<span class="operator">or</span> &lt;<span class="operator">a</span> href=<span class="string">"http://search.msn.com/"</span> title=<span class="string">"MSN Search"</span>&gt;MSN&lt;/<span class="operator">a</span>&gt;.&lt;/p&gt;
+</code></pre><p>下面是用行内式写的同样一段内容的 Markdown 文件，提供作为比较之用：</p>
+<pre><code>I get 10 times more traffic from [<span class="link_label">Google</span>](<span class="link_url">http://google.com/ "Google"</span>)
+than from [<span class="link_label">Yahoo</span>](<span class="link_url">http://search.yahoo.com/ "Yahoo Search"</span>) or
+[<span class="link_label">MSN</span>](<span class="link_url">http://search.msn.com/ "MSN Search"</span>).
+</code></pre><p>参考式的链接其实重点不在于它比较好写，而是它比较好读，比较一下上面的范例，使用参考式的文章本身只有 81 个字符，但是用行内形式的却会增加到 176 个字元，如果是用纯 HTML 格式来写，会有 234 个字元，在 HTML 格式中，标签比文本还要多。</p>
+<p>使用 Markdown 的参考式链接，可以让文件更像是浏览器最后产生的结果，让你可以把一些标记相关的元数据移到段落文字之外，你就可以增加链接而不让文章的阅读感觉被打断。</p>
+<h3 id="em">强调</h3>
+
+<p>Markdown 使用星号（<code>*</code>）和底线（<code>_</code>）作为标记强调字词的符号，被 <code>*</code> 或 <code>_</code> 包围的字词会被转成用 <code>&lt;em&gt;</code> 标签包围，用两个 <code>*</code> 或 <code>_</code> 包起来的话，则会被转成 <code>&lt;strong&gt;</code>，例如：</p>
+<pre><code><span class="keyword">*</span>single asterisks<span class="keyword">*</span>
+
+_single underscores_
+
+<span class="keyword">*</span><span class="keyword">*</span>double asterisks<span class="keyword">*</span><span class="keyword">*</span>
+
+__double underscores__
+</code></pre><p>会转成：</p>
+<pre><code><span class="tag">&lt;<span class="title">em</span>&gt;</span>single asterisks<span class="tag">&lt;/<span class="title">em</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">em</span>&gt;</span>single underscores<span class="tag">&lt;/<span class="title">em</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">strong</span>&gt;</span>double asterisks<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">strong</span>&gt;</span>double underscores<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+</code></pre><p>你可以随便用你喜欢的样式，唯一的限制是，你用什么符号开启标签，就要用什么符号结束。</p>
+<p>强调也可以直接插在文字中间：</p>
+<pre><code>un<span class="keyword">*</span>frigging<span class="keyword">*</span>believable
+</code></pre><p>但是<strong>如果你的 <code>*</code> 和 <code>_</code> 两边都有空白的话，它们就只会被当成普通的符号</strong>。</p>
+<p>如果要在文字前后直接插入普通的星号或底线，你可以用反斜线：</p>
+<pre><code><span class="string">\*this</span> text <span class="keyword">is</span> surrounded <span class="keyword">by</span> literal asterisks<span class="string">\*</span>
+</code></pre><h3 id="code">代码</h3>
+
+<p>如果要标记一小段行内代码，你可以用反引号把它包起来（<code>` </code>），例如：</p>
+<pre><code><span class="keyword">Use</span> the `printf()` <span class="function"><span class="keyword">function</span>.</span>
+</code></pre><p>会产生：</p>
+<pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span>Use the <span class="tag">&lt;<span class="title">code</span>&gt;</span>printf()<span class="tag">&lt;/<span class="title">code</span>&gt;</span> function.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+</code></pre><p>如果要在代码区段内插入反引号，你可以用多个反引号来开启和结束代码区段：</p>
+<pre><code><span class="escape">``</span>There is <span class="literal">a</span> literal backtick (<span class="escape">`)</span> here.<span class="escape">``</span>
+</code></pre><p>这段语法会产生：</p>
+<pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">code</span>&gt;</span>There is a literal backtick (`) here.<span class="tag">&lt;/<span class="title">code</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+</code></pre><p>代码区段的起始和结束端都可以放入一个空白，起始端后面一个，结束端前面一个，这样你就可以在区段的一开始就插入反引号：</p>
+<pre><code>A single backtick <span class="keyword">in</span> <span class="tag">a</span> <span class="tag">code</span> <span class="tag">span</span>: `` ` ``
+
+A backtick-delimited string <span class="keyword">in</span> <span class="tag">a</span> <span class="tag">code</span> <span class="tag">span</span>: `` `foo` ``
+</code></pre><p>会产生：</p>
+<pre><code>&lt;p&gt;A single backtick <span class="keyword">in</span> <span class="tag">a</span> <span class="tag">code</span> <span class="tag">span</span>: &lt;code&gt;`&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;A backtick-delimited string <span class="keyword">in</span> <span class="tag">a</span> <span class="tag">code</span> <span class="tag">span</span>: &lt;code&gt;`foo`&lt;/code&gt;&lt;/p&gt;
+</code></pre><p>在代码区段内，<code>&amp;</code> 和尖括号<strong>都</strong>会被自动地转成 HTML 实体，这使得插入 HTML 原始码变得很容易，Markdown 会把下面这段：</p>
+<pre><code>Please don't <span class="operator"><span class="keyword">use</span> <span class="keyword">any</span> <span class="string">`&lt;blink&gt;`</span> tags.</span>
+</code></pre><p>转为：</p>
+<pre><code><span class="variable">&lt;p&gt;</span>Please don't use <span class="literal">any</span> <span class="variable">&lt;code&gt;</span>&amp;lt;blink&amp;gt;<span class="variable">&lt;/code&gt;</span> tags.<span class="variable">&lt;/p&gt;</span>
+</code></pre><p>你也可以这样写：</p>
+<pre><code>`<span class="javascript">&amp;#<span class="number">8212</span>;</span>` <span class="keyword">is</span> the decimal-encoded equivalent <span class="keyword">of</span> `<span class="javascript">&amp;mdash;</span>`.
+</code></pre><p>以产生：</p>
+<pre><code><span class="variable">&lt;p&gt;</span><span class="variable">&lt;code&gt;</span>&amp;amp;<span class="comment">#8212;&lt;/code&gt; is the decimal-encoded</span>
+equivalent of <span class="variable">&lt;code&gt;</span>&amp;amp;mdash;<span class="variable">&lt;/code&gt;</span>.<span class="variable">&lt;/p&gt;</span>
+</code></pre><h3 id="img">图片</h3>
+
+<p>很明显地，要在纯文字应用中设计一个「自然」的语法来插入图片是有一定难度的。</p>
+<p>Markdown 使用一种和链接很相似的语法来标记图片，同样也允许两种样式： <em>行内式</em>和<em>参考式</em>。</p>
+<p>行内式的图片语法看起来像是：</p>
+<pre><code>![<span class="link_label">Alt text</span>](<span class="link_url">/path/to/img.jpg</span>)
+
+![<span class="link_label">Alt text</span>](<span class="link_url">/path/to/img.jpg "Optional title"</span>)
+</code></pre><p>详细叙述如下：</p>
+<ul>
+<li>一个惊叹号 <code>!</code></li>
+<li>接着一个方括号，里面放上图片的替代文字</li>
+<li>接着一个普通括号，里面放上图片的网址，最后还可以用引号包住并加上<br>选择性的 ‘title’ 文字。</li>
+</ul>
+<p>参考式的图片语法则长得像这样：</p>
+<pre><code>![<span class="link_label">Alt text</span>][<span class="link_reference">id</span>]
+</code></pre><p>「id」是图片参考的名称，图片参考的定义方式则和链接参考一样：</p>
+<pre><code>[<span class="property">id</span>]: url/<span class="keyword">to</span>/image  <span class="string">"Optional title attribute"</span>
+</code></pre><p>到目前为止， Markdown 还没有办法指定图片的宽高，如果你需要的话，你可以使用普通的 <code>&lt;img&gt;</code> 标签。</p>
+<hr>
+<h2 id="misc">其它</h2>
+
+<h3 id="autolink">自动链接</h3>
+
+<p>Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，只要是用尖括号包起来， Markdown 就会自动把它转成链接。一般网址的链接文字就和链接地址一样，例如：</p>
+<pre><code>&lt;<span class="string">http:</span><span class="comment">//example.com/&gt;</span>
+</code></pre><p>Markdown 会转为：</p>
+<pre><code>&lt;<span class="tag">a</span> href=<span class="string">"http://example.com/"</span>&gt;http:<span class="comment">//example.com/&lt;/a&gt;</span>
+</code></pre><p>邮址的自动链接也很类似，只是 Markdown 会先做一个编码转换的过程，把文字字符转成 16 进位码的 HTML 实体，这样的格式可以糊弄一些不好的邮址收集机器人，例如：</p>
+<pre><code><span class="tag">&lt;address@example.com&gt;</span>
+</code></pre><p>Markdown 会转成：</p>
+<pre><code>&lt;a href=<span class="string">"&amp;#x6D;&amp;#x61;i&amp;#x6C;&amp;#x74;&amp;#x6F;:&amp;#x61;&amp;#x64;&amp;#x64;&amp;#x72;&amp;#x65;
+&amp;#115;&amp;#115;&amp;#64;&amp;#101;&amp;#120;&amp;#x61;&amp;#109;&amp;#x70;&amp;#x6C;e&amp;#x2E;&amp;#99;&amp;#111;
+&amp;#109;"</span>&gt;&amp;<span class="title">#x61</span>;&amp;<span class="title">#x64</span>;&amp;<span class="title">#x64</span>;&amp;<span class="title">#x72</span>;&amp;<span class="title">#x65</span>;&amp;<span class="title">#115</span>;&amp;<span class="title">#115</span>;&amp;<span class="title">#64</span>;&amp;<span class="title">#101</span>;&amp;<span class="title">#120</span>;&amp;<span class="title">#x61</span>;
+&amp;<span class="title">#109</span>;&amp;<span class="title">#x70</span>;&amp;<span class="title">#x6</span>C;e&amp;<span class="title">#x2</span>E;&amp;<span class="title">#99</span>;&amp;<span class="title">#111</span>;&amp;<span class="title">#109</span>;&lt;/a&gt;
+</code></pre><p>在浏览器里面，这段字串（其实是 <code>&lt;a href=&quot;mailto:address@example.com&quot;&gt;address@example.com&lt;/a&gt;</code>）会变成一个可以点击的「address@example.com」链接。</p>
+<p>（这种作法虽然可以糊弄不少的机器人，但并不能全部挡下来，不过总比什么都不做好些。不管怎样，公开你的信箱终究会引来广告信件的。）</p>
+<h3 id="backslash">反斜杠</h3>
+
+<p>Markdown 可以利用反斜杠来插入一些在语法中有其它意义的符号，例如：如果你想要用星号加在文字旁边的方式来做出强调效果（但不用 <code>&lt;em&gt;</code> 标签），你可以在星号的前面加上反斜杠：</p>
+<pre><code>\<span class="keyword">*</span>literal asterisks\<span class="keyword">*</span>
+</code></pre><p>Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：</p>
+<pre><code>\   反斜线
+`   反引号
+<span class="bullet">*   </span>星号
+_   底线
+{}  花括号
+[]  方括号
+()  括弧
+<span class="header">#   井字号</span>
+<span class="bullet">+   </span>加号
+<span class="bullet">-   </span>减号
+.   英文句点
+!   惊叹号
+</code></pre><h2 id="acknowledgement">感谢</h2>
+
+<p>感谢 <a href="https://twitter.com/#!/leafy7382" target="_blank" rel="external">leafy7382</a> 协助翻译，<a href="http://iamhlb.com/" target="_blank" rel="external">hlb</a>、<a href="http://twitter.com/randylien" target="_blank" rel="external">Randylien</a> 帮忙润稿，<a href="https://twitter.com/#!/ethantw" target="_blank" rel="external">ethantw</a> 的<a href="http://ethantw.net/projects/han/" target="_blank" rel="external">汉字标准格式・CSS Reset</a>， <a href="http://kidwm.net/" target="_blank" rel="external">WM</a> 回报文字错误。</p>
+<p>感谢 <a href="https://github.com/fenprace" target="_blank" rel="external">fenprace</a>，<a href="https://github.com/addv" target="_blank" rel="external">addv</a>。</p>
+<hr>
+<h2 id="editor">Markdown 免费编辑器</h2>
+
+<p>Windows 平台</p>
+<ul>
+<li><a href="http://markdownpad.com/" target="_blank" rel="external">MarkdownPad</a></li>
+<li><a href="http://code52.org/DownmarkerWPF/" target="_blank" rel="external">MarkPad</a></li>
+</ul>
+<p>Linux 平台</p>
+<ul>
+<li><a href="http://sourceforge.net/p/retext/home/ReText/" target="_blank" rel="external">ReText</a></li>
+</ul>
+<p>Mac 平台</p>
+<ul>
+<li><a href="http://mouapp.com/" target="_blank" rel="external">Mou</a></li>
+</ul>
+<p>在线编辑器</p>
+<ul>
+<li><a href="http://markable.in/" target="_blank" rel="external">Markable.in</a></li>
+<li><a href="http://dillinger.io/" target="_blank" rel="external">Dillinger.io</a></li>
+</ul>
+<p>浏览器插件</p>
+<ul>
+<li><a href="https://chrome.google.com/webstore/detail/oknndfeeopgpibecfjljjfanledpbkog" target="_blank" rel="external">MaDe</a> (Chrome)</li>
+</ul>
+<p>高级应用</p>
+<ul>
+<li><a href="http://www.sublimetext.com/2" target="_blank" rel="external">Sublime Text 2</a> + <a href="http://ttscoff.github.com/MarkdownEditing/" target="_blank" rel="external">MarkdownEditing</a> / <a href="http://lucifr.com/2012/07/12/markdownediting-for-sublime-text-2/" target="_blank" rel="external">教程</a></li>
+</ul>
+<p>*** 如有更好的 Markdown 免费编辑器推荐，请到<a href="https://gitcafe.com/riku/Markdown-Syntax-CN/tickets/1" target="_blank" rel="external">这里反馈</a>，谢谢！</p>
+<p><strong>版权声明</strong></p>
+<p>转载自 <a href="https://gitcafe.com/riku/Markdown-Syntax-CN" target="_blank" rel="external">Markdown 语法简体中文版</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>================</p>
+<ul>
+<li><a href="#overview">概述</a><ul>
+<li><a href="#philosophy">宗旨</a></li>
+<li><a href="#html">兼容 HTML</a></li>
+<li><a href="#autoescape">特殊字符自动转换</a></li>
+</ul>
+</li>
+<li><a href="#block">区块元素</a><ul>
+<li><a href="#p">段落和换行</a></li>
+<li><a href="#header">标题</a></li>
+<li><a href="#blockquote">区块引用</a></li>
+<li><a href="#list">列表</a></li>
+<li><a href="#precode">代码区块</a></li>
+<li><a href="#hr">分隔线</a></li>
+</ul>
+</li>
+<li><a href="#span">区段元素</a>]]>
+    
+    </summary>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/tags/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="其它" scheme="https://www.gehaowu.com/notes/tags/%E5%85%B6%E5%AE%83/"/>
+    
+      <category term="开源" scheme="https://www.gehaowu.com/notes/tags/%E5%BC%80%E6%BA%90/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/categories/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[通过 SSH 远程跨版本更新 FreeBSD]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/05/Update-FreeBSD-via-SSH-remote-cross-version/"/>
+    <id>https://www.gehaowu.com/notes/2015/05/Update-FreeBSD-via-SSH-remote-cross-version/</id>
+    <published>2015-05-06T00:54:08.000Z</published>
+    <updated>2015-07-05T02:01:35.157Z</updated>
+    <content type="html"><![CDATA[<p>因为远程，所以你，只有一次机会！！！</p>
+<p>任务需求：<br>    远程将系统更新到最新版，并彻底清理掉原系统管理员可能存在的操作遗留问题。</p>
+<p>需要注意的地方：<br>    服务器硬件在外地并未开启IPMI功能，且因为特殊原因禁止与机房管理员联系。</p>
+<p>必备条件：<br>    操作员必须可接入远程服务器</p>
+<p>升级方案：<br>    1，通过 FreeBSD 自带的升级工具 freebsd-update 将系统更新到最新版本。（<a href="https://www.freebsd.org/doc/zh_CN/books/handbook/updating-upgrading.html" target="_blank" rel="external">FreeBSD 使用手冊 - 第 25 章 更新与升级 FreeBSD</a><a href="https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/updating-upgrading.html" target="_blank" rel="external">FreeBSD Handbook - Chapter 24. Updating and Upgrading FreeBSD</a>）<br>    2，或者直接将旧版系统替换到最新系统。<br><a id="more"></a></p>
+<p>方案一比较简单，FreeBSD官方升级方案，（-_-! 我能说我出来没通过freebsd-update升级过系统麽。。。放弃吧。）<br>方案二个人强力推荐，通过替换旧版系统可以顺便清理干净原系统管理员留下来的所有操作痕迹，还可以将系统从32位更新到64位。另外因为是<strong><em>远程更新方案，所以只有一次机会</em></strong>，必须选择最安稳的方案。</p>
+<p>方案二详细操作流程：</p>
+<p>因为这个机器的情况我们并不了解，需要了解一些系统基本信息<br>查看系统版本<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root<span class="variable">@7AXU</span><span class="symbol">:~</span> <span class="comment"># uname -a</span></span><br><span class="line"><span class="constant">FreeBSD</span> <span class="number">7</span>AXU.<span class="constant">COM</span> <span class="number">9.2</span>-<span class="constant">RELEASE</span>-p15 <span class="constant">FreeBSD</span> <span class="number">9.2</span>-<span class="constant">RELEASE</span>-p15 <span class="comment">#0: Mon Nov  3 20:08:52 UTC 2014     root<span class="doctag">@amd</span>64-builder.daemonology.net:/usr/obj/usr/src/sys/GENERIC  i386</span></span><br></pre></td></tr></table></figure></p>
+<p>查看处理器类型<br><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sysctl -a |grep CPU</span><br><span class="line">cpu     I686_CPU</span><br><span class="line">cpu     I586_CPU</span><br><span class="line">cpu     I486_CPU</span><br><span class="line">hw.model: Intel(R) Xeon(R) CPU            <span class="number">5130</span>  @ <span class="number">2.00</span>GHz</span><br><span class="line"><span class="built_in">dev</span>.cpu.0.%<span class="built_in">desc</span>: ACPI CPU</span><br><span class="line"><span class="built_in">dev</span>.cpu.0.%location: handle=\_PR_.CPU1</span><br><span class="line"><span class="built_in">dev</span>.cpu.1.%<span class="built_in">desc</span>: ACPI CPU</span><br><span class="line"><span class="built_in">dev</span>.cpu.1.%location: handle=\_PR_.CPU2</span><br><span class="line"><span class="built_in">dev</span>.p4tcc.0.%<span class="built_in">desc</span>: CPU Frequency Thermal Control</span><br><span class="line"><span class="built_in">dev</span>.p4tcc.1.%<span class="built_in">desc</span>: CPU Frequency Thermal Control</span><br></pre></td></tr></table></figure></p>
+<p>查看内存大小<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">dmesg -a |grep mem</span><br><span class="line">real memory  = <span class="number">4294967296</span> (<span class="number">4096</span> MB)</span><br><span class="line">avail memory = <span class="number">3404886016</span> (<span class="number">3247</span> MB)</span><br><span class="line"><span class="label">hpet0:</span> &lt;High Precision Event Timer&gt; iomem <span class="number">0xfed00000</span>-<span class="number">0xfed003ff</span> on acpi0</span><br><span class="line"><span class="label">bce0:</span> &lt;QLogic NetXtreme II BCM5708 1000Base-T (B2)&gt; mem <span class="number">0xf4000000</span>-<span class="number">0xf5ffffff</span> irq <span class="number">16</span> <span class="preprocessor">at</span> device <span class="number">0.0</span> on pci8</span><br><span class="line"><span class="label">mpt0:</span> &lt;LSILogic SAS/SATA Adapter&gt; port <span class="number">0xec00</span>-<span class="number">0xecff</span> mem <span class="number">0xfc5fc000</span>-<span class="number">0xfc5fffff</span>,<span class="number">0xfc5e0000</span>-<span class="number">0xfc5effff</span> irq <span class="number">64</span> <span class="preprocessor">at</span> device <span class="number">8.0</span> on pci2</span><br><span class="line"><span class="label">bce1:</span> &lt;QLogic NetXtreme II BCM5708 1000Base-T (B2)&gt; mem <span class="number">0xf8000000</span>-<span class="number">0xf9ffffff</span> irq <span class="number">16</span> <span class="preprocessor">at</span> device <span class="number">0.0</span> on pci4</span><br><span class="line"><span class="label">ehci0:</span> &lt;Intel 63XXESB USB <span class="number">2.0</span> controller&gt; mem <span class="number">0xfc700000</span>-<span class="number">0xfc7003ff</span> irq <span class="number">21</span> <span class="preprocessor">at</span> device <span class="number">29.7</span> on pci0</span><br><span class="line"><span class="label">vgapci0:</span> &lt;VGA-compatible display&gt; port <span class="number">0xdc00</span>-<span class="number">0xdcff</span> mem <span class="number">0xd8000000</span>-<span class="number">0xdfffffff</span>,<span class="number">0xfc1f0000</span>-<span class="number">0xfc1fffff</span> irq <span class="number">19</span> <span class="preprocessor">at</span> device <span class="number">13.0</span> on pci16</span><br><span class="line"><span class="label">orm0:</span> &lt;ISA <span class="preprocessor">Option</span> ROMs&gt; <span class="preprocessor">at</span> iomem <span class="number">0xc0000</span>-<span class="number">0xc8fff</span>,<span class="number">0xc9000</span>-<span class="number">0xc9fff</span>,<span class="number">0xd0000</span>-<span class="number">0xd17ff</span>,<span class="number">0xec000</span>-<span class="number">0xeffff</span> pnpid ORM0000 on isa0</span><br><span class="line"><span class="label">vga0:</span> &lt;Generic ISA VGA&gt; <span class="preprocessor">at</span> port <span class="number">0x3c0</span>-<span class="number">0x3df</span> iomem <span class="number">0xa0000</span>-<span class="number">0xbffff</span> on isa0</span><br></pre></td></tr></table></figure></p>
+<p>从uname信息看我们更新前的系统是32位的，不过机器内存也就4G，更不更新到64位实在没太大差异，那就干脆别搞了，省事。</p>
+<p>查看 rc.conf 文件<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/rc.conf</span><br><span class="line"><span class="variable">sshd_enable=</span><span class="string">"YES"</span></span><br><span class="line"><span class="variable">ifconfig_bce1=</span><span class="string">"inet IP  netmask 255.255.255.0"</span></span><br><span class="line"><span class="variable">defaultrouter=</span><span class="string">"WG"</span></span><br><span class="line"><span class="variable">hostname=</span><span class="string">"freebsd.local"</span></span><br><span class="line">……</span><br></pre></td></tr></table></figure></p>
+<p>部分内容就直接省略了，不是很有意义，之所以要查看这个文件，是因为需要确定是否有特殊的服务，如果没有针对机器特殊的服务，那就不需要处理，将文件备份到U盘后者其它地方备用。</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir <span class="regexp">/USBDISK/</span></span><br><span class="line">mount -t msdosfs <span class="regexp">/dev/</span>da1s1 <span class="regexp">/USBDISK/</span></span><br><span class="line">cp <span class="regexp">/etc/</span>rc.conf <span class="regexp">/USBDISK/</span></span><br></pre></td></tr></table></figure>
+<p>/boot/device.hints</p>
+<p>查看fstab文件系统结构文件<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/etc/</span>fstab</span><br><span class="line"># Device                Mountpoint      FStype  Options         Dump    Pass#</span><br><span class="line"><span class="regexp">/dev/</span>da0s1b             none            swap    sw              <span class="number">0</span>       <span class="number">0</span></span><br><span class="line"><span class="regexp">/dev/</span>da0s1a             /               ufs     rw              <span class="number">1</span>       <span class="number">1</span></span><br><span class="line"><span class="regexp">/dev/</span>da0s1e             /tmp            ufs     rw              <span class="number">2</span>       <span class="number">2</span></span><br><span class="line"><span class="regexp">/dev/</span>da0s1f             /usr            ufs     rw              <span class="number">2</span>       <span class="number">2</span></span><br><span class="line"><span class="regexp">/dev/</span>da0s1d             /var            ufs     rw              <span class="number">2</span>       <span class="number">2</span></span><br><span class="line"><span class="regexp">/dev/</span>acd0               /cdrom          cd9660  ro,noauto       <span class="number">0</span>       <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<p>顺便把文件也备份了<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp <span class="regexp">/etc/</span>fstab <span class="regexp">/USBDISK/</span></span><br></pre></td></tr></table></figure></p>
+<p>旧系统freebsd-update fetch系统停止支持的提示<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># freebsd-<span class="operator"><span class="keyword">update</span> <span class="keyword">fetch</span></span><br><span class="line">Looking up <span class="keyword">update</span>.FreeBSD.org mirrors... <span class="number">5</span> mirrors <span class="keyword">found</span>.</span><br><span class="line">Fetching metadata signature <span class="keyword">for</span> <span class="number">9.2</span>-<span class="keyword">RELEASE</span> <span class="keyword">from</span> update6.freebsd.org... done.</span><br><span class="line">Fetching metadata <span class="keyword">index</span>... done.</span><br><span class="line">Inspecting system... done.</span><br><span class="line">Preparing <span class="keyword">to</span> download files... done.</span><br><span class="line"></span><br><span class="line">The following files will be added <span class="keyword">as</span> part <span class="keyword">of</span> updating <span class="keyword">to</span> <span class="number">9.2</span>-<span class="keyword">RELEASE</span>-p17:</span><br><span class="line">/usr/src/contrib/bind9/lib/isc/counter.c</span><br><span class="line">/usr/src/contrib/bind9/lib/isc/include/isc/counter.h</span><br><span class="line">/usr/src/contrib/tzdata/leap-seconds.list</span><br><span class="line">/usr/src/contrib/tzdata/zone1970.tab</span><br><span class="line"></span><br><span class="line">The following files will be updated <span class="keyword">as</span> part <span class="keyword">of</span> updating <span class="keyword">to</span> <span class="number">9.2</span>-<span class="keyword">RELEASE</span>-p17:</span><br><span class="line">/boot/kernel/linker.hints</span><br><span class="line"></span><br><span class="line">WARNING: FreeBSD <span class="number">9.2</span>-<span class="keyword">RELEASE</span>-p15 HAS PASSED ITS <span class="keyword">END</span>-<span class="keyword">OF</span>-LIFE <span class="built_in">DATE</span>.</span><br><span class="line"><span class="keyword">Any</span> security issues discovered <span class="keyword">after</span> Thu Jan  <span class="number">1</span> <span class="number">08</span>:<span class="number">00</span>:<span class="number">00</span> CST <span class="number">2015</span></span><br><span class="line">will <span class="keyword">not</span> have been corrected.</span></span><br></pre></td></tr></table></figure></p>
+<p>格式化SWAP分区，挂载，并将FreeBSD10.1基本系统从网上拉下来并释放到/mnt中去。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#mount</span> -t mfsdosfs /dev/da1s1 /USBDISK/</span><br><span class="line">newfs /dev/da0s1b</span><br><span class="line">mount /dev/da0s1b /mnt</span><br><span class="line">fetch -o /USBDISK/base<span class="class">.txz</span> <span class="string">"http://ftp.freebsd.org/pub/FreeBSD/releases/i386/10.1-RELEASE/base.txz"</span></span><br><span class="line">fetch -o /USBDISK/kernel<span class="class">.txz</span> <span class="string">"http://ftp.freebsd.org/pub/FreeBSD/releases/i386/10.1-RELEASE/kernel.txz"</span></span><br><span class="line">fetch -o /USBDISK/MANIFEST <span class="string">"http://ftp.freebsd.org/pub/FreeBSD/releases/i386/10.1-RELEASE/MANIFEST"</span></span><br><span class="line">tar --unlink -xvf /USBDISK/kernel<span class="class">.txz</span> -C /mnt</span><br><span class="line">tar --unlink -xvf /USBDISK/base<span class="class">.txz</span> -C /mnt</span><br></pre></td></tr></table></figure></p>
+<p>向fstab中指定”/“为”/dev/da0s1b”设备，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"/dev/da0s1b / ufs rw 1 1"</span> &gt;/mnt/etc/fstab</span><br></pre></td></tr></table></figure></p>
+<p>修改引导器配置文件，让系统启动的时候选择自动挂载/dev/da0s1b，<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">'vfs.root.mountfrom=”ufs:/dev/da0s1b"'</span> &gt;/mnt/boot/loader.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure></p>
+<p>将备份的rc.conf直接覆盖回来<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp <span class="regexp">/USBDISK/</span>rc.conf <span class="regexp">/mnt/</span>etc<span class="regexp">/</span></span><br></pre></td></tr></table></figure></p>
+<p>将sshd配置文件中的#PermitRootLogin no为PermitRootLogin yes<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -<span class="tag">i</span><span class="class">.bak</span> -e s/#PermitRootLogin\ no/PermitRootLogin\ without-password/g /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure></p>
+<p>修改临时系统root密码<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">chroot</span> /mnt</span><br><span class="line">passwd</span><br></pre></td></tr></table></figure></p>
+<p>第一步完工，准备重启，可以抽个小烟，坐等系统重新上线~~</p>
+<p>&lt;(￣︶￣)&gt;<br><figure class="highlight mizar"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown -r <span class="keyword">now</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>等系统重新上线后通过root账户跟刚设定的密码登陆，然后开始第二步。</p>
+<p>清理掉老系统，可以直接格式化，或者将文件移动到其它目录，<br>格式化：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">newfs <span class="regexp">/dev/</span>da0s1a</span><br><span class="line">newfs <span class="regexp">/dev/</span>da0s1e</span><br><span class="line">newfs <span class="regexp">/dev/</span>da0s1f</span><br><span class="line">newfs <span class="regexp">/dev/</span>da0s1d</span><br><span class="line">mount <span class="regexp">/dev/</span>da0s1a /mnt</span><br><span class="line">mkdir <span class="regexp">/mnt/</span>usr</span><br><span class="line">mkdir <span class="regexp">/mnt/</span>var</span><br><span class="line">mkdir <span class="regexp">/mnt/</span>tmp</span><br><span class="line">mount <span class="regexp">/dev/</span>da0s1e <span class="regexp">/mnt/</span>tmp</span><br><span class="line">mount <span class="regexp">/dev/</span>da0s1f <span class="regexp">/mnt/</span>usr</span><br><span class="line">mount <span class="regexp">/dev/</span>da0s1d <span class="regexp">/mnt/</span>var</span><br></pre></td></tr></table></figure></p>
+<p>移动一个旧系统到一个目录里：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mount <span class="regexp">/dev/</span>da0s1a /mnt</span><br><span class="line">mkdir <span class="regexp">/mnt/</span>OLD</span><br><span class="line">mv <span class="regexp">/mnt/</span>* <span class="regexp">/mnt/</span>OLD</span><br><span class="line">mkdir <span class="regexp">/mnt/</span>usr</span><br><span class="line">mkdir <span class="regexp">/mnt/</span>var</span><br><span class="line">mkdir <span class="regexp">/mnt/</span>tmp</span><br><span class="line">mount <span class="regexp">/dev/</span>da0s1e <span class="regexp">/mnt/</span>tmp</span><br><span class="line">mount <span class="regexp">/dev/</span>da0s1f <span class="regexp">/mnt/</span>usr</span><br><span class="line">mount <span class="regexp">/dev/</span>da0s1d <span class="regexp">/mnt/</span>var</span><br><span class="line">mkdir <span class="regexp">/mnt/</span>tmp/OLD</span><br><span class="line">mkdir <span class="regexp">/mnt/</span>usr/OLD</span><br><span class="line">mkdir <span class="regexp">/mnt/</span>var/OLD</span><br><span class="line">mv <span class="regexp">/mnt/</span>tmp<span class="comment">/* /mnt/tmp/OLD</span><br><span class="line">mv /mnt/usr<span class="comment">/* /mnt/usr/OLD</span><br><span class="line">mv /mnt/var<span class="comment">/* /mnt/var/OLD</span></span></span></span><br></pre></td></tr></table></figure></p>
+<p>正式更新系统，<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir /USBDISK</span><br><span class="line">mount -t msdosfs /dev/da1s1 /USBDISK</span><br><span class="line">tar --unlink -xvf /USBDISK/kernel<span class="class">.txz</span> -C /mnt</span><br><span class="line">tar --unlink -xvf /USBDISK/base<span class="class">.txz</span> -C /mnt</span><br></pre></td></tr></table></figure></p>
+<p>拷贝rc.conf,fstab到新系统<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp <span class="regexp">/USBDISK/</span>rc.conf <span class="regexp">/USBDISK/</span>fstab <span class="regexp">/mnt/</span>etc<span class="regexp">/</span></span><br></pre></td></tr></table></figure></p>
+<p>新系统设置<br><figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">chroot /mnt</span><br><span class="line">passwd</span><br><span class="line">tzsetup</span><br><span class="line">adduser</span><br><span class="line">。。。</span><br><span class="line">其它巴拉巴拉的。。</span><br><span class="line">（不添加普通用户的情况下，切记设置允许<span class="literal">root</span>登陆，并设置<span class="literal">root</span>密码）</span><br></pre></td></tr></table></figure></p>
+<p>&lt;(￣︶￣)&gt;<br>搞完重启就OK了，<br>旧的SWAP分区会因为根据fstab里的内容直接覆盖掉SWAP里的临时系统</p>
+<p>最后放一个更新到最新的FreeBSD-10.1-RELEASE-p9靓照一张 = = ！<br><img src="//dn-nimages.qbox.me/2015/05/FreeBSD-10.1-RELEASE-p9.png" alt="FreeBSD-10.1-RELEASE-p9"></p>
+<hr>
+<p><strong>版权声明</strong></p>
+<p><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="external"><img src="//dn-nimages.qbox.me/other/CC-BY-SA-ND.png" alt="署名-非商业性使用-禁止演绎 创意共享4.0国际许可证"></a></p>
+<p><a href="//www.gehaowu.com/">Ge Haowu’s Personal Website</a> by <a href="//www.gehaowu.com/aboutme/">Haowu Ge</a> is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="external">CC BY-NC-ND 4.0 International</a> License.<br>由 <a href="//www.gehaowu.com/aboutme/">葛豪武</a> 创作并维护在<a href="//www.gehaowu.com/">葛豪武的个人网站</a> 采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="external">署名-非商业性使用-禁止演绎 创意共享 4.0 国际</a> 许可证。</p>
+<p>本文首发于 <a href="//www.gehaowu.com/">葛豪武的个人网站！· Ge Haowu’s Personal Website!</a> ，版权所有，侵权必究。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>因为远程，所以你，只有一次机会！！！</p>
+<p>任务需求：<br>    远程将系统更新到最新版，并彻底清理掉原系统管理员可能存在的操作遗留问题。</p>
+<p>需要注意的地方：<br>    服务器硬件在外地并未开启IPMI功能，且因为特殊原因禁止与机房管理员联系。</p>
+<p>必备条件：<br>    操作员必须可接入远程服务器</p>
+<p>升级方案：<br>    1，通过 FreeBSD 自带的升级工具 freebsd-update 将系统更新到最新版本。（<a href="https://www.freebsd.org/doc/zh_CN/books/handbook/updating-upgrading.html">FreeBSD 使用手冊 - 第 25 章 更新与升级 FreeBSD</a><a href="https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/updating-upgrading.html">FreeBSD Handbook - Chapter 24. Updating and Upgrading FreeBSD</a>）<br>    2，或者直接将旧版系统替换到最新系统。<br>]]>
+    
+    </summary>
+    
+      <category term="FreeBSD" scheme="https://www.gehaowu.com/notes/tags/FreeBSD/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/tags/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="开源" scheme="https://www.gehaowu.com/notes/tags/%E5%BC%80%E6%BA%90/"/>
+    
+      <category term="信息技术" scheme="https://www.gehaowu.com/notes/categories/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Hello World！ ， 你好，世界！]]></title>
+    <link href="https://www.gehaowu.com/notes/2015/05/hello-world/"/>
+    <id>https://www.gehaowu.com/notes/2015/05/hello-world/</id>
+    <published>2015-04-30T16:00:00.000Z</published>
+    <updated>2015-07-05T02:01:39.531Z</updated>
+    <content type="html"><![CDATA[<h3 id="English_version">English version</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">March <span class="number">23</span>, <span class="number">1990</span>, I came to this world,</span><br><span class="line">Hello World!</span><br></pre></td></tr></table></figure>
+<h3 id="简体中文版本">简体中文版本</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1990</span>年<span class="number">03</span>月<span class="number">23</span>日，我来到这个世界，</span><br><span class="line">你好，世界！</span><br></pre></td></tr></table></figure>]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="English_version">English version</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br>]]>
+    </summary>
+    
+      <category term="其它" scheme="https://www.gehaowu.com/notes/tags/%E5%85%B6%E5%AE%83/"/>
+    
+  </entry>
+  
+</feed>
