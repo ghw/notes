@@ -2,7 +2,7 @@
 menu:
   主页: /notes/
   归档: /notes/archives
-  关于我: /resume/
+  关于我: /aboutme/
 rss: /notes/atom.xml
 
 # Content
@@ -22,9 +22,9 @@ widgets:
 # Miscellaneous
 google_analytics: UA-65013365-1
 favicon: ../favicon.ico
-twitter:
-google_plus:
-fb_admins:
-fb_app_id:
+#twitter:
+#google_plus:
+#fb_admins:
+#fb_app_id:
 
 tinysou: true

@@ -1,55 +1,34 @@
 <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %>" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <%- partial('post/date', {class_name: 'article-date', date_format: null}) %>
-    <%- partial('post/category') %>
-  </div>
-  <div class="article-inner">
-    <%- partial('post/gallery') %>
-    <% if (post.link || post.title){ %>
-      <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
-      </header>
-    <% } %>
-    <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link){ %>
-          <p class="article-more-link">
-            <a href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %></a>
-          </p>
-        <% } %>
-      <% } else { %>
-        <!-- Table of Contents -->
-        <% if (!index && post.toc){ %>
-            <div id="toc" class="toc-article">
-              <strong class="toc-title">提纲</strong>
-              <%- toc(post.content) %>
-            </div>
-        <% } %>
-        <%- post.content %>
-      <% } %>
-    </div>
-    <footer class="article-footer">
-      <a data-url="<%- config.url + config.root + post.path %>" data-id="<%= post._id %>" class="article-share-link">分享</a>
-      <% if (post.comments && config.disqus_shortname){ %>
-        <a href="<%- config.url + config.root + post.path %>#disqus_thread" class="article-comment-link">评论</a>
-      <% } %>
-      <%- partial('post/tag') %>
-    </footer>
-  </div>
-  <% if (!index){ %>
-    <%- partial('post/nav') %>
-  <% } %>
-</article>
-
+	<div class="article-meta">
+		<%- partial('post/date', {class_name: 'article-date', date_format: null}) %>
+		<%- partial('post/category') %>
+	</div>
+	<div class="article-inner">
+		<%- partial('post/gallery') %>
+		<% if (post.link || post.title){ %>
+			<header class="article-header">
+				<%- partial('post/title', {class_name: 'article-title'}) %>
+			</header><% } %>
+	<div class="article-entry" itemprop="articleBody">
+		<% if (post.excerpt && index){ %>
+			<%- post.excerpt %>
+		<% if (theme.excerpt_link){ %>
+			<p class="article-more-link"><a href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %></a></p><% } %>
+		<% } else { %>
+		<!-- Table of Contents -->
+		<% if (!index && post.toc){ %>
+			<div id="toc" class="toc-article">
+				<strong class="toc-title">提纲</strong>
+				<%- toc(post.content) %>
+			</div><% } %>
+		<%- post.content %><% } %>
+	</div>
+	<footer class="article-footer"><a data-url="<%- config.url + config.root + post.path %>" data-id="<%= post._id %>" class="article-share-link">分享</a><% if (post.comments && config.disqus_shortname){ %><a href="<%- config.url + config.root + post.path %>#disqus_thread" class="article-comment-link">评论</a><% } %>
+		<%- partial('post/tag') %>
+	</footer>
+</div>
+<% if (!index){ %><%- partial('post/nav') %><% } %></article>
 <% if (!index && post.comments && config.disqus_shortname){ %>
-<section id="comments">
-  <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  </div>
-</section>
-<% } %>
-
+<section id="comments"><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></section><% } %>
 <% if(!index && post.comments && config.duoshuo_shortname){ %>
-<%- partial('duoshuo-comment') %>
-<% } %>
+<%- partial('duoshuo-comment') %><% } %>
