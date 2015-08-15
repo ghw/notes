@@ -1,199 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>Markdown语法说明 ( 简体中文版 ) | 等一个晴天</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="================
+<meta charset="utf-8">
 
-概述
-宗旨
-兼容 HTML
-特殊字符自动转换
-
-
-区块元素
-段落和换行
-标题
-区块引用
-列表
-代码区块
-分隔线
-
-
-区段元素">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Markdown语法说明 ( 简体中文版 )">
-<meta property="og:url" content="https://www.gehaowu.com/2015/05/Markdown-syntax-description-Simplified-Chinese-Version/index.html">
-<meta property="og:site_name" content="等一个晴天">
-<meta property="og:description" content="================
-
-概述
-宗旨
-兼容 HTML
-特殊字符自动转换
-
-
-区块元素
-段落和换行
-标题
-区块引用
-列表
-代码区块
-分隔线
-
-
-区段元素">
-<meta property="og:updated_time" content="2015-07-05T02:01:29.676Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Markdown语法说明 ( 简体中文版 )">
-<meta name="twitter:description" content="================
-
-概述
-宗旨
-兼容 HTML
-特殊字符自动转换
-
-
-区块元素
-段落和换行
-标题
-区块引用
-列表
-代码区块
-分隔线
-
-
-区段元素">
-  
-    <link rel="alternative" href="/notes/atom.xml" title="等一个晴天" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="../favicon.ico">
-  
-  <!--<link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">-->
-  <link rel="stylesheet" href="/notes/css/style.css" type="text/css">
-  
-<!-- Google Analytics -->
-<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-65013365-1', 'auto');
-ga('send', 'pageview');
-
-</script>
-<!-- End Google Analytics -->
-
-
-  
-
-
-
+<title>Markdown语法说明 ( 简体中文版 ) | 等一个晴天</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="alternative" href="/notes/atom.xml" title="等一个晴天" type="application/atom+xml">
+<link rel="icon" href="../favicon.ico">
+<link rel="stylesheet" href="/notes/css/style.css" type="text/css">
 </head>
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">等一个晴天</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">记录 &amp; 监督</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/notes/">主页</a>
-        
-          <a class="main-nav-link" href="/notes/archives">归档</a>
-        
-          <a class="main-nav-link" href="/resume/">关于我</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/notes/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-		<div id="search-form-wrap">
-			<form class="search-form">
-				<input type="text" id="ts-search-input"  name="word" maxlength="20"  class="search-form-input" placeholder="搜索">
-			</form>
+<div id="container">
+<div id="wrap">
+<header id="header">
+	<div id="banner"></div>
+		<div id="header-outer" class="outer">
+			<div id="header-title" class="inner">
+				<h1 id="logo-wrap"><a href="/" id="logo">等一个晴天</a></h1>
+				<h2 id="subtitle-wrap"><a href="/" id="subtitle">记录 &amp; 监督</a></h2>
+			</div>
+		<div id="header-inner" class="inner">
+			<nav id="main-nav"><a id="main-nav-toggle" class="nav-icon"></a><a class="main-nav-link" href="/notes/">主页</a><a class="main-nav-link" href="/notes/archives">归档</a><a class="main-nav-link" href="/aboutme/">关于我</a></nav>
+			<nav id="sub-nav"><a id="nav-rss-link" class="nav-icon" href="/notes/atom.xml" title="RSS Feed"></a><a id="nav-search-btn" class="nav-icon" title="Search"></a></nav>
+		<div id="search-form-wrap"><form class="search-form"><input type="text" id="ts-search-input"  name="word" maxlength="20"  class="search-form-input" placeholder="搜索"></form>
 		</div>
-    </div>
-  </div>
-  <script>
-    
-    var d = new Date();
-    var m = d.getMinutes();
-    var num = Math.ceil((m + 1) / (60 / 6));
-    document.getElementById("banner").style.backgroundImage = "url(/notes/images/banner" + num + ".jpg)";
-    
-</script>
-  <script>
-var option = {
-  engineKey: '9022dbde8652469b4e64'
-};
-(function(w,d,t,u,n,s,e){
-  s = d.createElement(t);
-  s.src = u;
-  s.async = 1;
-  w[n] = function(r){
-    w[n].opts = r;
-  };
-  e = d.getElementsByTagName(t)[0];
-  e.parentNode.insertBefore(s, e);
-})(window,document,'script','//tinysou-cdn.b0.upaiyun.com/ts.js','_ts');
-_ts(option);
-</script>
+	</div>
+</div>
+<script>var d = new Date();var m = d.getMinutes();var num = Math.ceil((m + 1) / (60 / 6));document.getElementById("banner").style.backgroundImage = "url(/notes/images/banner" + num + ".jpg)";</script>
+<script>var option = {engineKey: '9022dbde8652469b4e64'};(function(w,d,t,u,n,s,e){s = d.createElement(t);s.src = u;s.async = 1;w[n] = function(r){w[n].opts = r;};e = d.getElementsByTagName(t)[0];e.parentNode.insertBefore(s, e);})(window,document,'script','//tinysou-cdn.b0.upaiyun.com/ts.js','_ts');_ts(option);</script>
 </header>
-      <div class="outer">
-        <section id="main"><article id="post-Markdown-syntax-description-Simplified-Chinese-Version" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/notes/2015/05/Markdown-syntax-description-Simplified-Chinese-Version/" class="article-date">
+<div class="outer">
+<section id="main"><article id="post-Markdown-syntax-description-Simplified-Chinese-Version" class="article article-type-post" itemscope itemprop="blogPost">
+	<div class="article-meta">
+		<a href="/notes/2015/05/Markdown-syntax-description-Simplified-Chinese-Version/" class="article-date">
   <time datetime="2015-05-16T13:35:08.000Z" itemprop="datePublished">2015-05-16</time>
 </a>
-    
+		
   <div class="article-category">
     <a class="article-category-link" href="/notes/categories/信息技术/">信息技术</a>
   </div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+	</div>
+	<div class="article-inner">
+		
+		
+			<header class="article-header">
+				
   
     <h1 class="article-title" itemprop="name">
       Markdown语法说明 ( 简体中文版 )
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-            <div id="toc" class="toc-article">
-              <strong class="toc-title">提纲</strong>
-              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#overview"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#philosophy"><span class="toc-number">1.1.</span> <span class="toc-text">宗旨</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#html"><span class="toc-number">1.2.</span> <span class="toc-text">兼容 HTML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#autoescape"><span class="toc-number">1.3.</span> <span class="toc-text">特殊字符自动转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#block"><span class="toc-number">2.</span> <span class="toc-text">区块元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#p"><span class="toc-number">2.1.</span> <span class="toc-text">段落和换行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#header"><span class="toc-number">2.2.</span> <span class="toc-text">标题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#blockquote"><span class="toc-number">2.3.</span> <span class="toc-text">区块引用 Blockquotes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#list"><span class="toc-number">2.4.</span> <span class="toc-text">列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#precode"><span class="toc-number">2.5.</span> <span class="toc-text">代码区块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hr"><span class="toc-number">2.6.</span> <span class="toc-text">分隔线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#span"><span class="toc-number">3.</span> <span class="toc-text">区段元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#link"><span class="toc-number">3.1.</span> <span class="toc-text">链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#em"><span class="toc-number">3.2.</span> <span class="toc-text">强调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#code"><span class="toc-number">3.3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#img"><span class="toc-number">3.4.</span> <span class="toc-text">图片</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#misc"><span class="toc-number">4.</span> <span class="toc-text">其它</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#autolink"><span class="toc-number">4.1.</span> <span class="toc-text">自动链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#backslash"><span class="toc-number">4.2.</span> <span class="toc-text">反斜杠</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#acknowledgement"><span class="toc-number">5.</span> <span class="toc-text">感谢</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#editor"><span class="toc-number">6.</span> <span class="toc-text">Markdown 免费编辑器</span></a></li></ol>
-            </div>
-        
-        <p>================</p>
+			</header>
+	<div class="article-entry" itemprop="articleBody">
+		
+		<!-- Table of Contents -->
+		
+			<div id="toc" class="toc-article">
+				<strong class="toc-title">提纲</strong>
+				<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#overview"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#philosophy"><span class="toc-number">1.1.</span> <span class="toc-text">宗旨</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#html"><span class="toc-number">1.2.</span> <span class="toc-text">兼容 HTML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#autoescape"><span class="toc-number">1.3.</span> <span class="toc-text">特殊字符自动转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#block"><span class="toc-number">2.</span> <span class="toc-text">区块元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#p"><span class="toc-number">2.1.</span> <span class="toc-text">段落和换行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#header"><span class="toc-number">2.2.</span> <span class="toc-text">标题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#blockquote"><span class="toc-number">2.3.</span> <span class="toc-text">区块引用 Blockquotes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#list"><span class="toc-number">2.4.</span> <span class="toc-text">列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#precode"><span class="toc-number">2.5.</span> <span class="toc-text">代码区块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hr"><span class="toc-number">2.6.</span> <span class="toc-text">分隔线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#span"><span class="toc-number">3.</span> <span class="toc-text">区段元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#link"><span class="toc-number">3.1.</span> <span class="toc-text">链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#em"><span class="toc-number">3.2.</span> <span class="toc-text">强调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#code"><span class="toc-number">3.3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#img"><span class="toc-number">3.4.</span> <span class="toc-text">图片</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#misc"><span class="toc-number">4.</span> <span class="toc-text">其它</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#autolink"><span class="toc-number">4.1.</span> <span class="toc-text">自动链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#backslash"><span class="toc-number">4.2.</span> <span class="toc-text">反斜杠</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#acknowledgement"><span class="toc-number">5.</span> <span class="toc-text">感谢</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#editor"><span class="toc-number">6.</span> <span class="toc-text">Markdown 免费编辑器</span></a></li></ol>
+			</div>
+		<p>================</p>
 <ul>
 <li><a href="#overview">概述</a><ul>
 <li><a href="#philosophy">宗旨</a></li>
@@ -710,18 +578,14 @@ _   底线
 <p><strong>版权声明</strong></p>
 <p>转载自 <a href="https://gitcafe.com/riku/Markdown-Syntax-CN" target="_blank" rel="external">Markdown 语法简体中文版</a></p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.gehaowu.com/notes/2015/05/Markdown-syntax-description-Simplified-Chinese-Version/" data-id="cidcdg5aw003nwwv1cub48347" class="article-share-link">分享</a>
-      
-      
+	</div>
+	<footer class="article-footer"><a data-url="https://www.gehaowu.com/notes/2015/05/Markdown-syntax-description-Simplified-Chinese-Version/" data-id="cidcgchqc003n1wv1bgzo3c58" class="article-share-link">分享</a>
+		
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/notes/tags/信息技术/">信息技术</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/notes/tags/其它/">其它</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/notes/tags/开源/">开源</a></li></ul>
 
-    </footer>
-  </div>
-  
-    
+	</footer>
+</div>
+
 <nav id="article-nav">
   
     <a href="/notes/2015/05/NGINX-configure-multiple-certificate-environment-and-forced-https-Jump/" id="article-nav-newer" class="article-nav-link-wrap">
@@ -740,36 +604,13 @@ _   底线
     </a>
   
 </nav>
-
-  
 </article>
 
 
+<section id="comments"><div class="ds-thread" data-thread-key="/notes/2015/05/Markdown-syntax-description-Simplified-Chinese-Version/" data-title="Markdown语法说明 ( 简体中文版 )" data-url="https://www.gehaowu.com/notes/2015/05/Markdown-syntax-description-Simplified-Chinese-Version/"></div>
+<script type="text/javascript">var duoshuoQuery = {short_name:"gehaowu"};(function() {var ds = document.createElement('script');ds.type = 'text/javascript';ds.async = true;ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//dn-ds-img.qbox.me/embed.js';ds.charset = 'UTF-8';(document.getElementsByTagName('head')[0]|| document.getElementsByTagName('body')[0]).appendChild(ds);})();</script></section></section>
+<aside id="sidebar">
 
-
-<section id="comments">
-<!-- 多说评论框 start -->
-<div class="ds-thread" data-thread-key="/notes/2015/05/Markdown-syntax-description-Simplified-Chinese-Version/" data-title="Markdown语法说明 ( 简体中文版 )" data-url="https://www.gehaowu.com/notes/2015/05/Markdown-syntax-description-Simplified-Chinese-Version/"></div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"gehaowu"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//dn-ds-img.qbox.me/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-<!-- 多说公共JS代码 end -->
-</section>
-</section>
-        
-          <aside id="sidebar">
-  
-    
   <div class="widget-wrap">
     <h3 class="widget-title">文章分类</h3>
     <div class="widget">
@@ -777,8 +618,7 @@ var duoshuoQuery = {short_name:"gehaowu"};
     </div>
   </div>
 
-  
-    
+
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
@@ -786,8 +626,7 @@ var duoshuoQuery = {short_name:"gehaowu"};
     </div>
   </div>
 
-  
-    
+
   <div class="widget-wrap">
     <h3 class="widget-title">文章归档</h3>
     <div class="widget">
@@ -795,8 +634,7 @@ var duoshuoQuery = {short_name:"gehaowu"};
     </div>
   </div>
 
-  
-    
+
   <div class="widget-wrap">
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
@@ -826,8 +664,7 @@ var duoshuoQuery = {short_name:"gehaowu"};
     </div>
   </div>
 
-  
-    <div class="widget-wrap">
+<div class="widget-wrap">
   <h3 class="widget-title">友情链接</h3>
   <div class="widget">
   <ul class="entry">
@@ -862,41 +699,28 @@ var duoshuoQuery = {short_name:"gehaowu"};
   <li><a href="http://www.wuwenliang.net/" target="_blank" rel="nofollow">知行合一</a>：Do Not Go Gentle Into That Good Night</li>
   </ul>
   </div>
+</div></aside></div>
+<footer id="footer">
+<div class="outer">
+	<div id="footer-info" class="inner">
+		Copyright &copy; 2011 - 2015 Haowu Ge. All rights reserved.<br>
+		<!--Powered by <a href="https://www.freebsd.org/" target="_blank">FreeBSD</a> · <a href="http://nginx.org/" target="_blank">NGINX</a> · <a href="https://hexo.io/" target="_blank">Hexo</a>-->
+		<a href="https://www.digitalocean.com/?refcode=3d8f48ccdfb7" target="_blank" rel="nofollow"><img src="/notes/images/do.png" height="39" /></a> <a href="https://www.freebsd.org/" target="_blank" rel="nofollow"><img src="/notes/images/powerani.gif" height="55" /></a>
+	</div>
 </div>
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      Copyright &copy; 2011 - 2015 Haowu Ge. All rights reserved.<br>
-      <!--Powered by <a href="https://www.freebsd.org/" target="_blank">FreeBSD</a> · <a href="http://nginx.org/" target="_blank">NGINX</a> · <a href="https://hexo.io/" target="_blank">Hexo</a>-->
-	  <a href="https://www.digitalocean.com/?refcode=3d8f48ccdfb7" target="_blank" rel="nofollow"><img src="/notes/images/do.png" height="39" /></a> <a href="https://www.freebsd.org/" target="_blank" rel="nofollow"><img src="/notes/images/powerani.gif" height="55" /></a>
-    </div>
-  </div>
 </footer>
 <!--height="32" width="200"-->
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/notes/" class="mobile-nav-link">主页</a>
-  
-    <a href="/notes/archives" class="mobile-nav-link">归档</a>
-  
-    <a href="/resume/" class="mobile-nav-link">关于我</a>
-  
-</nav>
-    
+<script type="text/javascript">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-65013365-1', 'auto');ga('send', 'pageview');</script>
+
+
+
+</div>
+<nav id="mobile-nav"><a href="/notes/" class="mobile-nav-link">主页</a><a href="/notes/archives" class="mobile-nav-link">归档</a><a href="/aboutme/" class="mobile-nav-link">关于我</a></nav>
 
 <script src="//dn-glibs.qbox.me/jquery-2.1.4/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/notes/fancybox/jquery.fancybox.css" type="text/css">
-  <script src="/notes/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
-
+<link rel="stylesheet" href="/notes/fancybox/jquery.fancybox.css" type="text/css">
+<script src="/notes/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
 <script src="/notes/js/script.js" type="text/javascript"></script>
-  </div>
+</div>
 </body>
 </html>
