@@ -65,7 +65,7 @@ pagination_dir: page
 #disqus_shortname: gehaowu
 duoshuo_shortname: gehaowu
 #host_name: 
-google_analytics: UA-65013365-1
+#google_analytics: UA-65013365-1
 #baidu_analytics: true
 #baidu_share: true
 switch_banner: true
@@ -91,7 +91,8 @@ feed:
   type: atom
   path: atom.xml
   limit: 20
-#baidu_analytics: 2f0f4b0d867163a00886350ad2c21f8c
+
+baidu_analytics: 2f0f4b0d867163a00886350ad2c21f8c
 #tencent_analytics: 47218858
 
 startyear: 2011
