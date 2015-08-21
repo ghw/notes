@@ -2,7 +2,7 @@
 menu:
   主页: /notes/
   归档: /notes/archives
-  关于我: /aboutme/
+  关于: /
 rss: /notes/atom.xml
 
 # Content
