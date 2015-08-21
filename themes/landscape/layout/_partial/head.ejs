@@ -8,4 +8,13 @@
 <% if (theme.rss){ %><link rel="alternative" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml"><% } %>
 <% if (theme.favicon){ %><link rel="icon" href="<%- theme.favicon %>"><% } %>
 <%- css('css/style') %>
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "//hm.baidu.com/hm.js?2f0f4b0d867163a00886350ad2c21f8c";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
 </head>
