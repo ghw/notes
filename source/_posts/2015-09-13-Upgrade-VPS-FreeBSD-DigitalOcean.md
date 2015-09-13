@@ -35,3 +35,7 @@ u10.2-RELEASE
 FreeBSD haomwei.com 10.2-RELEASE FreeBSD 10.2-RELEASE #0 r286666: Wed Aug 12 15:26:37 UTC 2015     root@releng1.nyi.freebsd.org:/usr/obj/usr/src/sys/GENERIC  amd64
 [ghw@haomwei.pts/1] ~ %
 ```
+
+彻底清理掉旧系统。。。全新安装，，，
+
+→_→ →_→ →_→ →_→ →_→
