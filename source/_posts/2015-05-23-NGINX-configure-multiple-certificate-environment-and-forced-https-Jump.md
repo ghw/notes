@@ -13,7 +13,7 @@ toc: true
 
 其实，很简单嘛，，，
 根本还是在比较装逼呗。。。
-![https](//dn-nimages.qbox.me/2015/05/https.png)
+![https](https://dn-nimages.qbox.me/2015/05/https.png)
 小绿锁哟，哈哈哈哈哈哈
 
 
@@ -33,7 +33,7 @@ pkg install -y nginx
 cd /usr/ports/www/nginx &&make install clean
 ```
 
-![从Ports安装NGINX](//dn-nimages.qbox.me/2015/05/ports.nginx.png)
+![从Ports安装NGINX](https://dn-nimages.qbox.me/2015/05/ports.nginx.png)
 
 坐等一会，NGINX 就安好了，比较方便，
 
@@ -260,7 +260,7 @@ NGINX 会监听这两个域名的的80号端口，
 --------------------
 **版权声明**
 
-<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh"><img src="//dn-nimages.qbox.me/other/CC-BY-SA-ND.png" alt="署名-非商业性使用-禁止演绎 创意共享4.0国际许可证" /></a>
+<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh"><img src="https://dn-nimages.qbox.me/other/CC-BY-SA-ND.png" alt="署名-非商业性使用-禁止演绎 创意共享4.0国际许可证" /></a>
 
 [Ge Haowu's Personal Website](//www.gehaowu.com/) by [Haowu Ge](//www.gehaowu.com/aboutme/) is licensed under a [CC BY-NC-ND 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh) License.
 由 [葛豪武](//www.gehaowu.com/aboutme/) 创作并维护在[葛豪武的个人网站](//www.gehaowu.com/) 采用 [署名-非商业性使用-禁止演绎 创意共享 4.0 国际](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh) 许可证。
