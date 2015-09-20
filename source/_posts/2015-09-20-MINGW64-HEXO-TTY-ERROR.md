@@ -1,4 +1,4 @@
-title: MINGW64 环境 更新 HEXO 到 Github 提示 TTY 错误
+title: MINGW64环境更新HEXO到Github提示TTY错误
 toc: true
 date: 2015-09-20 20:24:20
 tags: [信息技术,开源,HEXO,TTY,MINGW64,Github]
