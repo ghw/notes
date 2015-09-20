@@ -170,3 +170,5 @@ service mpd5 restart
 ![KDE Login](https://dn-nimages.qbox.me/2015/09/kde5_3.png)
 ![SLIM Login](https://dn-nimages.qbox.me/2015/09/kde5_4.png)
 ![KDE 关于](https://dn-nimages.qbox.me/2015/09/kde5_5.png)
+
+文章原版来自 FreeBSDChina Wiki：[在 FreeBSD 上用 mpd5 构建 PPTP VPN](https://wiki.freebsdchina.org/howto/m/mpd5_setup)
