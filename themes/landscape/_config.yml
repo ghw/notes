@@ -12,6 +12,7 @@ fancybox: true
 # Sidebar
 sidebar: right
 widgets:
+- about
 - aboutsite
 - category
 #- tag
