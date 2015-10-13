@@ -1,6 +1,6 @@
 # config
-cover: /img/bg_img.jpg
-logo: /img/logo.png
+cover: /notes/img/bg_img.jpg
+logo: /notes/img/logo.png
 top_saying:
 - title: YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.
 - content: 每一个不曾起舞的日子都是对生命的辜负。
@@ -45,4 +45,4 @@ links:
 - name: Kieran
   link: http://go.kieran.top/
 - name: Name
-  link: http://domain.com/
+  link: http://go.kieran.top
