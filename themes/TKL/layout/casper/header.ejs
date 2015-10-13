@@ -2,7 +2,7 @@
 
     <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
         <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
-            <img src="<%- config.root %>img/close.png" alt="Close"/>
+            <img src="<%- config.root %>images/close.png" alt="Close"/>
         </div>
         <!-- Lists in Slidebars -->
         <ul class="sb-menu">
@@ -70,9 +70,10 @@
                     <nav>
                         <ul class="nav">
                             <li><a href="/" class="animsition-link"><%- config.title %></a></li>
-                            <li class="nolink"><span>Always </span>Creative.</li>
-                            <% if(theme.github){ %>
-                            <li><a href="<%- theme.github %>" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            <li class="nolink"><span>Welcome!</span></li>
+                            <li class="nolink">Powered by </li>
+                            <% if(theme.aliyun){ %>
+                            <li><a href="<%- theme.aliyun %>" title="Aliyun" target="_blank"><i class="icon-github"></i></a></li>
                             <% } %>
                             <% if(theme.twitter){ %>
                             <li><a href="<%- theme.twitter %>" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
@@ -85,8 +86,7 @@
                             <% } %>
                             <% if(theme.weibo){ %>
                             <li><a href="<%- theme.weibo %>" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
-                            <% } %>
-                            <li class="nolink"><span>Welcome!</span></li>
+                            <% } %>.
                         </ul>
                     </nav>
                     <!--// Info-bar -->
