@@ -20,10 +20,15 @@ works:
   works_url: /atom.xml
 
 #duoshuo name
-duoshuo: duoshuo_name
+duoshuo: gehaowu
 
 # Miscellaneous
-github: https://github.com/
+aliyun: /go/aliyun
+digitalocean: /go/digitalocean
+freebsd: /go/freebsd
+nginx: /go/nginx
+hexo: /go/hexo
+github: /go/github
 twitter: https://twitter.com/
 facebook: https://www.facebook.com/
 google: https://google.com/
