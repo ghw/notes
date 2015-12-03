@@ -36,9 +36,9 @@ in your terminal/console.
 
 <!-- more -->
 
-![道法自然](https://dn-nimages.qbox.me/2015/07/dfzr1.png)
-![道法自然](https://dn-nimages.qbox.me/2015/07/dfzr2.png)
-![道法自然](https://dn-nimages.qbox.me/2015/07/dfzr3.png)
+![道法自然](https://dn-gehaowu.qbox.me/notes/2015/07/dfzr1.png)
+![道法自然](https://dn-gehaowu.qbox.me/notes/2015/07/dfzr2.png)
+![道法自然](https://dn-gehaowu.qbox.me/notes/2015/07/dfzr3.png)
 
 ```sh
 Creative Commons Attribution 3.0 Unported

@@ -7,7 +7,7 @@ categories: 信息技术
 
 把图片啥的，直接重定向到七牛上了。。还是302方便
 
-![302](https://dn-nimages.qbox.me/2015/09/IMAGES302CDN.png)
+![302](https://dn-gehaowu.qbox.me/notes/2015/09/IMAGES302CDN.png)
 
 ```sh
 	location                            ~* \.(gif|jpeg|jpg|png|bmp|svg|otf|woff|eot|ttf|woff2)$ {

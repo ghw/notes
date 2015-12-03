@@ -20,18 +20,18 @@ letter-spacing: 1em;
 
 然后悲剧的发现 **不居中了** 。。。
 
-![道法自然](https://dn-nimages.qbox.me/2015/06/imitation_of_nature1.png)
+![道法自然](https://dn-gehaowu.qbox.me/notes/2015/06/imitation_of_nature1.png)
 
 <!-- more -->
 
 想想算了，，，改回去吧。。
 
 
-![道法自然](https://dn-nimages.qbox.me/2015/06/imitation_of_nature2.png)
+![道法自然](https://dn-gehaowu.qbox.me/notes/2015/06/imitation_of_nature2.png)
 
 
 
-![兼爱非攻](https://dn-nimages.qbox.me/2015/07/jafg.jpg)
+![兼爱非攻](https://dn-gehaowu.qbox.me/notes/2015/07/jafg.jpg)
 
 原方案：
 ```html

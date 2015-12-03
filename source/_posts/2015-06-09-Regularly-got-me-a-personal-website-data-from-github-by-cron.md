@@ -131,7 +131,7 @@ server {
 }
 ```
 
-![freebsdlogo.sh](https://dn-nimages.qbox.me/2015/06/freebsd_gehaowu.com.png)
+![freebsdlogo.sh](https://dn-gehaowu.qbox.me/notes/2015/06/freebsd_gehaowu.com.png)
 
 
 
@@ -149,7 +149,7 @@ git clone --depth 1 -b gh-pages https://github.com/gehaowu/notes /home/ghw/wwwro
 git clone --depth 1 -b gh-pages https://github.com/gehaowu/albums /home/ghw/wwwroot/albums
 ```
 
-![gitclone.sh](https://dn-nimages.qbox.me/2015/06/gitclone_gehaowu.com.png)
+![gitclone.sh](https://dn-gehaowu.qbox.me/notes/2015/06/gitclone_gehaowu.com.png)
 
 
 因为我在 wwwroot 根目录放了 gitpull.sh 脚本，所以直接给 cron 添加计划任务：
@@ -161,7 +161,7 @@ git clone --depth 1 -b gh-pages https://github.com/gehaowu/albums /home/ghw/wwwr
 * */5 * * * /bin/sh /home/ghw/wwwroot/gitpull.sh >/dev/null 2>&1
 ```
 
-![gitpull.sh](https://dn-nimages.qbox.me/2015/06/gitpull_gehaowu.com.png)
+![gitpull.sh](https://dn-gehaowu.qbox.me/notes/2015/06/gitpull_gehaowu.com.png)
 
 ## gitpull.sh 脚本的内容
 
@@ -192,7 +192,7 @@ git pull
 --------------------
 **版权声明**
 
-<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh"><img src="https://dn-nimages.qbox.me/other/CC-BY-SA-ND.png" alt="署名-非商业性使用-禁止演绎 创意共享4.0国际许可证" /></a>
+<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh"><img src="https://dn-gehaowu.qbox.me/notes/other/CC-BY-SA-ND.png" alt="署名-非商业性使用-禁止演绎 创意共享4.0国际许可证" /></a>
 
 [Ge Haowu's Personal Website](//www.gehaowu.com/) by [Haowu Ge](//www.gehaowu.com/aboutme/) is licensed under a [CC BY-NC-ND 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh) License.
 由 [葛豪武](//www.gehaowu.com/aboutme/) 创作并维护在[葛豪武的个人网站](//www.gehaowu.com/) 采用 [署名-非商业性使用-禁止演绎 创意共享 4.0 国际](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh) 许可证。

@@ -9,10 +9,10 @@ categories: 信息技术
 猜猜怎么升级的。。哈哈哈。。。
 
 
-![FreeBSD](https://dn-nimages.qbox.me/2015/09/freebsdr.png)
+![FreeBSD](https://dn-gehaowu.qbox.me/notes/2015/09/freebsdr.png)
 
 <!--more-->
-![DigitalOcean](https://dn-nimages.qbox.me/2015/09/DOVPS.png)
+![DigitalOcean](https://dn-gehaowu.qbox.me/notes/2015/09/DOVPS.png)
 
 ```sh
 [ghw@haomwei.pts/1] ~ % dmesg -a | grep CPU

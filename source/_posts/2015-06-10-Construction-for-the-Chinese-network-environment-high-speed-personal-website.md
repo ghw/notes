@@ -34,9 +34,9 @@ toc: true
 
 也就是 访客浏览器 -> 加速乐 -> Github 。
 
-![加速乐](https://dn-nimages.qbox.me/2015/06/jiasule_gehaowu.com.png)
+![加速乐](https://dn-gehaowu.qbox.me/notes/2015/06/jiasule_gehaowu.com.png)
 
-![Github](https://dn-nimages.qbox.me/2015/06/github_gehaowu.com.png)
+![Github](https://dn-gehaowu.qbox.me/notes/2015/06/github_gehaowu.com.png)
 ## 为主站添加 **robots.txt** 文件，
 Github 会主动扩展账户下的分支为 gh-pages 的子仓库，避免被搜索引擎收录，屏蔽之。
 
@@ -57,7 +57,7 @@ Disallow: /wwwroot_*/
 --------------------
 **版权声明**
 
-<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh"><img src="https://dn-nimages.qbox.me/other/CC-BY-SA-ND.png" alt="署名-非商业性使用-禁止演绎 创意共享4.0国际许可证" /></a>
+<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh"><img src="https://dn-gehaowu.qbox.me/notes/other/CC-BY-SA-ND.png" alt="署名-非商业性使用-禁止演绎 创意共享4.0国际许可证" /></a>
 
 [Ge Haowu's Personal Website](//www.gehaowu.com/) by [Haowu Ge](//www.gehaowu.com/aboutme/) is licensed under a [CC BY-NC-ND 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh) License.
 由 [葛豪武](//www.gehaowu.com/aboutme/) 创作并维护在[葛豪武的个人网站](//www.gehaowu.com/) 采用 [署名-非商业性使用-禁止演绎 创意共享 4.0 国际](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh) 许可证。

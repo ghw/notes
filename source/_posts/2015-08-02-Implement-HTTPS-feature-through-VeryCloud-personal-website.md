@@ -42,9 +42,9 @@ categories: 信息技术
 到 VeryCloud 注册你的帐号
 将申请到的 SSL 证书添加到 VeryCloud 中去
 进入 VeryCloud 控制台，
-![VeryCloud 控制台](https://dn-nimages.qbox.me/2015/08/VeryCloudSSL0.png)
+![VeryCloud 控制台](https://dn-gehaowu.qbox.me/notes/2015/08/VeryCloudSSL0.png)
 选择 *云分发* -> *证书管理* -> *新建*
-![新建证书](https://dn-nimages.qbox.me/2015/08/VeryCloudSSL1.png)
+![新建证书](https://dn-gehaowu.qbox.me/notes/2015/08/VeryCloudSSL1.png)
 证书名称随便填，自己知道是哪一份就可以了
 授权证书就是 CA 签发给你的证书
 证书密钥。。。
@@ -52,23 +52,23 @@ CA 机构证书就是证书链，证书商会提供，可选选项
 证书添加完成后就可以添加域名了
 这里**推荐使用二级域名**，因为 VeryCloud 使用 CNAME CDN 方案，如果裸域名使用 CNAME 会破坏当前域上的其它 DNS 记录。
 选择 *云分发* -> *频道管理* -> *新建*
-![基础设置](https://dn-nimages.qbox.me/2015/08/VeryCloudAdd1.png)
+![基础设置](https://dn-gehaowu.qbox.me/notes/2015/08/VeryCloudAdd1.png)
 频道选择你需要加速的二级域名，我使用 *www.gehaowu.com*
 ICP 备案号会自动获取
 加速类型选择云分发
 源站填 *gehaowu.github.io* ，端口80
 接着选择下一步
-![策略设置](https://dn-nimages.qbox.me/2015/08/VeryCloudAdd2.png)
+![策略设置](https://dn-gehaowu.qbox.me/notes/2015/08/VeryCloudAdd2.png)
 策略选择 *遵循源站* 就可以了，你也可以选择自定义，
 接着再下一步
-![高级设置](https://dn-nimages.qbox.me/2015/08/VeryCloudAdd3.png)
+![高级设置](https://dn-gehaowu.qbox.me/notes/2015/08/VeryCloudAdd3.png)
 备份源站填 *gitcafe.io* ，端口80
 证书选择之前添加的证书
 创建，等官方审核通过。
 ### 配置 DNS 记录
 审核通过后修改 DNS 记录
 修改 DNS 记录后台，为 *www* 添加 *CNAME* 记录值 *www.gehaowu.com.verygslb.com*
-![DNSPod添加www记录](https://dn-nimages.qbox.me/2015/08/DNSPod.png)
+![DNSPod添加www记录](https://dn-gehaowu.qbox.me/notes/2015/08/DNSPod.png)
 并将裸域名解析到 github.io 所在 IP （这里由 Github 实现 http://gehaowu.com 跳转到 http://www.gehaowu.com）
 ## 收官，开始装逼吧~~
 最终的效果（忽悠朋友也开了VeryCloud的）
@@ -99,16 +99,16 @@ Connection: keep-alive
 %
 
 ```
-![我的后台选项](https://dn-nimages.qbox.me/2015/08/VeryCloud1.png)
+![我的后台选项](https://dn-gehaowu.qbox.me/notes/2015/08/VeryCloud1.png)
 我的源站并没有使用Github，直接挂在朋友的VPS上的
-![CURL](https://dn-nimages.qbox.me/2015/08/VeryCloud2.png)
+![CURL](https://dn-gehaowu.qbox.me/notes/2015/08/VeryCloud2.png)
 我是高级装逼工程师，我是巨硬爱好者，，，哈哈哈
 
 
 --------------------
 **版权声明**
 
-<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh"><img src="https://dn-nimages.qbox.me/other/CC-BY-SA-ND.png" alt="署名-非商业性使用-禁止演绎 创意共享4.0国际许可证" /></a>
+<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh"><img src="https://dn-gehaowu.qbox.me/notes/other/CC-BY-SA-ND.png" alt="署名-非商业性使用-禁止演绎 创意共享4.0国际许可证" /></a>
 
 [Ge Haowu's Personal Website](//www.gehaowu.com/) by [Haowu Ge](//www.gehaowu.com/aboutme/) is licensed under a [CC BY-NC-ND 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh) License.
 由 [葛豪武](//www.gehaowu.com/aboutme/) 创作并维护在[葛豪武的个人网站](//www.gehaowu.com/) 采用 [署名-非商业性使用-禁止演绎 创意共享 4.0 国际](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh) 许可证。

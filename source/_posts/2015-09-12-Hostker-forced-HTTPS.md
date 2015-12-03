@@ -9,7 +9,7 @@ categories: 信息技术
 
 写个 .htaccess 来强制 HTTPS 跳转了
 
-## 没有 HTTPS 如何*装逼*。。。![HTTPS](https://dn-nimages.qbox.me/2015/09/HTTPS.png)
+## 没有 HTTPS 如何*装逼*。。。![HTTPS](https://dn-gehaowu.qbox.me/notes/2015/09/HTTPS.png)
 
 ## .htaccess 配置文件：
 ```sh

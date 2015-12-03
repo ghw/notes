@@ -239,13 +239,13 @@ adduser
 
 
 最后放一个更新到最新的FreeBSD-10.1-RELEASE-p9靓照一张 = = ！
-![FreeBSD-10.1-RELEASE-p9](https://dn-nimages.qbox.me/2015/05/FreeBSD-10.1-RELEASE-p9.png)
+![FreeBSD-10.1-RELEASE-p9](https://dn-gehaowu.qbox.me/notes/2015/05/FreeBSD-10.1-RELEASE-p9.png)
 
 
 --------------------
 **版权声明**
 
-<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh"><img src="https://dn-nimages.qbox.me/other/CC-BY-SA-ND.png" alt="署名-非商业性使用-禁止演绎 创意共享4.0国际许可证" /></a>
+<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh"><img src="https://dn-gehaowu.qbox.me/notes/other/CC-BY-SA-ND.png" alt="署名-非商业性使用-禁止演绎 创意共享4.0国际许可证" /></a>
 
 [Ge Haowu's Personal Website](//www.gehaowu.com/) by [Haowu Ge](//www.gehaowu.com/aboutme/) is licensed under a [CC BY-NC-ND 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh) License.
 由 [葛豪武](//www.gehaowu.com/aboutme/) 创作并维护在[葛豪武的个人网站](//www.gehaowu.com/) 采用 [署名-非商业性使用-禁止演绎 创意共享 4.0 国际](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh) 许可证。

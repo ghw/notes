@@ -27,7 +27,7 @@ fatal: could not read Username for 'https://github.com': Invalid argument
 偷懒的做法是换 Github 客户端自带的 SHELL ，
 
 ## Github Shell
-![Github Shell](https://dn-nimages.qbox.me/2015/09/githubshell.png)
+![Github Shell](https://dn-gehaowu.qbox.me/notes/2015/09/githubshell.png)
 
 就像酱紫。。
 
